@@ -233,10 +233,6 @@ def generate_html(qa_issues):
                 <div class="stat-number">{len(closed_issues)}</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
-            <div class="stat-box" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);" onclick="showSection('open')">
-                <div class="stat-number">{len(netflex_open)}</div>
-                <div class="stat-label">Production Issues</div>
-            </div>
         </div>
 
         <div class="nav-buttons">
