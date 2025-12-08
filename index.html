@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leapwork QA Dashboard - LightRiver netFLEX</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .update-time {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            min-width: 150px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .stat-box:hover {
+            transform: scale(1.05);
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+        }
+        .stat-label {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .chart-container {
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .chart-box {
+            width: 45%;
+            min-width: 400px;
+            margin: 20px 0;
+        }
+        canvas {
+            max-height: 400px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 40px;
+        }
+        .issues-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        .issues-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        .issues-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        .issues-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        .issue-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .issue-link:hover {
+            text-decoration: underline;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .badge-open {
+            background-color: #28a745;
+            color: white;
+        }
+        .badge-closed {
+            background-color: #6c757d;
+            color: white;
+        }
+        .badge-repo {
+            background-color: #007bff;
+            color: white;
+        }
+        .section {
+            margin: 40px 0;
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .nav-button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+        .nav-button:hover {
+            transform: scale(1.05);
+        }
+        .nav-button.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .test-issue {
+            background-color: #fff3cd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Leapwork QA Dashboard</h1>
+        <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
+        <div class="update-time">Last updated: 2025-12-08 20:45 UTC</div>
+
+        <div class="stats">
+            <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
+                <div class="stat-number">26</div>
+                <div class="stat-label">Total QA Issues</div>
+            </div>
+            <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Open Issues</div>
+            </div>
+            <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
+                <div class="stat-number">14</div>
+                <div class="stat-label">Closed Issues</div>
+            </div>
+            <div class="stat-box" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);" onclick="showSection('open')">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Production Issues</div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-button active" onclick="showSection('charts')">Charts</button>
+            <button class="nav-button" onclick="showSection('open')">Open Issues</button>
+            <button class="nav-button" onclick="showSection('closed')">Closed Issues</button>
+            <button class="nav-button" onclick="showSection('all')">All Issues</button>
+        </div>
+
+        <!-- Charts Section -->
+        <div id="charts-section" class="section active">
+            <div class="chart-container">
+                <div class="chart-box">
+                    <h2>Issues by Status</h2>
+                    <canvas id="statusChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h2>Issues Over Time (Last 12 Months)</h2>
+                    <canvas id="timeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Open Issues Section -->
+        <div id="open-section" class="section">
+            <h2>Open QA Issues (12)</h2>
+            <table class="issues-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Repository</th>
+                        <th>Created</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">444</span></td>
+                        <td>[QA] LW Network Layout from WVL Service Route Form not opening layout view if previously opened and closed</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-08</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/444" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-open">439</span></td>
+                        <td>[QA] LW RLS Provisioning SNC Naming convention is using svcNm for all fields causing errors for DTL names</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-08</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/439" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-open">431</span></td>
+                        <td>[QA] LW Wavelength Service goes partial and doesnt trace</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-06</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/431" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-open">430</span></td>
+                        <td>[QA] LW GUI Provisioning Log is truncated for RLS commands</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-05</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/430" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-open">429</span></td>
+                        <td>[QA] LW-RLS Carrier Provisioning from logical view on C-Band card doesn't always show error if L-Band Freq is selected</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-05</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/429" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-open">428</span></td>
+                        <td>[QA] LW RLS Carrier Provisioning choosing port with an existing service doesn't immediately error</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-05</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/428" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">32</span></td>
+                        <td>[QA][testing again]sub-sub-issue level 2 test qa [#9]</td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/32" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">26</span></td>
+                        <td>[QA] testing new qa issue</td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/26" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">24</span></td>
+                        <td>[QA][testing again]and another subflow test for qa [#9]</td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/24" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">23</span></td>
+                        <td>[QA] manual qa subissue test3</td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/23" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">22</span></td>
+                        <td>[QA][testing again]testing qa subflow [#9]</td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/22" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">16</span></td>
+                        <td>[QA] testing qa</td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/16" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="color: #666; font-style: italic;">Note: Yellow highlighted rows are test issues from the workflow-testing repository</p>
+        </div>
+
+        <!-- Closed Issues Section -->
+        <div id="closed-section" class="section">
+            <h2>Closed QA Issues (14)</h2>
+            <table class="issues-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Repository</th>
+                        <th>Created</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-closed">409</span></td>
+                        <td>[QA] Test Issue Input</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-04</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/409" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">333</span></td>
+                        <td>[PORT to 5.3.0] [QA] Another new issue test [#276]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-26</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/333" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">332</span></td>
+                        <td>[QA] [PORT to 5.2.1] [QA] Another new issue test [#276] [#276]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/332" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">331</span></td>
+                        <td>[QA] [PORT to 5.2.0] [QA] Another new issue test [#276] [#276]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/331" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">330</span></td>
+                        <td>[QA] Another new issue test [#276]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/330" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">329</span></td>
+                        <td>[QA] new issue from parent [#276]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/329" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">328</span></td>
+                        <td>[QA] new issue test from parent [#276]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/328" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">327</span></td>
+                        <td>[QA] another test [#276]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/327" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">307</span></td>
+                        <td>[QA] can't believe this is not working [#276]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-19</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/307" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">306</span></td>
+                        <td>[QA] test priority [#294]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/306" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">304</span></td>
+                        <td>[QA] qa test [#294]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/304" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">303</span></td>
+                        <td>[QA] test [#294]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/303" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">302</span></td>
+                        <td>[QA] Description [#294]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/302" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">301</span></td>
+                        <td>[QA] LW found this [#294]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/301" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- All Issues Section -->
+        <div id="all-section" class="section">
+            <h2>All QA Issues (26)</h2>
+            <table class="issues-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Repository</th>
+                        <th>Created</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">444</span></td>
+                        <td>[QA] LW Network Layout from WVL Service Route Form not opening layout view if previously opened and closed</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-08</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/444" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-open">439</span></td>
+                        <td>[QA] LW RLS Provisioning SNC Naming convention is using svcNm for all fields causing errors for DTL names</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-08</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/439" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-open">431</span></td>
+                        <td>[QA] LW Wavelength Service goes partial and doesnt trace</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-06</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/431" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-open">430</span></td>
+                        <td>[QA] LW GUI Provisioning Log is truncated for RLS commands</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-05</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/430" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-open">429</span></td>
+                        <td>[QA] LW-RLS Carrier Provisioning from logical view on C-Band card doesn't always show error if L-Band Freq is selected</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-05</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/429" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-open">428</span></td>
+                        <td>[QA] LW RLS Carrier Provisioning choosing port with an existing service doesn't immediately error</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-05</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/428" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">409</span></td>
+                        <td>[QA] Test Issue Input</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-04</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/409" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">333</span></td>
+                        <td>[PORT to 5.3.0] [QA] Another new issue test [#276]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-26</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/333" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">332</span></td>
+                        <td>[QA] [PORT to 5.2.1] [QA] Another new issue test [#276] [#276]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/332" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">331</span></td>
+                        <td>[QA] [PORT to 5.2.0] [QA] Another new issue test [#276] [#276]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/331" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">330</span></td>
+                        <td>[QA] Another new issue test [#276]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/330" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">329</span></td>
+                        <td>[QA] new issue from parent [#276]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/329" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">328</span></td>
+                        <td>[QA] new issue test from parent [#276]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/328" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">327</span></td>
+                        <td>[QA] another test [#276]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/327" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">307</span></td>
+                        <td>[QA] can't believe this is not working [#276]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-19</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/307" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">306</span></td>
+                        <td>[QA] test priority [#294]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/306" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">304</span></td>
+                        <td>[QA] qa test [#294]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/304" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">303</span></td>
+                        <td>[QA] test [#294]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/303" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">302</span></td>
+                        <td>[QA] Description [#294]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/302" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-closed">301</span></td>
+                        <td>[QA] LW found this [#294]</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-11-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/301" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">32</span></td>
+                        <td>[QA][testing again]sub-sub-issue level 2 test qa [#9]</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/32" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">26</span></td>
+                        <td>[QA] testing new qa issue</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/26" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">24</span></td>
+                        <td>[QA][testing again]and another subflow test for qa [#9]</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/24" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">23</span></td>
+                        <td>[QA] manual qa subissue test3</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/23" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">22</span></td>
+                        <td>[QA][testing again]testing qa subflow [#9]</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/22" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="test-issue">
+                        <td><span class="badge badge-open">16</span></td>
+                        <td>[QA] testing qa</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">workflow-testing</span></td>
+                        <td>2025-12-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex-workflow-testing/issues/16" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="color: #666; font-style: italic; margin-top: 20px;">Note: Yellow highlighted rows are test issues from the workflow-testing repository</p>
+        </div>
+    </div>
+
+    <script>
+        // Chart 1: Issues by Status (Pie Chart)
+        const statusCtx = document.getElementById('statusChart').getContext('2d');
+        new Chart(statusCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Open', 'Closed'],
+                datasets: [{
+                    data: [12, 14],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'QA Issues Distribution',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Issues Over Time (Bar Chart)
+        const timeCtx = document.getElementById('timeChart').getContext('2d');
+        new Chart(timeCtx, {
+            type: 'bar',
+            data: {
+                labels: ["2025-11", "2025-12"],
+                datasets: [{
+                    label: 'New QA Issues',
+                    data: [13, 13],
+                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 2
+                        },
+                        title: {
+                            display: true,
+                            text: 'Number of Issues'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Month'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'QA Issues Created Per Month',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+
+        // Section switching functionality
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
+
+            if (section === 'charts') {
+                document.getElementById('charts-section').classList.add('active');
+                document.querySelectorAll('.nav-button')[0].classList.add('active');
+            } else if (section === 'open') {
+                document.getElementById('open-section').classList.add('active');
+                document.querySelectorAll('.nav-button')[1].classList.add('active');
+            } else if (section === 'closed') {
+                document.getElementById('closed-section').classList.add('active');
+                document.querySelectorAll('.nav-button')[2].classList.add('active');
+            } else if (section === 'all') {
+                document.getElementById('all-section').classList.add('active');
+                document.querySelectorAll('.nav-button')[3].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
