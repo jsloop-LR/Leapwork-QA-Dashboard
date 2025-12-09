@@ -7,6 +7,7 @@ Fetches QA issues from GitHub and generates an interactive HTML dashboard
 import json
 import subprocess
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from collections import Counter, defaultdict
 
 def run_gh_command(cmd):
@@ -218,7 +219,7 @@ def generate_html(qa_issues):
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}</div>
+        <div class="update-time">Last updated: {datetime.now(ZoneInfo('America/New_York')).strftime('%Y-%m-%d %H:%M %Z')}</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
