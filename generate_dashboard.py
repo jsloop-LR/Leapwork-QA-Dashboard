@@ -128,6 +128,7 @@ def generate_html(qa_issues):
         }}
         canvas {{
             max-height: 400px;
+            cursor: pointer;
         }}
         h2 {{
             color: #555;
@@ -394,6 +395,16 @@ def generate_html(qa_issues):
             }},
             options: {{
                 responsive: true,
+                onClick: (event, elements) => {{
+                    if (elements.length > 0) {{
+                        const index = elements[0].index;
+                        if (index === 0) {{
+                            showSection('open');  // Click on "Open" slice
+                        }} else if (index === 1) {{
+                            showSection('closed');  // Click on "Closed" slice
+                        }}
+                    }}
+                }},
                 plugins: {{
                     legend: {{
                         position: 'bottom',
@@ -401,13 +412,26 @@ def generate_html(qa_issues):
                             font: {{
                                 size: 14
                             }}
+                        }},
+                        onClick: (event, legendItem, legend) => {{
+                            const index = legendItem.index;
+                            if (index === 0) {{
+                                showSection('open');
+                            }} else if (index === 1) {{
+                                showSection('closed');
+                            }}
                         }}
                     }},
                     title: {{
                         display: true,
-                        text: 'QA Issues Distribution',
+                        text: 'QA Issues Distribution (Click to view)',
                         font: {{
                             size: 16
+                        }}
+                    }},
+                    tooltip: {{
+                        callbacks: {{
+                            footer: () => 'Click to view issues'
                         }}
                     }}
                 }}
@@ -430,6 +454,11 @@ def generate_html(qa_issues):
             }},
             options: {{
                 responsive: true,
+                onClick: (event, elements) => {{
+                    if (elements.length > 0) {{
+                        showSection('all');  // Click any bar to view all issues
+                    }}
+                }},
                 scales: {{
                     y: {{
                         beginAtZero: true,
@@ -454,9 +483,14 @@ def generate_html(qa_issues):
                     }},
                     title: {{
                         display: true,
-                        text: 'QA Issues Created Per Month',
+                        text: 'QA Issues Created Per Month (Click to view)',
                         font: {{
                             size: 16
+                        }}
+                    }},
+                    tooltip: {{
+                        callbacks: {{
+                            footer: () => 'Click to view all issues'
                         }}
                     }}
                 }}
