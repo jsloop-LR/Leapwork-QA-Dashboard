@@ -4,7 +4,7 @@ Automated dashboard for tracking QA issues in the netFLEX project using Leapwork
 
 ## 🌐 Live Dashboard
 
-**View the dashboard:** https://jsloop-LR.github.io/leapwork-qa-dashboard/
+**View the dashboard:** https://jsloop-lr.github.io/Leapwork-QA-Dashboard/
 
 ## 📊 Features
 
@@ -12,12 +12,12 @@ Automated dashboard for tracking QA issues in the netFLEX project using Leapwork
 - **Interactive Charts**: Visual representation of issue status and trends
 - **Detailed Issue Lists**: Browse open, closed, and all QA issues
 - **Clickable Links**: Direct links to each issue on GitHub
-- **Auto-Updated Daily**: Dashboard refreshes automatically at 8 AM UTC every day
+- **Auto-Updated**: Dashboard refreshes automatically every 30 minutes
 
 ## 🔄 Automatic Updates
 
 This dashboard updates automatically using GitHub Actions:
-- **Schedule**: Daily at 8:00 AM UTC
+- **Schedule**: Every 30 minutes
 - **Manual Trigger**: Can be triggered manually from the Actions tab
 - **Auto-commit**: Changes are automatically committed to the repository
 
@@ -25,13 +25,12 @@ This dashboard updates automatically using GitHub Actions:
 
 - Total QA issues
 - Open vs Closed issues
-- Production issues (netflex repo only)
 - Historical trends (last 12 months)
 - Issue details with direct GitHub links
 
 ## 🛠️ How It Works
 
-1. GitHub Actions runs `generate_dashboard.py` daily
+1. GitHub Actions runs `generate_dashboard.py` every 30 minutes
 2. Script fetches all QA issues from lightriversoftware organization
 3. Generates an interactive HTML dashboard with charts
 4. Commits the updated dashboard to the repository
