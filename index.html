@@ -70,6 +70,7 @@
         }
         canvas {
             max-height: 400px;
+            cursor: pointer;
         }
         h2 {
             color: #555;
@@ -161,7 +162,7 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2025-12-09 08:51 EST</div>
+        <div class="update-time">Last updated: 2025-12-09 08:54 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -714,6 +715,16 @@
             },
             options: {
                 responsive: true,
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        if (index === 0) {
+                            showSection('open');  // Click on "Open" slice
+                        } else if (index === 1) {
+                            showSection('closed');  // Click on "Closed" slice
+                        }
+                    }
+                },
                 plugins: {
                     legend: {
                         position: 'bottom',
@@ -721,13 +732,26 @@
                             font: {
                                 size: 14
                             }
+                        },
+                        onClick: (event, legendItem, legend) => {
+                            const index = legendItem.index;
+                            if (index === 0) {
+                                showSection('open');
+                            } else if (index === 1) {
+                                showSection('closed');
+                            }
                         }
                     },
                     title: {
                         display: true,
-                        text: 'QA Issues Distribution',
+                        text: 'QA Issues Distribution (Click to view)',
                         font: {
                             size: 16
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            footer: () => 'Click to view issues'
                         }
                     }
                 }
@@ -750,6 +774,11 @@
             },
             options: {
                 responsive: true,
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        showSection('all');  // Click any bar to view all issues
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true,
@@ -774,9 +803,14 @@
                     },
                     title: {
                         display: true,
-                        text: 'QA Issues Created Per Month',
+                        text: 'QA Issues Created Per Month (Click to view)',
                         font: {
                             size: 16
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            footer: () => 'Click to view all issues'
                         }
                     }
                 }
