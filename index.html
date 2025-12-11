@@ -162,15 +162,15 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2025-12-11 08:54 EST</div>
+        <div class="update-time">Last updated: 2025-12-11 09:15 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">41</div>
+                <div class="stat-number">42</div>
                 <div class="stat-label">Total QA Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">10</div>
+                <div class="stat-number">11</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -202,7 +202,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open QA Issues (10)</h2>
+            <h2>Open QA Issues (11)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -214,6 +214,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">593</span></td>
+                        <td>[QA] LW 53.0.26 API Swagger /Inventory/v2/ConnectionTerminationPoint/{TID}/{PTP}/{CTP} Get one Connection Termination Point (CTP) inventory does not show the CTP in the response</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-11</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/593" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">542</span></td>
                         <td>[QA] LW RLS Need Field added to the "Create Wavelength Service" popup to search for frequencies</td>
@@ -526,7 +533,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All QA Issues (41)</h2>
+            <h2>All QA Issues (42)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -539,6 +546,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">593</span></td>
+                        <td>[QA] LW 53.0.26 API Swagger /Inventory/v2/ConnectionTerminationPoint/{TID}/{PTP}/{CTP} Get one Connection Termination Point (CTP) inventory does not show the CTP in the response</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-11</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/593" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">542</span></td>
                         <td>[QA] LW RLS Need Field added to the "Create Wavelength Service" popup to search for frequencies</td>
@@ -881,7 +896,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [10, 31],
+                    data: [11, 31],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -946,7 +961,7 @@
                 labels: ["2025-11", "2025-12"],
                 datasets: [{
                     label: 'New QA Issues',
-                    data: [13, 28],
+                    data: [13, 29],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
