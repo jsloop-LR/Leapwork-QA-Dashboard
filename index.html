@@ -162,7 +162,7 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2025-12-12 14:10 EST</div>
+        <div class="update-time">Last updated: 2025-12-12 14:35 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -170,11 +170,11 @@
                 <div class="stat-label">Total QA Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">11</div>
+                <div class="stat-number">10</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">34</div>
+                <div class="stat-number">35</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -202,7 +202,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open QA Issues (11)</h2>
+            <h2>Open QA Issues (10)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -250,13 +250,6 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/540" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr class="">
-                        <td><span class="badge badge-open">538</span></td>
-                        <td>[QA] LW: 64 bit 53.0.26 R8 Unable to Trace thru PASSIVE MUX/DEMUX. Was working in 53.0.22</td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2025-12-09</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/538" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr class="">
                         <td><span class="badge badge-open">534</span></td>
                         <td>[QA] LW 52.0 64 bit The netFlex Power Level report does not load</td>
                         <td><span class="badge badge-repo">netflex</span></td>
@@ -298,7 +291,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed QA Issues (34)</h2>
+            <h2>Closed QA Issues (35)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -316,6 +309,13 @@
                         <td><span class="badge badge-repo">netflex</span></td>
                         <td>2025-12-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/542" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">538</span></td>
+                        <td>[QA] LW: 64 bit 53.0.26 R8 Unable to Trace thru PASSIVE MUX/DEMUX. Was working in 53.0.22</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-09</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/538" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">535</span></td>
@@ -616,9 +616,9 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/540" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr class="">
-                        <td><span class="badge badge-open">538</span></td>
+                        <td><span class="badge badge-closed">538</span></td>
                         <td>[QA] LW: 64 bit 53.0.26 R8 Unable to Trace thru PASSIVE MUX/DEMUX. Was working in 53.0.22</td>
-                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
                         <td><span class="badge badge-repo">netflex</span></td>
                         <td>2025-12-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/538" target="_blank" class="issue-link">View Issue →</a></td>
@@ -941,7 +941,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [11, 34],
+                    data: [10, 35],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
