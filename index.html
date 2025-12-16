@@ -162,15 +162,15 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2025-12-16 13:52 EST</div>
+        <div class="update-time">Last updated: 2025-12-16 14:13 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">49</div>
+                <div class="stat-number">50</div>
                 <div class="stat-label">Total QA Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">9</div>
+                <div class="stat-number">10</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -202,7 +202,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open QA Issues (9)</h2>
+            <h2>Open QA Issues (10)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -214,6 +214,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">765</span></td>
+                        <td>[QA] Network Layout shows extra endpoints after navigating from WL Svc Route form</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-16</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/765" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">694</span></td>
                         <td>[QA] LW 52.1.36 64 bit NE CUT THRU hosed. The entire window is not displayed properly and just spins</td>
@@ -582,7 +589,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All QA Issues (49)</h2>
+            <h2>All QA Issues (50)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -595,6 +602,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">765</span></td>
+                        <td>[QA] Network Layout shows extra endpoints after navigating from WL Svc Route form</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-16</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/765" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-closed">729</span></td>
                         <td>[QA] LW Wavelength Service using API sending provisioning to ports with existing service</td>
@@ -1001,7 +1016,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [9, 40],
+                    data: [10, 40],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1066,7 +1081,7 @@
                 labels: ["2025-11", "2025-12"],
                 datasets: [{
                     label: 'New QA Issues',
-                    data: [13, 36],
+                    data: [13, 37],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
