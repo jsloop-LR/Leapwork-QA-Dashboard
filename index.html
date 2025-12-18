@@ -162,7 +162,7 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2025-12-18 14:12 EST</div>
+        <div class="update-time">Last updated: 2025-12-18 14:32 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -170,11 +170,11 @@
                 <div class="stat-label">Total QA Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">11</div>
+                <div class="stat-number">12</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">38</div>
+                <div class="stat-number">37</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -202,7 +202,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open QA Issues (11)</h2>
+            <h2>Open QA Issues (12)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -214,6 +214,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">835</span></td>
+                        <td>[QA] LW Network Layout Not showing drop Ports AID's</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-18</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/835" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">830</span></td>
                         <td>[QA] DNO dumping core on TELLABS 532L</td>
@@ -298,7 +305,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed QA Issues (38)</h2>
+            <h2>Closed QA Issues (37)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -528,13 +535,6 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/307" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-closed">306</span></td>
-                        <td>[QA] test priority [#294]</td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2025-11-14</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/306" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
                         <td><span class="badge badge-closed">32</span></td>
                         <td>[QA][testing again]sub-sub-issue level 2 test qa [#9]</td>
                         <td><span class="badge badge-repo">workflow-testing</span></td>
@@ -595,6 +595,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">835</span></td>
+                        <td>[QA] LW Network Layout Not showing drop Ports AID's</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2025-12-18</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/835" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">830</span></td>
                         <td>[QA] DNO dumping core on TELLABS 532L</td>
@@ -932,14 +940,6 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/307" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr class="">
-                        <td><span class="badge badge-closed">306</span></td>
-                        <td>[QA] test priority [#294]</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2025-11-14</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/306" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr class="">
                         <td><span class="badge badge-closed">32</span></td>
                         <td>[QA][testing again]sub-sub-issue level 2 test qa [#9]</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
@@ -1001,7 +1001,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [11, 38],
+                    data: [12, 37],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1066,7 +1066,7 @@
                 labels: ["2025-11", "2025-12"],
                 datasets: [{
                     label: 'New QA Issues',
-                    data: [9, 40],
+                    data: [8, 41],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
