@@ -162,15 +162,15 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2026-01-05 15:44 EST</div>
+        <div class="update-time">Last updated: 2026-01-05 16:11 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">47</div>
+                <div class="stat-number">48</div>
                 <div class="stat-label">Total QA Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">7</div>
+                <div class="stat-number">8</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -202,7 +202,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open QA Issues (7)</h2>
+            <h2>Open QA Issues (8)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -214,6 +214,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">1025</span></td>
+                        <td>[SUPPORT] [QA] [LW 52.1.37 missing assigns/facility records in the dno data for holmvm16]Stitching code needs to set DNOmode local to stitching code, remove from add_linedata, for NCS2000 [#1007]</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-01-05</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1025" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">1007</span></td>
                         <td>[QA] LW 52.1.37 missing assigns/facility records in the dno data for holmvm16</td>
@@ -568,7 +575,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All QA Issues (47)</h2>
+            <h2>All QA Issues (48)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -588,6 +595,14 @@
                         <td><span class="badge badge-repo">netflex</span></td>
                         <td>2026-01-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1032" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr class="">
+                        <td><span class="badge badge-open">1025</span></td>
+                        <td>[SUPPORT] [QA] [LW 52.1.37 missing assigns/facility records in the dno data for holmvm16]Stitching code needs to set DNOmode local to stitching code, remove from add_linedata, for NCS2000 [#1007]</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-01-05</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1025" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr class="">
                         <td><span class="badge badge-open">1007</span></td>
@@ -971,7 +986,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [7, 40],
+                    data: [8, 40],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1036,7 +1051,7 @@
                 labels: ["2025-12", "2026-01"],
                 datasets: [{
                     label: 'New QA Issues',
-                    data: [46, 1],
+                    data: [46, 2],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
