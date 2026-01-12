@@ -162,7 +162,7 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2026-01-12 18:09 EST</div>
+        <div class="update-time">Last updated: 2026-01-12 18:35 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -170,11 +170,11 @@
                 <div class="stat-label">Total QA Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">13</div>
+                <div class="stat-number">14</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">43</div>
+                <div class="stat-number">42</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -202,7 +202,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open QA Issues (13)</h2>
+            <h2>Open QA Issues (14)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -214,6 +214,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">1222</span></td>
+                        <td>[QA] LW Inventory Get One PTP Response message confusing when no PTP exists</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-01-12</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1222" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">1200</span></td>
                         <td>[QA] LW Loopback removal confirmation message from Trace Form should be consistent across NE Types</td>
@@ -312,7 +319,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed QA Issues (43)</h2>
+            <h2>Closed QA Issues (42)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -618,13 +625,6 @@
                         <td>2025-12-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/428" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">409</span></td>
-                        <td>[QA] Test Issue Input</td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2025-12-04</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/409" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -644,6 +644,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">1222</span></td>
+                        <td>[QA] LW Inventory Get One PTP Response message confusing when no PTP exists</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-01-12</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1222" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">1200</span></td>
                         <td>[QA] LW Loopback removal confirmation message from Trace Form should be consistent across NE Types</td>
@@ -1084,14 +1092,6 @@
                         <td>2025-12-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/428" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr class="">
-                        <td><span class="badge badge-closed">409</span></td>
-                        <td>[QA] Test Issue Input</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2025-12-04</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/409" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
             <p style="color: #666; font-style: italic; margin-top: 20px;">Note: Yellow highlighted rows are test issues from the workflow-testing repository</p>
@@ -1106,7 +1106,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [13, 43],
+                    data: [14, 42],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1171,7 +1171,7 @@
                 labels: ["2025-12", "2026-01"],
                 datasets: [{
                     label: 'New QA Issues',
-                    data: [40, 16],
+                    data: [39, 17],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
