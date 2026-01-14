@@ -162,11 +162,11 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2026-01-13 18:37 EST</div>
+        <div class="update-time">Last updated: 2026-01-13 19:58 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">58</div>
+                <div class="stat-number">55</div>
                 <div class="stat-label">Total QA Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
@@ -174,7 +174,7 @@
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">45</div>
+                <div class="stat-number">42</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -312,7 +312,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed QA Issues (45)</h2>
+            <h2>Closed QA Issues (42)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -618,34 +618,13 @@
                         <td>2025-12-08</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/439" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">431</span></td>
-                        <td>[QA] LW Wavelength Service goes partial and doesnt trace</td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2025-12-06</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/431" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">429</span></td>
-                        <td>[QA] LW-RLS Carrier Provisioning from logical view on C-Band card doesn't always show error if L-Band Freq is selected</td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2025-12-05</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/429" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">428</span></td>
-                        <td>[QA] LW RLS Carrier Provisioning choosing port with an existing service doesn't immediately error</td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2025-12-05</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/428" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All QA Issues (58)</h2>
+            <h2>All QA Issues (55)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -1098,30 +1077,6 @@
                         <td>2025-12-08</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/439" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr class="">
-                        <td><span class="badge badge-closed">431</span></td>
-                        <td>[QA] LW Wavelength Service goes partial and doesnt trace</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2025-12-06</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/431" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr class="">
-                        <td><span class="badge badge-closed">429</span></td>
-                        <td>[QA] LW-RLS Carrier Provisioning from logical view on C-Band card doesn't always show error if L-Band Freq is selected</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2025-12-05</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/429" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr class="">
-                        <td><span class="badge badge-closed">428</span></td>
-                        <td>[QA] LW RLS Carrier Provisioning choosing port with an existing service doesn't immediately error</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2025-12-05</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/428" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
             <p style="color: #666; font-style: italic; margin-top: 20px;">Note: Yellow highlighted rows are test issues from the workflow-testing repository</p>
@@ -1136,7 +1091,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [13, 45],
+                    data: [13, 42],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1201,7 +1156,7 @@
                 labels: ["2025-12", "2026-01"],
                 datasets: [{
                     label: 'New QA Issues',
-                    data: [39, 19],
+                    data: [36, 19],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
