@@ -162,15 +162,15 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2026-01-14 15:11 EST</div>
+        <div class="update-time">Last updated: 2026-01-14 15:41 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">53</div>
+                <div class="stat-number">54</div>
                 <div class="stat-label">Total QA Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">11</div>
+                <div class="stat-number">12</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -202,7 +202,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open QA Issues (11)</h2>
+            <h2>Open QA Issues (12)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -214,6 +214,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">1281</span></td>
+                        <td>[QA] Question around the use of $range in response files</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-01-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1281" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">1200</span></td>
                         <td>[QA] LW Loopback removal confirmation message from Trace Form should be consistent across NE Types</td>
@@ -610,7 +617,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All QA Issues (53)</h2>
+            <h2>All QA Issues (54)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -623,6 +630,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">1281</span></td>
+                        <td>[QA] Question around the use of $range in response files</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-01-14</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1281" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-closed">1238</span></td>
                         <td>[QA] LW Deleting 1830 carrier service using GUI is not deleting the xcons for entire path</td>
@@ -1061,7 +1076,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [11, 42],
+                    data: [12, 42],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1126,7 +1141,7 @@
                 labels: ["2025-12", "2026-01"],
                 datasets: [{
                     label: 'New QA Issues',
-                    data: [34, 19],
+                    data: [34, 20],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
