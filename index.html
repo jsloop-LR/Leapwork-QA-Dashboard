@@ -162,15 +162,15 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2026-01-21 11:24 EST</div>
+        <div class="update-time">Last updated: 2026-01-21 12:34 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">48</div>
+                <div class="stat-number">49</div>
                 <div class="stat-label">Total QA Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">14</div>
+                <div class="stat-number">15</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -202,7 +202,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open QA Issues (14)</h2>
+            <h2>Open QA Issues (15)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -214,6 +214,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">1422</span></td>
+                        <td>[QA] LW 53.0.27 64-bit linc11vm1. XCON Match from NE Summary failing for 1 NE NOKIA-DMX-2/5</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-01-21</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1422" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">1363</span></td>
                         <td>[QA] LW Link Status for NE Type CIENA 5100/5200 is not correct on NE Management Page</td>
@@ -575,7 +582,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All QA Issues (48)</h2>
+            <h2>All QA Issues (49)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -588,6 +595,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">1422</span></td>
+                        <td>[QA] LW 53.0.27 64-bit linc11vm1. XCON Match from NE Summary failing for 1 NE NOKIA-DMX-2/5</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-01-21</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1422" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-closed">1391</span></td>
                         <td>[QA] LW NE Mgmt Use Global NE User Login field not disabling password field</td>
@@ -986,7 +1001,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [14, 34],
+                    data: [15, 34],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1051,7 +1066,7 @@
                 labels: ["2025-12", "2026-01"],
                 datasets: [{
                     label: 'New QA Issues',
-                    data: [16, 32],
+                    data: [16, 33],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
