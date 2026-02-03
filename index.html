@@ -162,15 +162,15 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2026-02-02 18:49 EST</div>
+        <div class="update-time">Last updated: 2026-02-02 20:09 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">53</div>
+                <div class="stat-number">54</div>
                 <div class="stat-label">Total QA Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">17</div>
+                <div class="stat-number">18</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -202,7 +202,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open QA Issues (17)</h2>
+            <h2>Open QA Issues (18)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -214,6 +214,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">1702</span></td>
+                        <td>[QA] Lumen: nF sending incorrect login command for Telmar 1633SX</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-02-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1702" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">1700</span></td>
                         <td>[QA] LW Circuit Stitching 6500 to 1830</td>
@@ -610,7 +617,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All QA Issues (53)</h2>
+            <h2>All QA Issues (54)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -623,6 +630,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">1702</span></td>
+                        <td>[QA] Lumen: nF sending incorrect login command for Telmar 1633SX</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-02-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1702" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">1700</span></td>
                         <td>[QA] LW Circuit Stitching 6500 to 1830</td>
@@ -1061,7 +1076,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [17, 36],
+                    data: [18, 36],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1126,7 +1141,7 @@
                 labels: ["2025-12", "2026-01", "2026-02"],
                 datasets: [{
                     label: 'New QA Issues',
-                    data: [2, 48, 3],
+                    data: [2, 48, 4],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
