@@ -162,7 +162,7 @@
     <div class="container">
         <h1>🧪 Leapwork QA Dashboard</h1>
         <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
-        <div class="update-time">Last updated: 2026-02-05 13:35 EST</div>
+        <div class="update-time">Last updated: 2026-02-05 14:30 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -170,11 +170,11 @@
                 <div class="stat-label">Total QA Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">26</div>
+                <div class="stat-number">27</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">37</div>
+                <div class="stat-number">36</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -202,7 +202,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open QA Issues (26)</h2>
+            <h2>Open QA Issues (27)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -214,6 +214,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">1808</span></td>
+                        <td>[QA] LW NeMgmt Schedule API's need description updates for 52.1</td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-02-05</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1808" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">1798</span></td>
                         <td>[QA] LW Add Link Down Message for REST NE types when attmepting EM functions</td>
@@ -403,7 +410,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed QA Issues (37)</h2>
+            <h2>Closed QA Issues (36)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -633,13 +640,6 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1124" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-closed">1083</span></td>
-                        <td>[QA] LW Remove Delete Menu option for WS5 Carriers</td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2026-01-06</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1083" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
                         <td><span class="badge badge-closed">87</span></td>
                         <td>[QA] testing new issue</td>
                         <td><span class="badge badge-repo">workflow-testing</span></td>
@@ -693,6 +693,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="">
+                        <td><span class="badge badge-open">1808</span></td>
+                        <td>[QA] LW NeMgmt Schedule API's need description updates for 52.1</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-repo">netflex</span></td>
+                        <td>2026-02-05</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1808" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr class="">
                         <td><span class="badge badge-open">1798</span></td>
                         <td>[QA] LW Add Link Down Message for REST NE types when attmepting EM functions</td>
@@ -1142,14 +1150,6 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1124" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr class="">
-                        <td><span class="badge badge-closed">1083</span></td>
-                        <td>[QA] LW Remove Delete Menu option for WS5 Carriers</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td><span class="badge badge-repo">netflex</span></td>
-                        <td>2026-01-06</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1083" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr class="">
                         <td><span class="badge badge-closed">87</span></td>
                         <td>[QA] testing new issue</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
@@ -1211,7 +1211,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [26, 37],
+                    data: [27, 36],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1276,7 +1276,7 @@
                 labels: ["2026-01", "2026-02"],
                 datasets: [{
                     label: 'New QA Issues',
-                    data: [45, 18],
+                    data: [44, 19],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
