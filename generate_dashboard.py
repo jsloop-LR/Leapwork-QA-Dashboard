@@ -35,7 +35,7 @@ def fetch_issues():
 
     # Filter issues by title pattern (e.g., issues starting with [TAG])
     # Customize or remove this filter based on your needs
-    filtered_issues = [issue for issue in all_issues if '[QA]' in issue['title']]
+    filtered_issues = [issue for issue in all_issues if '[QA] LW' in issue['title']]
 
     print(f"Found {len(filtered_issues)} issues")
     return filtered_issues
@@ -550,6 +550,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
