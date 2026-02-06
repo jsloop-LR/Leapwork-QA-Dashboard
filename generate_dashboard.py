@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Leapwork QA Dashboard Generator
-Fetches QA issues from GitHub and generates an interactive HTML dashboard
+Issues Dashboard Generator
+Fetches issues from GitHub and generates an interactive HTML dashboard
 """
 
 import json
@@ -19,36 +19,37 @@ def run_gh_command(cmd):
         return None
     return result.stdout
 
-def fetch_qa_issues():
-    """Fetch all QA issues from lightriversoftware organization"""
-    print("Fetching QA issues from GitHub...")
-    cmd = 'gh search issues "org:lightriversoftware" --limit 500 --json number,title,state,createdAt,updatedAt,labels,url'
+def fetch_issues():
+    """Fetch all issues matching your search criteria"""
+    print("Fetching issues from GitHub...")
+    # Customize this search query for your needs:
+    # - Change "org:YOUR_ORG" to your organization name
+    # - Add filters like "label:bug", "is:open", etc.
+    cmd = 'gh search issues "org:YOUR_ORGANIZATION_NAME" --limit 500 --json number,title,state,createdAt,updatedAt,labels,url'
     output = run_gh_command(cmd)
 
     if not output:
         return []
 
     all_issues = json.loads(output)
-    # Filter for QA issues only
-    qa_issues = [issue for issue in all_issues if '[QA]' in issue['title']]
 
-    print(f"Found {len(qa_issues)} QA issues")
-    return qa_issues
+    # Filter issues by title pattern (e.g., issues starting with [TAG])
+    # Customize or remove this filter based on your needs
+    filtered_issues = [issue for issue in all_issues if '[YOUR_TAG]' in issue['title']]
 
-def generate_html(qa_issues):
+    print(f"Found {len(filtered_issues)} issues")
+    return filtered_issues
+
+def generate_html(issues):
     """Generate the HTML dashboard"""
 
     # Calculate statistics
-    open_issues = [i for i in qa_issues if i['state'] == 'open']
-    closed_issues = [i for i in qa_issues if i['state'] == 'closed']
-
-    # Separate by repository
-    netflex_open = [i for i in open_issues if 'netflex/issues' in i['url'] and 'workflow-testing' not in i['url']]
-    test_open = [i for i in open_issues if 'workflow-testing' in i['url']]
+    open_issues = [i for i in issues if i['state'] == 'open']
+    closed_issues = [i for i in issues if i['state'] == 'closed']
 
     # Issues over time
     issues_by_month = defaultdict(int)
-    for issue in qa_issues:
+    for issue in issues:
         date = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00'))
         month_key = date.strftime('%Y-%m')
         issues_by_month[month_key] += 1
@@ -61,7 +62,7 @@ def generate_html(qa_issues):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leapwork QA Dashboard - LightRiver netFLEX</title>
+    <title>Issues Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {{
@@ -128,7 +129,6 @@ def generate_html(qa_issues):
         }}
         canvas {{
             max-height: 400px;
-            cursor: pointer;
         }}
         h2 {{
             color: #555;
@@ -211,21 +211,45 @@ def generate_html(qa_issues):
         .nav-button.active {{
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }}
-        .test-issue {{
-            background-color: #fff3cd;
+        /* Back to Top Button */
+        .back-to-top {{
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }}
+        .back-to-top:hover {{
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }}
+        .back-to-top.visible {{
+            display: flex;
         }}
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🧪 Leapwork QA Dashboard</h1>
-        <p style="text-align: center; color: #666;">LightRiver netFLEX - Automated Testing Results</p>
+        <h1>📊 Issues Dashboard</h1>
+        <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
         <div class="update-time">Last updated: {datetime.now(ZoneInfo('America/New_York')).strftime('%Y-%m-%d %H:%M %Z')}</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">{len(qa_issues)}</div>
-                <div class="stat-label">Total QA Issues</div>
+                <div class="stat-number">{len(issues)}</div>
+                <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
                 <div class="stat-number">{len(open_issues)}</div>
@@ -260,13 +284,12 @@ def generate_html(qa_issues):
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open QA Issues ({len(open_issues)})</h2>
+            <h2>Open Issues ({len(open_issues)})</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Title</th>
-                        <th>Repository</th>
                         <th>Created</th>
                         <th>Link</th>
                     </tr>
@@ -276,14 +299,11 @@ def generate_html(qa_issues):
 
     # Add open issues
     for issue in sorted(open_issues, key=lambda x: x['number'], reverse=True):
-        repo_name = 'netflex' if 'netflex/issues' in issue['url'] and 'workflow-testing' not in issue['url'] else 'workflow-testing'
-        is_test = 'test-issue' if repo_name == 'workflow-testing' else ''
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
 
-        html += f"""                    <tr class="{is_test}">
+        html += f"""                    <tr>
                         <td><span class="badge badge-open">{issue['number']}</span></td>
                         <td>{issue['title']}</td>
-                        <td><span class="badge badge-repo">{repo_name}</span></td>
                         <td>{created}</td>
                         <td><a href="{issue['url']}" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -291,18 +311,16 @@ def generate_html(qa_issues):
 
     html += """                </tbody>
             </table>
-            <p style="color: #666; font-style: italic;">Note: Yellow highlighted rows are test issues from the workflow-testing repository</p>
         </div>
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed QA Issues (""" + str(len(closed_issues)) + """)</h2>
+            <h2>Closed Issues (""" + str(len(closed_issues)) + """)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Title</th>
-                        <th>Repository</th>
                         <th>Created</th>
                         <th>Link</th>
                     </tr>
@@ -312,13 +330,11 @@ def generate_html(qa_issues):
 
     # Add closed issues
     for issue in sorted(closed_issues, key=lambda x: x['number'], reverse=True):
-        repo_name = 'netflex' if 'netflex/issues' in issue['url'] and 'workflow-testing' not in issue['url'] else 'workflow-testing'
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
 
         html += f"""                    <tr>
                         <td><span class="badge badge-closed">{issue['number']}</span></td>
                         <td>{issue['title']}</td>
-                        <td><span class="badge badge-repo">{repo_name}</span></td>
                         <td>{created}</td>
                         <td><a href="{issue['url']}" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -330,14 +346,13 @@ def generate_html(qa_issues):
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All QA Issues (""" + str(len(qa_issues)) + """)</h2>
+            <h2>All Issues (""" + str(len(issues)) + """)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Title</th>
                         <th>Status</th>
-                        <th>Repository</th>
                         <th>Created</th>
                         <th>Link</th>
                     </tr>
@@ -346,18 +361,15 @@ def generate_html(qa_issues):
 """
 
     # Add all issues
-    for issue in sorted(qa_issues, key=lambda x: x['number'], reverse=True):
-        repo_name = 'netflex' if 'netflex/issues' in issue['url'] and 'workflow-testing' not in issue['url'] else 'workflow-testing'
-        is_test = 'test-issue' if repo_name == 'workflow-testing' and issue['state'] == 'open' else ''
+    for issue in sorted(issues, key=lambda x: x['number'], reverse=True):
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
         status_badge = 'badge-open' if issue['state'] == 'open' else 'badge-closed'
         status_text = issue['state'].upper()
 
-        html += f"""                    <tr class="{is_test}">
+        html += f"""                    <tr>
                         <td><span class="badge {status_badge}">{issue['number']}</span></td>
                         <td>{issue['title']}</td>
                         <td><span class="badge {status_badge}">{status_text}</span></td>
-                        <td><span class="badge badge-repo">{repo_name}</span></td>
                         <td>{created}</td>
                         <td><a href="{issue['url']}" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -369,9 +381,13 @@ def generate_html(qa_issues):
 
     html += f"""                </tbody>
             </table>
-            <p style="color: #666; font-style: italic; margin-top: 20px;">Note: Yellow highlighted rows are test issues from the workflow-testing repository</p>
         </div>
     </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" title="Back to top">
+        ↑
+    </button>
 
     <script>
         // Chart 1: Issues by Status (Pie Chart)
@@ -395,16 +411,6 @@ def generate_html(qa_issues):
             }},
             options: {{
                 responsive: true,
-                onClick: (event, elements) => {{
-                    if (elements.length > 0) {{
-                        const index = elements[0].index;
-                        if (index === 0) {{
-                            showSection('open');  // Click on "Open" slice
-                        }} else if (index === 1) {{
-                            showSection('closed');  // Click on "Closed" slice
-                        }}
-                    }}
-                }},
                 plugins: {{
                     legend: {{
                         position: 'bottom',
@@ -412,26 +418,13 @@ def generate_html(qa_issues):
                             font: {{
                                 size: 14
                             }}
-                        }},
-                        onClick: (event, legendItem, legend) => {{
-                            const index = legendItem.index;
-                            if (index === 0) {{
-                                showSection('open');
-                            }} else if (index === 1) {{
-                                showSection('closed');
-                            }}
                         }}
                     }},
                     title: {{
                         display: true,
-                        text: 'QA Issues Distribution (Click to view)',
+                        text: 'Issues Distribution',
                         font: {{
                             size: 16
-                        }}
-                    }},
-                    tooltip: {{
-                        callbacks: {{
-                            footer: () => 'Click to view issues'
                         }}
                     }}
                 }}
@@ -445,7 +438,7 @@ def generate_html(qa_issues):
             data: {{
                 labels: {json.dumps(month_labels)},
                 datasets: [{{
-                    label: 'New QA Issues',
+                    label: 'New Issues',
                     data: {json.dumps(month_counts)},
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -454,11 +447,6 @@ def generate_html(qa_issues):
             }},
             options: {{
                 responsive: true,
-                onClick: (event, elements) => {{
-                    if (elements.length > 0) {{
-                        showSection('all');  // Click any bar to view all issues
-                    }}
-                }},
                 scales: {{
                     y: {{
                         beginAtZero: true,
@@ -483,14 +471,9 @@ def generate_html(qa_issues):
                     }},
                     title: {{
                         display: true,
-                        text: 'QA Issues Created Per Month (Click to view)',
+                        text: 'Issues Created Per Month',
                         font: {{
                             size: 16
-                        }}
-                    }},
-                    tooltip: {{
-                        callbacks: {{
-                            footer: () => 'Click to view all issues'
                         }}
                     }}
                 }}
@@ -516,6 +499,23 @@ def generate_html(qa_issues):
                 document.querySelectorAll('.nav-button')[3].classList.add('active');
             }}
         }}
+
+        // Back to Top Button functionality
+        window.addEventListener('scroll', function() {{
+            const backToTopButton = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {{
+                backToTopButton.classList.add('visible');
+            }} else {{
+                backToTopButton.classList.remove('visible');
+            }}
+        }});
+
+        function scrollToTop() {{
+            window.scrollTo({{
+                top: 0,
+                behavior: 'smooth'
+            }});
+        }}
     </script>
 </body>
 </html>
@@ -525,28 +525,28 @@ def generate_html(qa_issues):
 
 def main():
     """Main function"""
-    print("Leapwork QA Dashboard Generator")
+    print("Issues Dashboard Generator")
     print("=" * 50)
 
-    # Fetch QA issues
-    qa_issues = fetch_qa_issues()
+    # Fetch issues
+    issues = fetch_issues()
 
-    if not qa_issues:
-        print("No QA issues found or error fetching data")
+    if not issues:
+        print("No issues found or error fetching data")
         return
 
     # Generate HTML
     print("Generating HTML dashboard...")
-    html = generate_html(qa_issues)
+    html = generate_html(issues)
 
     # Write to file
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(html)
 
     print("✅ Dashboard generated successfully: index.html")
-    print(f"   Total issues: {len(qa_issues)}")
-    print(f"   Open: {len([i for i in qa_issues if i['state'] == 'open'])}")
-    print(f"   Closed: {len([i for i in qa_issues if i['state'] == 'closed'])}")
+    print(f"   Total issues: {len(issues)}")
+    print(f"   Open: {len([i for i in issues if i['state'] == 'open'])}")
+    print(f"   Closed: {len([i for i in issues if i['state'] == 'closed'])}")
 
 if __name__ == '__main__':
     main()
