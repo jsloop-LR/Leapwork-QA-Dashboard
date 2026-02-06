@@ -25,7 +25,7 @@ def fetch_issues():
     # Customize this search query for your needs:
     # - Change "org:YOUR_ORG" to your organization name
     # - Add filters like "label:bug", "is:open", etc.
-    cmd = 'gh search issues "org:YOUR_ORGANIZATION_NAME" --limit 500 --json number,title,state,createdAt,updatedAt,labels,url'
+    cmd = 'gh search issues "repo:lightriversoftware/netflex" --limit 500 --json
     output = run_gh_command(cmd)
 
     if not output:
@@ -550,3 +550,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
