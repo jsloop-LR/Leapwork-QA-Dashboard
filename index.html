@@ -185,15 +185,15 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-02-12 11:14 EST</div>
+        <div class="update-time">Last updated: 2026-02-12 12:31 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">62</div>
+                <div class="stat-number">64</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">16</div>
+                <div class="stat-number">18</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (16)</h2>
+            <h2>Open Issues (18)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -236,6 +236,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">1947</span></td>
+                        <td>[QA] LW: 53.0.28 Pages will not load if using NE List Type as Pulldown under Misc Tab of View Preferences</td>
+                        <td>2026-02-12</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1947" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-open">1946</span></td>
+                        <td>[QA] LW: 53.0.28 Trace Level set to 3 under View Preferences Miscellaneous and cannot be changed</td>
+                        <td>2026-02-12</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1946" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">1942</span></td>
                         <td>[QA] LW Match_wvl from the GUI for Infinera GX31 is not supported</td>
@@ -631,7 +643,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (62)</h2>
+            <h2>All Issues (64)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -643,6 +655,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">1947</span></td>
+                        <td>[QA] LW: 53.0.28 Pages will not load if using NE List Type as Pulldown under Misc Tab of View Preferences</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-02-12</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1947" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-open">1946</span></td>
+                        <td>[QA] LW: 53.0.28 Trace Level set to 3 under View Preferences Miscellaneous and cannot be changed</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-02-12</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1946" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">1942</span></td>
                         <td>[QA] LW Match_wvl from the GUI for Infinera GX31 is not supported</td>
@@ -1095,7 +1121,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [16, 46],
+                    data: [18, 46],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1137,7 +1163,7 @@
                 labels: ["2025-12", "2026-01", "2026-02"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [12, 30, 20],
+                    data: [12, 30, 22],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
