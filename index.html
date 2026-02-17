@@ -185,11 +185,11 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-02-17 08:59 EST</div>
+        <div class="update-time">Last updated: 2026-02-17 09:47 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">65</div>
+                <div class="stat-number">66</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
@@ -197,7 +197,7 @@
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">48</div>
+                <div class="stat-number">49</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -237,16 +237,16 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td><span class="badge badge-open">2000</span></td>
+                        <td>[QA] LW Trace showing oductp facilities in trace graphic when the "Show OTN AIDs" is No</td>
+                        <td>2026-02-17</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2000" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
                         <td><span class="badge badge-open">1981</span></td>
                         <td>[QA] LW error message incorrect when logging into standby GR server with an alias</td>
                         <td>2026-02-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1981" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-open">1979</span></td>
-                        <td>[QA] LW: Swagger API "/WavelengthServices/v2/wvls/docChan Retrieve the DOC channel report" has no data in the response body</td>
-                        <td>2026-02-13</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1979" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">1949</span></td>
@@ -344,7 +344,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (48)</h2>
+            <h2>Closed Issues (49)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -355,6 +355,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-closed">1979</span></td>
+                        <td>[QA] LW: Swagger API "/WavelengthServices/v2/wvls/docChan Retrieve the DOC channel report" has no data in the response body</td>
+                        <td>2026-02-13</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1979" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-closed">1942</span></td>
                         <td>[QA] LW Match_wvl from the GUI for Infinera GX31 is not supported</td>
@@ -649,7 +655,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (65)</h2>
+            <h2>All Issues (66)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -662,6 +668,13 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td><span class="badge badge-open">2000</span></td>
+                        <td>[QA] LW Trace showing oductp facilities in trace graphic when the "Show OTN AIDs" is No</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-02-17</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2000" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
                         <td><span class="badge badge-open">1981</span></td>
                         <td>[QA] LW error message incorrect when logging into standby GR server with an alias</td>
                         <td><span class="badge badge-open">OPEN</span></td>
@@ -669,9 +682,9 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1981" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-open">1979</span></td>
+                        <td><span class="badge badge-closed">1979</span></td>
                         <td>[QA] LW: Swagger API "/WavelengthServices/v2/wvls/docChan Retrieve the DOC channel report" has no data in the response body</td>
-                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1979" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -1134,7 +1147,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [17, 48],
+                    data: [17, 49],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1176,7 +1189,7 @@
                 labels: ["2025-12", "2026-01", "2026-02"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [10, 30, 25],
+                    data: [10, 30, 26],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
