@@ -185,7 +185,7 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-02-24 09:03 EST</div>
+        <div class="update-time">Last updated: 2026-02-24 10:15 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -193,11 +193,11 @@
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">11</div>
+                <div class="stat-number">10</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">55</div>
+                <div class="stat-number">56</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (11)</h2>
+            <h2>Open Issues (10)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -241,12 +241,6 @@
                         <td>[QA] LW error message incorrect when logging into standby GR server with an alias</td>
                         <td>2026-02-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1981" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-open">1949</span></td>
-                        <td>[QA] LW GR status report not reflecting the correct backup times for rdb group</td>
-                        <td>2026-02-12</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1949" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">1946</span></td>
@@ -308,7 +302,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (55)</h2>
+            <h2>Closed Issues (56)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -366,6 +360,12 @@
                         <td>[QA] LW: Swagger API "/WavelengthServices/v2/wvls/docChan Retrieve the DOC channel report" has no data in the response body</td>
                         <td>2026-02-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1979" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">1949</span></td>
+                        <td>[QA] LW GR status report not reflecting the correct backup times for rdb group</td>
+                        <td>2026-02-12</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1949" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1947</span></td>
@@ -731,9 +731,9 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1979" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-open">1949</span></td>
+                        <td><span class="badge badge-closed">1949</span></td>
                         <td>[QA] LW GR status report not reflecting the correct backup times for rdb group</td>
-                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1949" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -1147,7 +1147,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [11, 55],
+                    data: [10, 56],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
