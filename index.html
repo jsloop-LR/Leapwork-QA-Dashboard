@@ -185,7 +185,7 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-02-25 09:02 EST</div>
+        <div class="update-time">Last updated: 2026-02-25 10:15 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -193,11 +193,11 @@
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">12</div>
+                <div class="stat-number">11</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">54</div>
+                <div class="stat-number">55</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (12)</h2>
+            <h2>Open Issues (11)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -273,12 +273,6 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1899" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-open">1854</span></td>
-                        <td>[QA] LW GR not logging user out of GUI after GR switch</td>
-                        <td>2026-02-09</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1854" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
                         <td><span class="badge badge-open">1422</span></td>
                         <td>[QA] LW 53.0.27 64-bit linc11vm1. XCON Match from NE Summary failing for 1 NE NOKIA-DMX-2/5</td>
                         <td>2026-01-21</td>
@@ -314,7 +308,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (54)</h2>
+            <h2>Closed Issues (55)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -402,6 +396,12 @@
                         <td>[QA] LW: 53.0.28 CIENA WAVESERVER Line port TRACES but does not match in a Wavelength Service</td>
                         <td>2026-02-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1858" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">1854</span></td>
+                        <td>[QA] LW GR not logging user out of GUI after GR switch</td>
+                        <td>2026-02-09</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1854" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1852</span></td>
@@ -801,9 +801,9 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1858" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-open">1854</span></td>
+                        <td><span class="badge badge-closed">1854</span></td>
                         <td>[QA] LW GR not logging user out of GUI after GR switch</td>
-                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1854" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -1147,7 +1147,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [12, 54],
+                    data: [11, 55],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
