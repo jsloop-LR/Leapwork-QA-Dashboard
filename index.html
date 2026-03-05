@@ -185,11 +185,11 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-03-05 10:40 EST</div>
+        <div class="update-time">Last updated: 2026-03-05 12:54 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">57</div>
+                <div class="stat-number">55</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
@@ -197,7 +197,7 @@
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">50</div>
+                <div class="stat-number">48</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -284,7 +284,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (50)</h2>
+            <h2>Closed Issues (48)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -583,25 +583,13 @@
                         <td>2026-01-16</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1332" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">1314</span></td>
-                        <td>[QA] LW 53.0.26 Historical PM results shows NA for the most recent day</td>
-                        <td>2026-01-15</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1314" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">1311</span></td>
-                        <td>[QA] LW Add Tool tip to logical view for WS5 4x100 "Parent" port</td>
-                        <td>2026-01-15</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1311" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (57)</h2>
+            <h2>All Issues (55)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -998,20 +986,6 @@
                         <td>2026-01-16</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1332" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">1314</span></td>
-                        <td>[QA] LW 53.0.26 Historical PM results shows NA for the most recent day</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td>2026-01-15</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1314" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">1311</span></td>
-                        <td>[QA] LW Add Tool tip to logical view for WS5 4x100 "Parent" port</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td>2026-01-15</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1311" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -1030,7 +1004,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [7, 50],
+                    data: [7, 48],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1072,7 +1046,7 @@
                 labels: ["2026-01", "2026-02", "2026-03"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [15, 38, 4],
+                    data: [13, 38, 4],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
