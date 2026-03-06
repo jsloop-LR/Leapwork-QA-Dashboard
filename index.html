@@ -185,7 +185,7 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-03-06 08:45 EST</div>
+        <div class="update-time">Last updated: 2026-03-06 09:29 EST</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -193,11 +193,11 @@
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">6</div>
+                <div class="stat-number">5</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">47</div>
+                <div class="stat-number">48</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (6)</h2>
+            <h2>Open Issues (5)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -255,12 +255,6 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2243" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-open">2178</span></td>
-                        <td>[QA] LW GR replication not occurring per schedule due to GR Xfer Button bug</td>
-                        <td>2026-02-24</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2178" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
                         <td><span class="badge badge-open">1946</span></td>
                         <td>[QA] LW: 53.0.28 Trace Level set to 3 under View Preferences Miscellaneous and cannot be changed</td>
                         <td>2026-02-12</td>
@@ -278,7 +272,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (47)</h2>
+            <h2>Closed Issues (48)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -318,6 +312,12 @@
                         <td>[QA] LW Unify Login Form Submission Buttons</td>
                         <td>2026-02-27</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2262" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">2178</span></td>
+                        <td>[QA] LW GR replication not occurring per schedule due to GR Xfer Button bug</td>
+                        <td>2026-02-24</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2178" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2158</span></td>
@@ -646,9 +646,9 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2243" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-open">2178</span></td>
+                        <td><span class="badge badge-closed">2178</span></td>
                         <td>[QA] LW GR replication not occurring per schedule due to GR Xfer Button bug</td>
-                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-24</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2178" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -978,7 +978,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [6, 47],
+                    data: [5, 48],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
