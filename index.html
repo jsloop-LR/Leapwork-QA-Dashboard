@@ -185,11 +185,11 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-03-16 08:44 EDT</div>
+        <div class="update-time">Last updated: 2026-03-16 10:14 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">53</div>
+                <div class="stat-number">52</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
@@ -197,7 +197,7 @@
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">45</div>
+                <div class="stat-number">44</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -290,7 +290,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (45)</h2>
+            <h2>Closed Issues (44)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -565,19 +565,13 @@
                         <td>2026-01-28</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1549" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">1500</span></td>
-                        <td>[QA] LW End Point LinkStatus is missing parameters</td>
-                        <td>2026-01-23</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1500" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (53)</h2>
+            <h2>All Issues (52)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -953,13 +947,6 @@
                         <td>2026-01-28</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1549" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">1500</span></td>
-                        <td>[QA] LW End Point LinkStatus is missing parameters</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td>2026-01-23</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/1500" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -978,7 +965,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [8, 45],
+                    data: [8, 44],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1020,7 +1007,7 @@
                 labels: ["2026-01", "2026-02", "2026-03"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [4, 38, 11],
+                    data: [3, 38, 11],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
