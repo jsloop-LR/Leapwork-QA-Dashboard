@@ -185,15 +185,15 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-03-16 17:03 EDT</div>
+        <div class="update-time">Last updated: 2026-03-16 17:58 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">51</div>
+                <div class="stat-number">52</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">2</div>
+                <div class="stat-number">3</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (2)</h2>
+            <h2>Open Issues (3)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -236,6 +236,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">2690</span></td>
+                        <td>[QA] LW new feature for Interface management enhanced for NETCONF, RESTCONF, and CLI are not in def.system_defines</td>
+                        <td>2026-03-16</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2690" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">2631</span></td>
                         <td>[QA] LW Deleting NE's using RMT script failing b'c NE up when alrady in disable state</td>
@@ -565,7 +571,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (51)</h2>
+            <h2>All Issues (52)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -577,6 +583,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">2690</span></td>
+                        <td>[QA] LW new feature for Interface management enhanced for NETCONF, RESTCONF, and CLI are not in def.system_defines</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-03-16</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2690" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">2631</span></td>
                         <td>[QA] LW Deleting NE's using RMT script failing b'c NE up when alrady in disable state</td>
@@ -952,7 +965,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [2, 49],
+                    data: [3, 49],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -994,7 +1007,7 @@
                 labels: ["2026-01", "2026-02", "2026-03"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [2, 38, 11],
+                    data: [2, 38, 12],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
