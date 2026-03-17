@@ -185,7 +185,7 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-03-17 18:33 EDT</div>
+        <div class="update-time">Last updated: 2026-03-17 19:22 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -193,11 +193,11 @@
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">2</div>
+                <div class="stat-number">1</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">51</div>
+                <div class="stat-number">52</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (2)</h2>
+            <h2>Open Issues (1)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -242,19 +242,13 @@
                         <td>2026-03-17</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2692" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-open">2425</span></td>
-                        <td>[QA] LW BEP switching not occurring when down NE count exceeds system define</td>
-                        <td>2026-03-05</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2425" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (51)</h2>
+            <h2>Closed Issues (52)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -318,6 +312,12 @@
                         <td>[QA] LW: 53.1.23 CAT PM Missing for NE Type CISCO ROUTER - ciscoNCS57C3MODSSYS</td>
                         <td>2026-03-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2426" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">2425</span></td>
+                        <td>[QA] LW BEP switching not occurring when down NE count exceeds system define</td>
+                        <td>2026-03-05</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2425" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2412</span></td>
@@ -660,9 +660,9 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2426" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-open">2425</span></td>
+                        <td><span class="badge badge-closed">2425</span></td>
                         <td>[QA] LW BEP switching not occurring when down NE count exceeds system define</td>
-                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2425" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -978,7 +978,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [2, 51],
+                    data: [1, 52],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
