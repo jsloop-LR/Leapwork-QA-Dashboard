@@ -185,7 +185,7 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-03-19 08:37 EDT</div>
+        <div class="update-time">Last updated: 2026-03-19 10:01 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -193,11 +193,11 @@
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">3</div>
+                <div class="stat-number">2</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">52</div>
+                <div class="stat-number">53</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (3)</h2>
+            <h2>Open Issues (2)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -236,12 +236,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><span class="badge badge-open">2771</span></td>
-                        <td>[QA] LW RDB upgrade failing for Remote server deployment</td>
-                        <td>2026-03-18</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2771" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                     <tr>
                         <td><span class="badge badge-open">2756</span></td>
                         <td>[QA] LW: API for /Inventory/v2/ManagedElement/{TID} Get one Managed Element (ME) inventory incorrect/inconsistent output</td>
@@ -260,7 +254,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (52)</h2>
+            <h2>Closed Issues (53)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -271,6 +265,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-closed">2771</span></td>
+                        <td>[QA] LW RDB upgrade failing for Remote server deployment</td>
+                        <td>2026-03-18</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2771" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-closed">2692</span></td>
                         <td>[QA] LW CEC Trace not following xcon OTU4</td>
@@ -602,9 +602,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><span class="badge badge-open">2771</span></td>
+                        <td><span class="badge badge-closed">2771</span></td>
                         <td>[QA] LW RDB upgrade failing for Remote server deployment</td>
-                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-18</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2771" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -1004,7 +1004,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [3, 52],
+                    data: [2, 53],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
