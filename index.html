@@ -185,15 +185,15 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-03-19 16:31 EDT</div>
+        <div class="update-time">Last updated: 2026-03-19 17:25 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">56</div>
+                <div class="stat-number">57</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">4</div>
+                <div class="stat-number">5</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (4)</h2>
+            <h2>Open Issues (5)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -236,6 +236,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">2813</span></td>
+                        <td>[QA] LW matching in fully protect service using the protect port doesnt bring in the service</td>
+                        <td>2026-03-19</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2813" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">2798</span></td>
                         <td>[QA] LW wvl_svc_sync_dno is core dumping every few seconds</td>
@@ -595,7 +601,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (56)</h2>
+            <h2>All Issues (57)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -607,6 +613,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">2813</span></td>
+                        <td>[QA] LW matching in fully protect service using the protect port doesnt bring in the service</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-03-19</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2813" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">2798</span></td>
                         <td>[QA] LW wvl_svc_sync_dno is core dumping every few seconds</td>
@@ -1017,7 +1030,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [4, 52],
+                    data: [5, 52],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1059,7 +1072,7 @@
                 labels: ["2026-02", "2026-03"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [38, 18],
+                    data: [38, 19],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
