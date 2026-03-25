@@ -185,15 +185,15 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-03-25 17:58 EDT</div>
+        <div class="update-time">Last updated: 2026-03-25 18:32 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">60</div>
+                <div class="stat-number">62</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">8</div>
+                <div class="stat-number">10</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (8)</h2>
+            <h2>Open Issues (10)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -236,6 +236,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">2926</span></td>
+                        <td>[QA] LW Complete API action is core dumping</td>
+                        <td>2026-03-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2926" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-open">2925</span></td>
+                        <td>[QA] LW Multi Box Commands timing out, alrmhndlr q filling up</td>
+                        <td>2026-03-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2925" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">2923</span></td>
                         <td>[QA] LW: 53.1.28 TRACE/ Ports missing from circuit TRACE for NE Type OPENROADM RT</td>
@@ -619,7 +631,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (60)</h2>
+            <h2>All Issues (62)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -631,6 +643,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">2926</span></td>
+                        <td>[QA] LW Complete API action is core dumping</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-03-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2926" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-open">2925</span></td>
+                        <td>[QA] LW Multi Box Commands timing out, alrmhndlr q filling up</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-03-25</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2925" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">2923</span></td>
                         <td>[QA] LW: 53.1.28 TRACE/ Ports missing from circuit TRACE for NE Type OPENROADM RT</td>
@@ -1069,7 +1095,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [8, 52],
+                    data: [10, 52],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1111,7 +1137,7 @@
                 labels: ["2026-02", "2026-03"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [32, 28],
+                    data: [32, 30],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
