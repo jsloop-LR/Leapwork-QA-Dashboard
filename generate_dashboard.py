@@ -25,7 +25,7 @@ def fetch_issues():
     # Customize this search query for your needs:
     # - Change "org:YOUR_ORG" to your organization name
     # - Add filters like "label:bug", "is:open", etc.
-    cmd = 'gh search issues "repo:lightriversoftware/netflex" --limit 500 --json number,title,state,createdAt,updatedAt,labels,url'
+    cmd = 'gh search issues "repo:lightriversoftware/netflex" --limit 1000 --json number,title,state,createdAt,updatedAt,labels,url'
     output = run_gh_command(cmd)
 
     if not output:
@@ -35,7 +35,7 @@ def fetch_issues():
 
     # Filter issues by title pattern (e.g., issues starting with [TAG])
     # Customize or remove this filter based on your needs
-    filtered_issues = [issue for issue in all_issues if '[QA] LW' in issue['title']]
+    filtered_issues = [issue for issue in all_issues if 'LW' in issue['title'] and 'QA' in issue['title']]
 
     print(f"Found {len(filtered_issues)} issues")
     return filtered_issues
