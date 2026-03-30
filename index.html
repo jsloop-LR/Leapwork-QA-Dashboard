@@ -185,15 +185,15 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-03-30 10:20 EDT</div>
+        <div class="update-time">Last updated: 2026-03-30 11:48 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">139</div>
+                <div class="stat-number">138</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">12</div>
+                <div class="stat-number">11</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (12)</h2>
+            <h2>Open Issues (11)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -241,12 +241,6 @@
                         <td>[QA] LW: 53.1 Linc11vm1 Swagger: Alias for API User Access Control List not working as expected</td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2959" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-open">2946</span></td>
-                        <td>[QA] LW Tracing OPS protected servcie from the wvls report, ZA direction isnt working</td>
-                        <td>2026-03-26</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2946" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">2925</span></td>
@@ -344,6 +338,12 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2949" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
+                        <td><span class="badge badge-closed">2946</span></td>
+                        <td>[QA] LW Tracing OPS protected servcie from the wvls report, ZA direction isnt working</td>
+                        <td>2026-03-26</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2946" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
                         <td><span class="badge badge-closed">2943</span></td>
                         <td>[QA] LW Trace When tracing OPS protected service from client OPS port trace fails</td>
                         <td>2026-03-26</td>
@@ -1081,19 +1081,13 @@
                         <td>2025-12-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/523" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">504</span></td>
-                        <td>[PORT to 5.2.1] [QA] LW-RLS Carrier Provisioning from logical view on C-Band card doesn't always show error if L-Band Freq is selected</td>
-                        <td>2025-12-09</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/504" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (139)</h2>
+            <h2>All Issues (138)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -1134,9 +1128,9 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2949" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-open">2946</span></td>
+                        <td><span class="badge badge-closed">2946</span></td>
                         <td>[QA] LW Tracing OPS protected servcie from the wvls report, ZA direction isnt working</td>
-                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2946" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -2071,13 +2065,6 @@
                         <td>2025-12-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/523" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">504</span></td>
-                        <td>[PORT to 5.2.1] [QA] LW-RLS Carrier Provisioning from logical view on C-Band card doesn't always show error if L-Band Freq is selected</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td>2025-12-09</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/504" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -2096,7 +2083,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [12, 127],
+                    data: [11, 127],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -2138,7 +2125,7 @@
                 labels: ["2025-12", "2026-01", "2026-02", "2026-03"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [28, 32, 42, 37],
+                    data: [27, 32, 42, 37],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
