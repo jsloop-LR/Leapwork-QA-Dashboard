@@ -185,15 +185,15 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-03-31 12:47 EDT</div>
+        <div class="update-time">Last updated: 2026-03-31 13:47 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">136</div>
+                <div class="stat-number">135</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">10</div>
+                <div class="stat-number">9</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (10)</h2>
+            <h2>Open Issues (9)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -271,12 +271,6 @@
                         <td>[QA] LW: /Inventory/v2/ManagedElement/{TID} Get one Managed Element (ME) inventory Chrome Browser freezing</td>
                         <td>2026-03-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2864" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-open">2814</span></td>
-                        <td>[QA] LW API CLI Cut Thru not passing success  message upon command completion</td>
-                        <td>2026-03-19</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2814" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">2756</span></td>
@@ -378,6 +372,12 @@
                         <td>[QA] LW Wvls Partially Protected Servcie USER proc core dumps</td>
                         <td>2026-03-20</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2819" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">2814</span></td>
+                        <td>[QA] LW API CLI Cut Thru not passing success  message upon command completion</td>
+                        <td>2026-03-19</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/2814" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2813</span></td>
@@ -1063,19 +1063,13 @@
                         <td>2025-12-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/530" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">529</span></td>
-                        <td>[QA] LW Booting app fails unless su - cmm first</td>
-                        <td>2025-12-09</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/529" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (136)</h2>
+            <h2>All Issues (135)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -1207,9 +1201,9 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2819" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-open">2814</span></td>
+                        <td><span class="badge badge-closed">2814</span></td>
                         <td>[QA] LW API CLI Cut Thru not passing success  message upon command completion</td>
-                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2814" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -2032,13 +2026,6 @@
                         <td>2025-12-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/530" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">529</span></td>
-                        <td>[QA] LW Booting app fails unless su - cmm first</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td>2025-12-09</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/529" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -2057,7 +2044,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [10, 126],
+                    data: [9, 126],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -2099,7 +2086,7 @@
                 labels: ["2025-12", "2026-01", "2026-02", "2026-03"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [24, 32, 42, 38],
+                    data: [23, 32, 42, 38],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
