@@ -185,7 +185,7 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-03-31 11:43 EDT</div>
+        <div class="update-time">Last updated: 2026-03-31 12:47 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -193,11 +193,11 @@
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">9</div>
+                <div class="stat-number">10</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">127</div>
+                <div class="stat-number">126</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (9)</h2>
+            <h2>Open Issues (10)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -236,6 +236,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">3027</span></td>
+                        <td>[QA] LW: 52.1.41 TIES missing on Ciena 6500S.</td>
+                        <td>2026-03-31</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3027" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">2925</span></td>
                         <td>[QA] LW Multi Box Commands timing out, alrmhndlr q filling up</td>
@@ -296,7 +302,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (127)</h2>
+            <h2>Closed Issues (126)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -1063,12 +1069,6 @@
                         <td>2025-12-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/529" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">528</span></td>
-                        <td>[QA] LW 53.0 NE fields on all forms when hovered over should show TID and NEID</td>
-                        <td>2025-12-09</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/528" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -1087,6 +1087,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">3027</span></td>
+                        <td>[QA] LW: 52.1.41 TIES missing on Ciena 6500S.</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-03-31</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3027" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-closed">2959</span></td>
                         <td>[QA] LW: 53.1 Linc11vm1 Swagger: Alias for API User Access Control List not working as expected</td>
@@ -2032,13 +2039,6 @@
                         <td>2025-12-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/529" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">528</span></td>
-                        <td>[QA] LW 53.0 NE fields on all forms when hovered over should show TID and NEID</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td>2025-12-09</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/528" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -2057,7 +2057,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [9, 127],
+                    data: [10, 126],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -2099,7 +2099,7 @@
                 labels: ["2025-12", "2026-01", "2026-02", "2026-03"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [25, 32, 42, 37],
+                    data: [24, 32, 42, 38],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
