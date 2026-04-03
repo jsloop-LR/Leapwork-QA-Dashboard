@@ -185,11 +185,11 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-04-03 11:32 EDT</div>
+        <div class="update-time">Last updated: 2026-04-03 12:28 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">128</div>
+                <div class="stat-number">129</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
@@ -197,7 +197,7 @@
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">118</div>
+                <div class="stat-number">119</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -237,16 +237,16 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td><span class="badge badge-open">3163</span></td>
+                        <td>[QA] LW: 53.1 and 52.1 Service View Wizard is blank for NE TYPE CISCO ROUTER - cisco8201</td>
+                        <td>2026-04-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3163" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
                         <td><span class="badge badge-open">3125</span></td>
                         <td>[QA] LW NE Cut Thru Available NE's list missing after commands sent to initial set of NE's</td>
                         <td>2026-04-02</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3125" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-open">3080</span></td>
-                        <td>[QA] LW BEP needs to wait for rdb connection before app boots</td>
-                        <td>2026-04-01</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3080" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">2925</span></td>
@@ -302,7 +302,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (118)</h2>
+            <h2>Closed Issues (119)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -313,6 +313,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-closed">3080</span></td>
+                        <td>[QA] LW BEP needs to wait for rdb connection before app boots</td>
+                        <td>2026-04-01</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3080" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-closed">3050</span></td>
                         <td>[QA] LW: 52.1.41 holmvm16 dno failing for PSI-L NE Types</td>
@@ -1027,7 +1033,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (128)</h2>
+            <h2>All Issues (129)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -1040,6 +1046,13 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td><span class="badge badge-open">3163</span></td>
+                        <td>[QA] LW: 53.1 and 52.1 Service View Wizard is blank for NE TYPE CISCO ROUTER - cisco8201</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-04-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3163" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
                         <td><span class="badge badge-open">3125</span></td>
                         <td>[QA] LW NE Cut Thru Available NE's list missing after commands sent to initial set of NE's</td>
                         <td><span class="badge badge-open">OPEN</span></td>
@@ -1047,9 +1060,9 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3125" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-open">3080</span></td>
+                        <td><span class="badge badge-closed">3080</span></td>
                         <td>[QA] LW BEP needs to wait for rdb connection before app boots</td>
-                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-01</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3080" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -1953,7 +1966,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [10, 118],
+                    data: [10, 119],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -1995,7 +2008,7 @@
                 labels: ["2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [13, 32, 42, 39, 2],
+                    data: [13, 32, 42, 39, 3],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
