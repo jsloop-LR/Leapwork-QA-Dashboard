@@ -185,11 +185,11 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-04-06 10:04 EDT</div>
+        <div class="update-time">Last updated: 2026-04-06 11:10 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">129</div>
+                <div class="stat-number">130</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
@@ -197,7 +197,7 @@
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">117</div>
+                <div class="stat-number">118</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -237,16 +237,16 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td><span class="badge badge-open">3183</span></td>
+                        <td>[QA] LW Update Neighbor API not updating LineID field</td>
+                        <td>2026-04-06</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3183" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
                         <td><span class="badge badge-open">3181</span></td>
                         <td>[QA] LW OPS protected Trace not showing protect branch Correctly</td>
                         <td>2026-04-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3181" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-open">3163</span></td>
-                        <td>[QA] LW: 53.1 and 52.1 Service View Wizard is blank for NE TYPE CISCO ROUTER - cisco8201</td>
-                        <td>2026-04-03</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3163" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">3125</span></td>
@@ -314,7 +314,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (117)</h2>
+            <h2>Closed Issues (118)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -325,6 +325,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-closed">3163</span></td>
+                        <td>[QA] LW: 53.1 and 52.1 Service View Wizard is blank for NE TYPE CISCO ROUTER - cisco8201</td>
+                        <td>2026-04-03</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3163" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-closed">3080</span></td>
                         <td>[QA] LW BEP needs to wait for rdb connection before app boots</td>
@@ -1033,7 +1039,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (129)</h2>
+            <h2>All Issues (130)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -1046,6 +1052,13 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td><span class="badge badge-open">3183</span></td>
+                        <td>[QA] LW Update Neighbor API not updating LineID field</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-04-06</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3183" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
                         <td><span class="badge badge-open">3181</span></td>
                         <td>[QA] LW OPS protected Trace not showing protect branch Correctly</td>
                         <td><span class="badge badge-open">OPEN</span></td>
@@ -1053,9 +1066,9 @@
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3181" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-open">3163</span></td>
+                        <td><span class="badge badge-closed">3163</span></td>
                         <td>[QA] LW: 53.1 and 52.1 Service View Wizard is blank for NE TYPE CISCO ROUTER - cisco8201</td>
-                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3163" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -1966,7 +1979,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [12, 117],
+                    data: [12, 118],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -2008,7 +2021,7 @@
                 labels: ["2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [12, 32, 42, 39, 4],
+                    data: [12, 32, 42, 39, 5],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
