@@ -185,7 +185,7 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-04-07 14:46 EDT</div>
+        <div class="update-time">Last updated: 2026-04-07 15:49 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -193,11 +193,11 @@
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">11</div>
+                <div class="stat-number">12</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">122</div>
+                <div class="stat-number">121</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (11)</h2>
+            <h2>Open Issues (12)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -236,6 +236,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">3257</span></td>
+                        <td>[QA] LW Whosfile not working for RH9 biniaries</td>
+                        <td>2026-04-07</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3257" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">3222</span></td>
                         <td>[QA] LW Network Layout Enhancement for highlighting a service across network</td>
@@ -308,7 +314,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (122)</h2>
+            <h2>Closed Issues (121)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -1045,12 +1051,6 @@
                         <td>2025-12-15</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/702" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">694</span></td>
-                        <td>[QA] LW 52.1.36 64 bit NE CUT THRU hosed. The entire window is not displayed properly and just spins</td>
-                        <td>2025-12-15</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/694" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -1069,6 +1069,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">3257</span></td>
+                        <td>[QA] LW Whosfile not working for RH9 biniaries</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-04-07</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3257" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">3222</span></td>
                         <td>[QA] LW Network Layout Enhancement for highlighting a service across network</td>
@@ -1993,13 +2000,6 @@
                         <td>2025-12-15</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/702" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
-                    <tr>
-                        <td><span class="badge badge-closed">694</span></td>
-                        <td>[QA] LW 52.1.36 64 bit NE CUT THRU hosed. The entire window is not displayed properly and just spins</td>
-                        <td><span class="badge badge-closed">CLOSED</span></td>
-                        <td>2025-12-15</td>
-                        <td><a href="https://github.com/lightriversoftware/netflex/issues/694" target="_blank" class="issue-link">View Issue →</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -2018,7 +2018,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [11, 122],
+                    data: [12, 121],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -2060,7 +2060,7 @@
                 labels: ["2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [12, 32, 42, 39, 8],
+                    data: [11, 32, 42, 39, 9],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
