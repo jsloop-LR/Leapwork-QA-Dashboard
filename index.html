@@ -185,19 +185,19 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-04-09 15:57 EDT</div>
+        <div class="update-time">Last updated: 2026-04-09 16:43 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">131</div>
+                <div class="stat-number">133</div>
                 <div class="stat-label">Total Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
-                <div class="stat-number">13</div>
+                <div class="stat-number">14</div>
                 <div class="stat-label">Open Issues</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">118</div>
+                <div class="stat-number">119</div>
                 <div class="stat-label">Closed Issues</div>
             </div>
         </div>
@@ -225,7 +225,7 @@
 
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
-            <h2>Open Issues (13)</h2>
+            <h2>Open Issues (14)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -236,6 +236,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">3360</span></td>
+                        <td>[QA] LW: 53.1.29 API /Performance/v2/AllCurrentPmData Get current performance data for a port fails intermittently</td>
+                        <td>2026-04-09</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3360" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">3352</span></td>
                         <td>[QA] LW Carrier Routing failing ropute_oms not connecting to remote rdb</td>
@@ -320,7 +326,7 @@
 
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
-            <h2>Closed Issues (118)</h2>
+            <h2>Closed Issues (119)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -331,6 +337,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-closed">3356</span></td>
+                        <td>[QA] LW WUM report failing with JSON does not parse error</td>
+                        <td>2026-04-09</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3356" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-closed">3257</span></td>
                         <td>[QA] LW Whosfile not working for RH9 biniaries</td>
@@ -1045,7 +1057,7 @@
 
         <!-- All Issues Section -->
         <div id="all-section" class="section">
-            <h2>All Issues (131)</h2>
+            <h2>All Issues (133)</h2>
             <table class="issues-table">
                 <thead>
                     <tr>
@@ -1057,6 +1069,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><span class="badge badge-open">3360</span></td>
+                        <td>[QA] LW: 53.1.29 API /Performance/v2/AllCurrentPmData Get current performance data for a port fails intermittently</td>
+                        <td><span class="badge badge-open">OPEN</span></td>
+                        <td>2026-04-09</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3360" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-closed">3356</span></td>
+                        <td>[QA] LW WUM report failing with JSON does not parse error</td>
+                        <td><span class="badge badge-closed">CLOSED</span></td>
+                        <td>2026-04-09</td>
+                        <td><a href="https://github.com/lightriversoftware/netflex/issues/3356" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
                     <tr>
                         <td><span class="badge badge-open">3352</span></td>
                         <td>[QA] LW Carrier Routing failing ropute_oms not connecting to remote rdb</td>
@@ -1992,7 +2018,7 @@
             data: {
                 labels: ['Open', 'Closed'],
                 datasets: [{
-                    data: [13, 118],
+                    data: [14, 119],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.8)',
                         'rgba(153, 102, 255, 0.8)'
@@ -2034,7 +2060,7 @@
                 labels: ["2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
                 datasets: [{
                     label: 'New Issues',
-                    data: [6, 32, 42, 39, 12],
+                    data: [6, 32, 42, 39, 14],
                     backgroundColor: 'rgba(54, 162, 235, 0.8)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2
