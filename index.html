@@ -68,6 +68,11 @@
             min-width: 400px;
             margin: 20px 0;
         }
+        .chart-box-full {
+            width: 90%;
+            min-width: 400px;
+            margin: 20px auto;
+        }
         canvas {
             max-height: 400px;
         }
@@ -185,7 +190,7 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-04-14 07:34 EDT</div>
+        <div class="update-time">Last updated: 2026-04-14 08:37 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -220,6 +225,10 @@
                     <h2>Issues Over Time (Last 12 Months)</h2>
                     <canvas id="timeChart"></canvas>
                 </div>
+            </div>
+            <div class="chart-box-full">
+                <h2>Issues by Software Release</h2>
+                <canvas id="releaseChart"></canvas>
             </div>
         </div>
 
@@ -2106,6 +2115,55 @@
                     title: {
                         display: true,
                         text: 'Issues Created Per Month',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 3: Issues by Software Release (Bar Chart)
+        const releaseCtx = document.getElementById('releaseChart').getContext('2d');
+        new Chart(releaseCtx, {
+            type: 'bar',
+            data: {
+                labels: ["5.3.0", "5.3.1", "5.2.1", "Not specified", "5.2.1 53.0", "Unknown"],
+                datasets: [{
+                    label: 'Issues',
+                    data: [66, 32, 17, 17, 1, 1],
+                    backgroundColor: 'rgba(255, 159, 64, 0.8)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 5
+                        },
+                        title: {
+                            display: true,
+                            text: 'Number of Issues'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Software Release'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Issues by Software Release Detected',
                         font: {
                             size: 16
                         }

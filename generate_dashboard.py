@@ -6,6 +6,7 @@ Fetches issues from GitHub and generates an interactive HTML dashboard
 
 import json
 import subprocess
+import re
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from collections import Counter, defaultdict
@@ -19,13 +20,28 @@ def run_gh_command(cmd):
         return None
     return result.stdout
 
+def extract_software_release(body):
+    """Extract Software Release Detected from issue body"""
+    if not body:
+        return 'Not specified'
+
+    # Look for "Software Release Detected" field
+    match = re.search(r'Software Release Detected[:\s]*([^\n]+)', body, re.IGNORECASE)
+    if match:
+        release = match.group(1).strip()
+        # Clean up common variations
+        if release.lower() in ['none', 'n/a', '']:
+            return 'Not specified'
+        return release
+    return 'Not specified'
+
 def fetch_issues():
     """Fetch all issues matching your search criteria"""
     print("Fetching issues from GitHub...")
     # Customize this search query for your needs:
     # - Change "org:YOUR_ORG" to your organization name
     # - Add filters like "label:bug", "is:open", etc.
-    cmd = 'gh search issues "repo:lightriversoftware/netflex" --limit 1000 --json number,title,state,createdAt,updatedAt,labels,url'
+    cmd = 'gh search issues "repo:lightriversoftware/netflex" --limit 1000 --json number,title,state,createdAt,updatedAt,labels,url,body'
     output = run_gh_command(cmd)
 
     if not output:
@@ -55,6 +71,18 @@ def generate_html(issues):
         issues_by_month[month_key] += 1
 
     sorted_months = sorted(issues_by_month.items())[-12:]  # Last 12 months
+
+    # Extract software releases and count
+    releases = []
+    for issue in issues:
+        release = extract_software_release(issue.get('body', ''))
+        releases.append(release)
+
+    release_counts = Counter(releases)
+    # Sort by count (descending) and then by release name
+    sorted_releases = sorted(release_counts.items(), key=lambda x: (-x[1], x[0]))
+    release_labels = [r[0] for r in sorted_releases]
+    release_counts_list = [r[1] for r in sorted_releases]
 
     # Generate HTML
     html = f"""<!DOCTYPE html>
@@ -126,6 +154,11 @@ def generate_html(issues):
             width: 45%;
             min-width: 400px;
             margin: 20px 0;
+        }}
+        .chart-box-full {{
+            width: 90%;
+            min-width: 400px;
+            margin: 20px auto;
         }}
         canvas {{
             max-height: 400px;
@@ -279,6 +312,10 @@ def generate_html(issues):
                     <h2>Issues Over Time (Last 12 Months)</h2>
                     <canvas id="timeChart"></canvas>
                 </div>
+            </div>
+            <div class="chart-box-full">
+                <h2>Issues by Software Release</h2>
+                <canvas id="releaseChart"></canvas>
             </div>
         </div>
 
@@ -480,6 +517,55 @@ def generate_html(issues):
             }}
         }});
 
+        // Chart 3: Issues by Software Release (Bar Chart)
+        const releaseCtx = document.getElementById('releaseChart').getContext('2d');
+        new Chart(releaseCtx, {{
+            type: 'bar',
+            data: {{
+                labels: {json.dumps(release_labels)},
+                datasets: [{{
+                    label: 'Issues',
+                    data: {json.dumps(release_counts_list)},
+                    backgroundColor: 'rgba(255, 159, 64, 0.8)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 2
+                }}]
+            }},
+            options: {{
+                responsive: true,
+                scales: {{
+                    y: {{
+                        beginAtZero: true,
+                        ticks: {{
+                            stepSize: 5
+                        }},
+                        title: {{
+                            display: true,
+                            text: 'Number of Issues'
+                        }}
+                    }},
+                    x: {{
+                        title: {{
+                            display: true,
+                            text: 'Software Release'
+                        }}
+                    }}
+                }},
+                plugins: {{
+                    legend: {{
+                        display: false
+                    }},
+                    title: {{
+                        display: true,
+                        text: 'Issues by Software Release Detected',
+                        font: {{
+                            size: 16
+                        }}
+                    }}
+                }}
+            }}
+        }});
+
         // Section switching functionality
         function showSection(section) {{
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -550,7 +636,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
