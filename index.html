@@ -190,7 +190,7 @@
     <div class="container">
         <h1>📊 Issues Dashboard</h1>
         <p style="text-align: center; color: #666;">Automated Issue Tracking</p>
-        <div class="update-time">Last updated: 2026-04-14 08:37 EDT</div>
+        <div class="update-time">Last updated: 2026-04-14 08:42 EDT</div>
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
@@ -212,6 +212,7 @@
             <button class="nav-button" onclick="showSection('open')">Open Issues</button>
             <button class="nav-button" onclick="showSection('closed')">Closed Issues</button>
             <button class="nav-button" onclick="showSection('all')">All Issues</button>
+            <button class="nav-button" id="release-nav-button" onclick="showSection('release')" style="display:none;">Release Issues</button>
         </div>
 
         <!-- Charts Section -->
@@ -228,8 +229,27 @@
             </div>
             <div class="chart-box-full">
                 <h2>Issues by Software Release</h2>
+                <p style="text-align: center; color: #666; font-size: 14px; margin-top: 10px;">Click on any bar to view issues for that release</p>
                 <canvas id="releaseChart"></canvas>
             </div>
+        </div>
+
+        <!-- Release Filtered Issues Section -->
+        <div id="release-section" class="section">
+            <h2 id="release-section-title">Issues for Release</h2>
+            <table class="issues-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody id="release-issues-tbody">
+                </tbody>
+            </table>
         </div>
 
         <!-- Open Issues Section -->
@@ -240,6 +260,7 @@
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Release</th>
                         <th>Created</th>
                         <th>Link</th>
                     </tr>
@@ -248,72 +269,84 @@
                     <tr>
                         <td><span class="badge badge-open">3410</span></td>
                         <td>[QA] LW PM Not supported on NTK537BA sub ports</td>
+                        <td>5.3.1</td>
                         <td>2026-04-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3410" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">3406</span></td>
                         <td>[QA] LW Card Inventory Form missing columns in customize Report Settings</td>
+                        <td>5.3.1</td>
                         <td>2026-04-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3406" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">3377</span></td>
                         <td>[QA] LW: 53.1.29 linc11vm1 dno Segmentation fault core dumped on NE INFINERA-GROOVE-2/2001</td>
+                        <td>5.3.1</td>
                         <td>2026-04-10</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3377" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">3222</span></td>
                         <td>[QA] LW Network Layout Enhancement for highlighting a service across network</td>
+                        <td>5.3.1</td>
                         <td>2026-04-07</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3222" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">3183</span></td>
                         <td>[QA] LW Update Neighbor API not updating LineID field</td>
+                        <td>5.3.0</td>
                         <td>2026-04-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3183" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">3125</span></td>
                         <td>[QA] LW NE Cut Thru Available NE's list missing after commands sent to initial set of NE's</td>
+                        <td>5.3.1</td>
                         <td>2026-04-02</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3125" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">2923</span></td>
                         <td>[QA] LW: 53.1.28 TRACE/ Ports missing from circuit TRACE for NE Type OPENROADM RT</td>
+                        <td>5.3.1</td>
                         <td>2026-03-25</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2923" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">2891</span></td>
                         <td>[QA] LW: In netFlex seeing zero counts in Historical PM results when filtering for non-zero</td>
+                        <td>5.3.1</td>
                         <td>2026-03-24</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2891" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">2879</span></td>
                         <td>[QA] LW: 53.1 Circuit Trace Pencil and service view wizard icon in the wrong location on left hand pane</td>
+                        <td>5.3.1</td>
                         <td>2026-03-24</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2879" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">2756</span></td>
                         <td>[QA] LW: API for /Inventory/v2/ManagedElement/{TID} Get one Managed Element (ME) inventory incorrect/inconsistent output</td>
+                        <td>5.3.0</td>
                         <td>2026-03-18</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2756" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">1168</span></td>
                         <td>[QA] LW: Multi NE AZ Con Provisioning Issue</td>
+                        <td>Not specified</td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1168" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-open">1163</span></td>
                         <td>[QA] LW EM form sending TL1 command to retrieve Line port for S6AD600 Card - port back to 5.3.1</td>
+                        <td>Not specified</td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1163" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -329,6 +362,7 @@
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Release</th>
                         <th>Created</th>
                         <th>Link</th>
                     </tr>
@@ -337,732 +371,854 @@
                     <tr>
                         <td><span class="badge badge-closed">3364</span></td>
                         <td>[QA] LW: netFlex GUI Historical PM missing for CISCO ROUTER - cisco8201</td>
+                        <td>5.3.1</td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3364" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3360</span></td>
                         <td>[QA] LW: 53.1.29 API /Performance/v2/AllCurrentPmData Get current performance data for a port fails intermittently</td>
+                        <td>5.3.1</td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3360" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3356</span></td>
                         <td>[QA] LW WUM report failing with JSON does not parse error</td>
+                        <td>5.3.1</td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3356" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3352</span></td>
                         <td>[QA] LW Carrier Routing failing route_oms not connecting to remote rdb</td>
+                        <td>5.3.1</td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3352" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3340</span></td>
                         <td>[QA] LW Trace not relfecting ZA trace in GUI</td>
+                        <td>5.3.1</td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3340" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3331</span></td>
                         <td>[QA] LW: 53.1.29 API /NeMgmt/v2/Neighbors/Update Update a Neighbor is not updating the lineid</td>
+                        <td>5.3.1</td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3331" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3257</span></td>
                         <td>[QA] LW Whosfile not working for RH9 biniaries</td>
+                        <td>5.3.1</td>
                         <td>2026-04-07</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3257" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3194</span></td>
                         <td>[QA] LW Populate 53.031 patch core dumping</td>
+                        <td>5.3.0</td>
                         <td>2026-04-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3194" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3193</span></td>
                         <td>[DEV] [QA] [LW OPS protected Trace not showing protect branch Correctly]Fix circuit trace on non-detail to show protect OPS branch AID [#3181]</td>
+                        <td>Not specified</td>
                         <td>2026-04-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3193" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3181</span></td>
                         <td>[QA] LW OPS protected Trace not showing protect branch Correctly</td>
+                        <td>5.3.0</td>
                         <td>2026-04-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3181" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3163</span></td>
                         <td>[QA] LW: 53.1 and 52.1 Service View Wizard is blank for NE TYPE CISCO ROUTER - cisco8201</td>
+                        <td>5.3.1</td>
                         <td>2026-04-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3163" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3080</span></td>
                         <td>[QA] LW BEP needs to wait for rdb connection before app boots</td>
+                        <td>5.3.1</td>
                         <td>2026-04-01</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3080" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3050</span></td>
                         <td>[QA] LW: 52.1.41 holmvm16 dno failing for PSI-L NE Types</td>
+                        <td>5.2.1</td>
                         <td>2026-03-31</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3050" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">3027</span></td>
                         <td>[QA] LW: 52.1.41 TIES missing on Ciena 6500S.</td>
+                        <td>5.2.1</td>
                         <td>2026-03-31</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3027" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2959</span></td>
                         <td>[QA] LW: 53.1 Linc11vm1 Swagger: Alias for API User Access Control List not working as expected</td>
+                        <td>5.3.1</td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2959" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2958</span></td>
                         <td>[QA] LW Circuit trace after xcon lookup needs to set min num sts to the TO side sts of the xcon</td>
+                        <td>Not specified</td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2958" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2953</span></td>
                         <td>[QA] LW Provisioning RLS wavelength service form filter port is not allowed when a neighbor exists prior to service being provisioned</td>
+                        <td>5.3.0</td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2953" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2949</span></td>
                         <td>[QA] LW Trace From wvls report against client port is tracing carrier service</td>
+                        <td>5.3.0</td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2949" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2946</span></td>
                         <td>[QA] LW Tracing OPS protected servcie from the wvls report, ZA direction isnt working</td>
+                        <td>5.3.0</td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2946" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2943</span></td>
                         <td>[QA] LW Trace When tracing OPS protected service from client OPS port trace fails</td>
+                        <td>5.3.0</td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2943" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2926</span></td>
                         <td>[QA] LW Complete API action is core dumping</td>
+                        <td>5.3.0</td>
                         <td>2026-03-25</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2926" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2925</span></td>
                         <td>[QA] LW Multi Box Commands timing out, alrmhndlr q filling up</td>
+                        <td>5.3.0</td>
                         <td>2026-03-25</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2925" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2884</span></td>
                         <td>[QA] LW NE Cut Thru TL1 Send Multi not passing responses to commands</td>
+                        <td>5.3.1</td>
                         <td>2026-03-24</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2884" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2876</span></td>
                         <td>[QA] LW Swagger.json link on the swagger form not accessing file....opens blank page</td>
+                        <td>5.3.0</td>
                         <td>2026-03-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2876" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2864</span></td>
                         <td>[QA] LW: /Inventory/v2/ManagedElement/{TID} Get one Managed Element (ME) inventory Chrome Browser freezing</td>
+                        <td>5.3.1</td>
                         <td>2026-03-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2864" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2848</span></td>
                         <td>[QA] LW Equipment Management form not refrehsing when loop is dropped</td>
+                        <td>5.3.0</td>
                         <td>2026-03-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2848" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2819</span></td>
                         <td>[QA] LW Wvls Partially Protected Servcie USER proc core dumps</td>
+                        <td>5.3.0</td>
                         <td>2026-03-20</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2819" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2814</span></td>
                         <td>[QA] LW API CLI Cut Thru not passing success  message upon command completion</td>
+                        <td>5.3.0</td>
                         <td>2026-03-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2814" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2813</span></td>
                         <td>[QA] LW matching in fully protect service using the protect port doesnt bring in the service</td>
+                        <td>5.3.0</td>
                         <td>2026-03-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2813" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2798</span></td>
                         <td>[QA] LW wvl_svc_sync_dno is core dumping every few seconds</td>
+                        <td>5.3.0</td>
                         <td>2026-03-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2798" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2778</span></td>
                         <td>[QA] LW WVLS Complete API failing into partial state</td>
+                        <td>5.3.0</td>
                         <td>2026-03-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2778" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2771</span></td>
                         <td>[QA] LW RDB upgrade failing for Remote server deployment</td>
+                        <td>5.3.0</td>
                         <td>2026-03-18</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2771" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2734</span></td>
                         <td>[QA] LW: 53.1 netFlex Historical PM showing NO DATA YET, linc11vm1 and linc10vm15 for certain NE Types</td>
+                        <td>5.3.1</td>
                         <td>2026-03-18</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2734" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2692</span></td>
                         <td>[QA] LW CEC Trace not following xcon OTU4</td>
+                        <td>5.2.1 53.0</td>
                         <td>2026-03-17</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2692" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2690</span></td>
                         <td>[QA] LW new feature for Interface management enhanced for NETCONF, RESTCONF, and CLI are not in def.system_defines</td>
+                        <td>5.3.1</td>
                         <td>2026-03-16</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2690" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2631</span></td>
                         <td>[QA] LW Deleting NE's using RMT script failing b'c NE up when alrady in disable state</td>
+                        <td>5.3.0</td>
                         <td>2026-03-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2631" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2625</span></td>
                         <td>[QA] LW Multibox Is Adding NE's to all MUX's instead of just the one as selected on NE Mgmt</td>
+                        <td>5.3.0</td>
                         <td>2026-03-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2625" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2597</span></td>
                         <td>[QA] LW Newly created Templates on Alias form not being assinged all NE's, and User/Console commands</td>
+                        <td>5.2.1</td>
                         <td>2026-03-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2597" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2527</span></td>
                         <td>[QA] LW: dno's getting stuck and not completing linc11vm1</td>
+                        <td>5.3.1</td>
                         <td>2026-03-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2527" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2515</span></td>
                         <td>[QA] LW Available BW: Existing Service shown on OMS Usage Matrix - Spectrum/Not shown on WUM</td>
+                        <td>5.3.1</td>
                         <td>2026-03-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2515" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2494</span></td>
                         <td>[QA] LW: /NeMgmt/v2/DeleteNe/{TID} Delete an NE from netFLEX failing with 504 Gateway Timeout</td>
+                        <td>5.3.1</td>
                         <td>2026-03-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2494" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2489</span></td>
                         <td>[QA] LW: 53.1.24 API /Inventory/v2/EquipmentHolder/{TID}/{EH} Get one Equipment Holder (EH) inventory Internal Server Error<</td>
+                        <td>5.3.1</td>
                         <td>2026-03-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2489" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2474</span></td>
                         <td>[QA] LW: 53.1.24 API /Inventory/v2/ManagedElement/{TID} Get one Managed Element (ME) inventory Internal Server Error</td>
+                        <td>5.3.1</td>
                         <td>2026-03-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2474" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2426</span></td>
                         <td>[QA] LW: 53.1.23 CAT PM Missing for NE Type CISCO ROUTER - ciscoNCS57C3MODSSYS</td>
+                        <td>5.3.1</td>
                         <td>2026-03-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2426" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2425</span></td>
                         <td>[QA] LW BEP switching not occurring when down NE count exceeds system define</td>
+                        <td>5.3.0</td>
                         <td>2026-03-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2425" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2412</span></td>
                         <td>[QA] LW snmpne tool not setting enabled bit correctly</td>
+                        <td>5.3.0</td>
                         <td>2026-03-04</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2412" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2302</span></td>
                         <td>[QA] LW EM CLI Cut thru Message not providing positive response for command completion</td>
+                        <td>5.3.1</td>
                         <td>2026-03-02</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2302" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2268</span></td>
                         <td>[QA] LW Fail to Boot after Build Install</td>
+                        <td>5.3.1</td>
                         <td>2026-02-27</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2268" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2265</span></td>
                         <td>[QA] LW: 53.1 linc11vm1 dno problem for NE Type CISCO NCS2000 - DWDM PUNIT cards/shelves are not being discovered</td>
+                        <td>5.3.1</td>
                         <td>2026-02-27</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2265" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2262</span></td>
                         <td>[QA] LW Unify Login Form Submission Buttons</td>
+                        <td>5.3.1</td>
                         <td>2026-02-27</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2262" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2243</span></td>
                         <td>[QA] LW: 53.0.29 CAT for INFINERA GROOVE G30 failing/FAILED TO GET TRUNK_OTU PM FOR PMAID</td>
+                        <td>5.3.0</td>
                         <td>2026-02-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2243" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2185</span></td>
                         <td>[DEV][QA][LW Trace showing oductp facilities in trace graphic when the "Show OTN AIDs" is No]Fix circuit trace so trace graphic matches show OTN AIDs setting on left form [#2000]</td>
+                        <td>Not specified</td>
                         <td>2026-02-25</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2185" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2178</span></td>
                         <td>[QA] LW GR replication not occurring per schedule due to GR Xfer Button bug</td>
+                        <td>5.3.0</td>
                         <td>2026-02-24</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2178" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2158</span></td>
                         <td>[QA] LW Trace 100G WS5 through mated WS5 config dropping to incorrect far end port</td>
+                        <td>5.3.0</td>
                         <td>2026-02-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2158" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2143</span></td>
                         <td>[QA] LW: 53.0.29 dno fix related to Git issue 2079 has affected dno line data for ADVA FSP 3000R7</td>
+                        <td>5.3.0</td>
                         <td>2026-02-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2143" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2100</span></td>
                         <td>[QA] LW breakup command is core dumping</td>
+                        <td>5.3.0</td>
                         <td>2026-02-20</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2100" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2079</span></td>
                         <td>[QA] LW dno failing for PSI-L NE Types</td>
+                        <td>5.3.0</td>
                         <td>2026-02-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2079" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2078</span></td>
                         <td>[QA] LW: 53.0.29 linc10vm15 TRACE not complete for NOKIA 1830 PSI-L</td>
+                        <td>5.3.0</td>
                         <td>2026-02-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2078" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2030</span></td>
                         <td>[QA] LW Neighbor API not completing for RLS > WS5 Neighbor</td>
+                        <td>5.3.0</td>
                         <td>2026-02-18</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2030" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">2000</span></td>
                         <td>[QA] LW Trace showing oductp facilities in trace graphic when the "Show OTN AIDs" is No</td>
+                        <td>5.3.0</td>
                         <td>2026-02-17</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2000" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1981</span></td>
                         <td>[QA] LW error message incorrect when logging into standby GR server with an alias</td>
+                        <td>5.3.0</td>
                         <td>2026-02-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1981" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1979</span></td>
                         <td>[QA] LW: Swagger API "/WavelengthServices/v2/wvls/docChan Retrieve the DOC channel report" has no data in the response body</td>
+                        <td>5.3.0</td>
                         <td>2026-02-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1979" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1949</span></td>
                         <td>[QA] LW GR status report not reflecting the correct backup times for rdb group</td>
+                        <td>5.3.0</td>
                         <td>2026-02-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1949" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1948</span></td>
                         <td>[DEV] [QA] [Test separate RDB server with multibox and GR]LW GR not switching correctly when rdb server connection fails [#1685]</td>
+                        <td>Not specified</td>
                         <td>2026-02-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1948" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1947</span></td>
                         <td>[QA] LW: 53.0.28 Pages will not load if using NE List Type as Pulldown under Misc Tab of View Preferences</td>
+                        <td>5.3.0</td>
                         <td>2026-02-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1947" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1946</span></td>
                         <td>[QA] LW: 53.0.28 Trace Level set to 3 under View Preferences Miscellaneous and cannot be changed</td>
+                        <td>5.3.0</td>
                         <td>2026-02-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1946" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1942</span></td>
                         <td>[QA] LW Match_wvl from the GUI for Infinera GX31 is not supported</td>
+                        <td>5.3.0</td>
                         <td>2026-02-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1942" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1935</span></td>
                         <td>[QA] LW RLS Loopback failing due to command sequence being sent needs updating</td>
+                        <td>5.2.1</td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1935" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1921</span></td>
                         <td>[QA] LW: 52.1.39 Swagger API /NeMgmt/v2/Schedule/LinkStatus/Reset Reset the link has 500 Internal Server Error</td>
+                        <td>5.2.1</td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1921" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1917</span></td>
                         <td>[DEV] [QA] [Test separate RDB server with multibox and GR] LW OTN Facility and Facility Hierarchy menu items missing from menu tree [#1685]</td>
+                        <td>Not specified</td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1917" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1916</span></td>
                         <td>[DEV] [QA] [Test separate RDB server with multibox and GR]LW CAT not showing PM says not supported [#1685]</td>
+                        <td>Not specified</td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1916" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1908</span></td>
                         <td>[QA] LW Seperate RDB Server environment not showing NE's up using nestat -B [#1685]</td>
+                        <td>5.3.0</td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1908" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1899</span></td>
                         <td>[DEV][[QA] LW: 53.0 FUJITSU 1FINITY T600 ODUC2 Line Port TRACE Back TRACES to the 100GE Client Port]Perform carrier trace if starting on an INFINERA T600 network port on PIT6-P6A1 [#1852]</td>
+                        <td>Not specified</td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1899" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1858</span></td>
                         <td>[QA] LW: 53.0.28 CIENA WAVESERVER Line port TRACES but does not match in a Wavelength Service</td>
+                        <td>5.3.0</td>
                         <td>2026-02-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1858" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1854</span></td>
                         <td>[QA] LW GR not logging user out of GUI after GR switch</td>
+                        <td>5.3.0</td>
                         <td>2026-02-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1854" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1852</span></td>
                         <td>[QA] LW: 53.0 FUJITSU 1FINITY T600 ODUC2 Line Port TRACE Back TRACES to the 100GE Client Port</td>
+                        <td>5.3.0</td>
                         <td>2026-02-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1852" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1834</span></td>
                         <td>[QA] LW: 53.0.28 R8 64-bit match_wvl for CISCO NSC2000 causing segmentation fault</td>
+                        <td>5.3.0</td>
                         <td>2026-02-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1834" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1822</span></td>
                         <td>[QA] LW Having intermittent issues with trace form redrawing after loops being placed</td>
+                        <td>5.2.1</td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1822" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1817</span></td>
                         <td>[QA] LW match_wvl matching in an incorrect ckt related to circuit stitching</td>
+                        <td>5.3.0</td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1817" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1808</span></td>
                         <td>[QA] LW NeMgmt Schedule API's need description updates for 52.1</td>
+                        <td>5.2.1</td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1808" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1798</span></td>
                         <td>[QA] LW Add Link Down Message for REST NE types when attmepting EM functions</td>
+                        <td>5.2.1</td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1798" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1793</span></td>
                         <td>[QA] LW Equipment Management not populating data From native form or Logical View For Waveserver</td>
+                        <td>5.2.1</td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1793" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1784</span></td>
                         <td>[QA] LW NE Summary Disable Link for CLI not working</td>
+                        <td>5.2.1</td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1784" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1723</span></td>
                         <td>[QA] LW 53.0.27 linc11vm1 Swagger API /Performance/v2/SpanAnalysisData Get OTS Span Analysis data not showing Span loss or light levels</td>
+                        <td>5.3.0</td>
                         <td>2026-02-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1723" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1722</span></td>
                         <td>[QA] LW API Endpoint LinkStatus/Reset changes to usage</td>
+                        <td>5.3.0</td>
                         <td>2026-02-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1722" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1720</span></td>
                         <td>[QA] LW 53.0.27 linc11vm1 OTS Span Analysis not showing levels for CISCO NCS2k</td>
+                        <td>5.3.0</td>
                         <td>2026-02-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1720" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1706</span></td>
                         <td>[QA] LW RDB FEP Only MB test</td>
+                        <td>5.3.0</td>
                         <td>2026-02-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1706" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1700</span></td>
                         <td>[QA] LW Circuit Stitching 6500 to 1830</td>
+                        <td>5.3.0</td>
                         <td>2026-02-02</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1700" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1699</span></td>
                         <td>[QA] LW 53.0.27 linc11vm1 Alias Management form displays a please wait box affecting add user</td>
+                        <td>5.3.0</td>
                         <td>2026-02-02</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1699" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1624</span></td>
                         <td>[QA] LW 53.0.27 linc11vm1 has a file missing. /usr/cnc/mbin/rmvOldFiles is not getting built/installed</td>
+                        <td>5.3.0</td>
                         <td>2026-01-30</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1624" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1610</span></td>
                         <td>[QA] LW 53.0.27 Some PM Report windows not loading on demo server netflex1 logged in as console</td>
+                        <td>5.3.0</td>
                         <td>2026-01-29</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1610" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1550</span></td>
                         <td>[QA] ***TEST ISSUE NO NEED TO ASSIGN***LW snmp link not down</td>
+                        <td>5.3.0</td>
                         <td>2026-01-28</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1550" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1549</span></td>
                         <td>[QA] LW API Reset Link not reseting snmp links</td>
+                        <td>5.3.0</td>
                         <td>2026-01-28</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1549" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1500</span></td>
                         <td>[QA] LW End Point LinkStatus is missing parameters</td>
+                        <td>5.3.0</td>
                         <td>2026-01-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1500" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1472</span></td>
                         <td>[QA] LW /NeMgmt/v2/Schedule/WvlsMatch Endpoint needs to send OMS/OTS match flag as well</td>
+                        <td>5.3.0</td>
                         <td>2026-01-22</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1472" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1471</span></td>
                         <td>[QA] LW Schedule WvlsMatch End Point needs updated description</td>
+                        <td>5.3.0</td>
                         <td>2026-01-22</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1471" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1446</span></td>
                         <td>[QA] LW - auto run match_wvl on card if line port neighbor changes to update wave and client services</td>
+                        <td>5.3.0</td>
                         <td>2026-01-22</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1446" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1431</span></td>
                         <td>[QA] LW Trace picking up incorrect Nodes in circuit trace</td>
+                        <td>5.3.0</td>
                         <td>2026-01-21</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1431" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1422</span></td>
                         <td>[QA] LW 53.0.27 64-bit linc11vm1. XCON Match from NE Summary failing for 1 NE NOKIA-DMX-2/5</td>
+                        <td>5.3.0</td>
                         <td>2026-01-21</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1422" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1391</span></td>
                         <td>[QA] LW NE Mgmt Use Global NE User Login field not disabling password field</td>
+                        <td>Unknown</td>
                         <td>2026-01-20</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1391" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1363</span></td>
                         <td>[QA] LW Link Status for NE Type CIENA 5100/5200 is not correct on NE Management Page</td>
+                        <td>5.3.0</td>
                         <td>2026-01-16</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1363" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1333</span></td>
                         <td>[QA] LW GR Manual switch from command line takes long time for confirmation</td>
+                        <td>5.3.0</td>
                         <td>2026-01-16</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1333" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1332</span></td>
                         <td>[QA] LW GRD not launcing bep_rdb_switch.sh</td>
+                        <td>5.3.0</td>
                         <td>2026-01-16</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1332" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1314</span></td>
                         <td>[QA] LW 53.0.26 Historical PM results shows NA for the most recent day</td>
+                        <td>5.3.0</td>
                         <td>2026-01-15</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1314" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1311</span></td>
                         <td>[QA] LW Add Tool tip to logical view for WS5 4x100 "Parent" port</td>
+                        <td>5.2.1</td>
                         <td>2026-01-15</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1311" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1238</span></td>
                         <td>[QA] LW Deleting 1830 carrier service using GUI is not deleting the xcons for entire path</td>
+                        <td>5.2.1</td>
                         <td>2026-01-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1238" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1222</span></td>
                         <td>[QA] LW Inventory Get One PTP Response message confusing when no PTP exists</td>
+                        <td>5.2.1</td>
                         <td>2026-01-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1222" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1200</span></td>
                         <td>[QA] LW Loopback removal confirmation message from Trace Form should be consistent across NE Types</td>
+                        <td>5.2.1</td>
                         <td>2026-01-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1200" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1199</span></td>
                         <td>[QA] LW 53.0.26 64-bit Unable to Trace thru PASSIVE MUX/DEMUX on the correct LINE Port</td>
+                        <td>5.3.0</td>
                         <td>2026-01-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1199" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1178</span></td>
                         <td>[QA] LW 53.0.26 NE Summary page on the demo server has Gateway Timeout/Crashes the GUI</td>
+                        <td>5.3.0</td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1178" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1170</span></td>
                         <td>[QA] LW 52.1.38 API Swagger /Inventory/v2/PhysicalTerminationPoint/{TID}/{PTP} Get one Physical Termination Point (PTP) inventory does not show RATE in the response</td>
+                        <td>5.2.1</td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1170" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1167</span></td>
                         <td>[QA] LW: TRACE on carrier service the Loop option for a carrier port is missing</td>
+                        <td>Not specified</td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1167" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1166</span></td>
                         <td>[QA] LW Add known host error message to trace D0</td>
+                        <td>Not specified</td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1166" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1165</span></td>
                         <td>[QA] LW Equipment Management Need commands output into trace file for trace level 0</td>
+                        <td>Not specified</td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1165" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1164</span></td>
                         <td>[QA] LW Power Level report taking too long for SmartOptic NE Type to populate report</td>
+                        <td>Not specified</td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1164" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1124</span></td>
                         <td>[QA] LW 53.0.26 64 bit. An existing OMS service does not TRACE</td>
+                        <td>Not specified</td>
                         <td>2026-01-07</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1124" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1083</span></td>
                         <td>[QA] LW Remove Delete Menu option for WS5 Carriers</td>
+                        <td>Not specified</td>
                         <td>2026-01-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1083" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1068</span></td>
                         <td>[QA] LW FEP BEP communicatons down</td>
+                        <td>5.3.0</td>
                         <td>2026-01-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1068" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1025</span></td>
                         <td>[SUPPORT] [QA] [LW 52.1.37 missing assigns/facility records in the dno data for holmvm16]Stitching code needs to set DNOmode local to stitching code, remove from add_linedata, for NCS2000 [#1007]</td>
+                        <td>Not specified</td>
                         <td>2026-01-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1025" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">1007</span></td>
                         <td>[QA] LW 52.1.37 missing assigns/facility records in the dno data for holmvm16</td>
+                        <td>5.2.1</td>
                         <td>2025-12-31</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1007" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">947</span></td>
                         <td>[QA] LW RLS/WS5 TRACE Client port fails to trace when carrier Line 1 goes to Line 2 of WS5</td>
+                        <td>5.2.1</td>
                         <td>2025-12-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/947" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-closed">929</span></td>
                         <td>[QA] LW API Endpoints needed to be added to 52.1 release notes</td>
+                        <td>Not specified</td>
                         <td>2025-12-22</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/929" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -1078,6 +1234,7 @@
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Release</th>
                         <th>Status</th>
                         <th>Created</th>
                         <th>Link</th>
@@ -1087,6 +1244,7 @@
                     <tr>
                         <td><span class="badge badge-open">3410</span></td>
                         <td>[QA] LW PM Not supported on NTK537BA sub ports</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-04-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3410" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1094,6 +1252,7 @@
                     <tr>
                         <td><span class="badge badge-open">3406</span></td>
                         <td>[QA] LW Card Inventory Form missing columns in customize Report Settings</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-04-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3406" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1101,6 +1260,7 @@
                     <tr>
                         <td><span class="badge badge-open">3377</span></td>
                         <td>[QA] LW: 53.1.29 linc11vm1 dno Segmentation fault core dumped on NE INFINERA-GROOVE-2/2001</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-04-10</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3377" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1108,6 +1268,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3364</span></td>
                         <td>[QA] LW: netFlex GUI Historical PM missing for CISCO ROUTER - cisco8201</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3364" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1115,6 +1276,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3360</span></td>
                         <td>[QA] LW: 53.1.29 API /Performance/v2/AllCurrentPmData Get current performance data for a port fails intermittently</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3360" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1122,6 +1284,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3356</span></td>
                         <td>[QA] LW WUM report failing with JSON does not parse error</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3356" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1129,6 +1292,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3352</span></td>
                         <td>[QA] LW Carrier Routing failing route_oms not connecting to remote rdb</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3352" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1136,6 +1300,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3340</span></td>
                         <td>[QA] LW Trace not relfecting ZA trace in GUI</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3340" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1143,6 +1308,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3331</span></td>
                         <td>[QA] LW: 53.1.29 API /NeMgmt/v2/Neighbors/Update Update a Neighbor is not updating the lineid</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3331" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1150,6 +1316,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3257</span></td>
                         <td>[QA] LW Whosfile not working for RH9 biniaries</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-07</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3257" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1157,6 +1324,7 @@
                     <tr>
                         <td><span class="badge badge-open">3222</span></td>
                         <td>[QA] LW Network Layout Enhancement for highlighting a service across network</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-04-07</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3222" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1164,6 +1332,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3194</span></td>
                         <td>[QA] LW Populate 53.031 patch core dumping</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3194" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1171,6 +1340,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3193</span></td>
                         <td>[DEV] [QA] [LW OPS protected Trace not showing protect branch Correctly]Fix circuit trace on non-detail to show protect OPS branch AID [#3181]</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3193" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1178,6 +1348,7 @@
                     <tr>
                         <td><span class="badge badge-open">3183</span></td>
                         <td>[QA] LW Update Neighbor API not updating LineID field</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-04-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3183" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1185,6 +1356,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3181</span></td>
                         <td>[QA] LW OPS protected Trace not showing protect branch Correctly</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3181" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1192,6 +1364,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3163</span></td>
                         <td>[QA] LW: 53.1 and 52.1 Service View Wizard is blank for NE TYPE CISCO ROUTER - cisco8201</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3163" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1199,6 +1372,7 @@
                     <tr>
                         <td><span class="badge badge-open">3125</span></td>
                         <td>[QA] LW NE Cut Thru Available NE's list missing after commands sent to initial set of NE's</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-04-02</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3125" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1206,6 +1380,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3080</span></td>
                         <td>[QA] LW BEP needs to wait for rdb connection before app boots</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-04-01</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3080" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1213,6 +1388,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3050</span></td>
                         <td>[QA] LW: 52.1.41 holmvm16 dno failing for PSI-L NE Types</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-31</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3050" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1220,6 +1396,7 @@
                     <tr>
                         <td><span class="badge badge-closed">3027</span></td>
                         <td>[QA] LW: 52.1.41 TIES missing on Ciena 6500S.</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-31</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/3027" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1227,6 +1404,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2959</span></td>
                         <td>[QA] LW: 53.1 Linc11vm1 Swagger: Alias for API User Access Control List not working as expected</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2959" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1234,6 +1412,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2958</span></td>
                         <td>[QA] LW Circuit trace after xcon lookup needs to set min num sts to the TO side sts of the xcon</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2958" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1241,6 +1420,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2953</span></td>
                         <td>[QA] LW Provisioning RLS wavelength service form filter port is not allowed when a neighbor exists prior to service being provisioned</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2953" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1248,6 +1428,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2949</span></td>
                         <td>[QA] LW Trace From wvls report against client port is tracing carrier service</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2949" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1255,6 +1436,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2946</span></td>
                         <td>[QA] LW Tracing OPS protected servcie from the wvls report, ZA direction isnt working</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2946" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1262,6 +1444,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2943</span></td>
                         <td>[QA] LW Trace When tracing OPS protected service from client OPS port trace fails</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2943" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1269,6 +1452,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2926</span></td>
                         <td>[QA] LW Complete API action is core dumping</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-25</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2926" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1276,6 +1460,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2925</span></td>
                         <td>[QA] LW Multi Box Commands timing out, alrmhndlr q filling up</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-25</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2925" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1283,6 +1468,7 @@
                     <tr>
                         <td><span class="badge badge-open">2923</span></td>
                         <td>[QA] LW: 53.1.28 TRACE/ Ports missing from circuit TRACE for NE Type OPENROADM RT</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-03-25</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2923" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1290,6 +1476,7 @@
                     <tr>
                         <td><span class="badge badge-open">2891</span></td>
                         <td>[QA] LW: In netFlex seeing zero counts in Historical PM results when filtering for non-zero</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-03-24</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2891" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1297,6 +1484,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2884</span></td>
                         <td>[QA] LW NE Cut Thru TL1 Send Multi not passing responses to commands</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-24</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2884" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1304,6 +1492,7 @@
                     <tr>
                         <td><span class="badge badge-open">2879</span></td>
                         <td>[QA] LW: 53.1 Circuit Trace Pencil and service view wizard icon in the wrong location on left hand pane</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-03-24</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2879" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1311,6 +1500,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2876</span></td>
                         <td>[QA] LW Swagger.json link on the swagger form not accessing file....opens blank page</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2876" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1318,6 +1508,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2864</span></td>
                         <td>[QA] LW: /Inventory/v2/ManagedElement/{TID} Get one Managed Element (ME) inventory Chrome Browser freezing</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2864" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1325,6 +1516,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2848</span></td>
                         <td>[QA] LW Equipment Management form not refrehsing when loop is dropped</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2848" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1332,6 +1524,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2819</span></td>
                         <td>[QA] LW Wvls Partially Protected Servcie USER proc core dumps</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-20</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2819" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1339,6 +1532,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2814</span></td>
                         <td>[QA] LW API CLI Cut Thru not passing success  message upon command completion</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2814" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1346,6 +1540,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2813</span></td>
                         <td>[QA] LW matching in fully protect service using the protect port doesnt bring in the service</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2813" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1353,6 +1548,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2798</span></td>
                         <td>[QA] LW wvl_svc_sync_dno is core dumping every few seconds</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2798" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1360,6 +1556,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2778</span></td>
                         <td>[QA] LW WVLS Complete API failing into partial state</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2778" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1367,6 +1564,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2771</span></td>
                         <td>[QA] LW RDB upgrade failing for Remote server deployment</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-18</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2771" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1374,6 +1572,7 @@
                     <tr>
                         <td><span class="badge badge-open">2756</span></td>
                         <td>[QA] LW: API for /Inventory/v2/ManagedElement/{TID} Get one Managed Element (ME) inventory incorrect/inconsistent output</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-03-18</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2756" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1381,6 +1580,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2734</span></td>
                         <td>[QA] LW: 53.1 netFlex Historical PM showing NO DATA YET, linc11vm1 and linc10vm15 for certain NE Types</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-18</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2734" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1388,6 +1588,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2692</span></td>
                         <td>[QA] LW CEC Trace not following xcon OTU4</td>
+                        <td>5.2.1 53.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-17</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2692" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1395,6 +1596,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2690</span></td>
                         <td>[QA] LW new feature for Interface management enhanced for NETCONF, RESTCONF, and CLI are not in def.system_defines</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-16</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2690" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1402,6 +1604,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2631</span></td>
                         <td>[QA] LW Deleting NE's using RMT script failing b'c NE up when alrady in disable state</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2631" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1409,6 +1612,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2625</span></td>
                         <td>[QA] LW Multibox Is Adding NE's to all MUX's instead of just the one as selected on NE Mgmt</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2625" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1416,6 +1620,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2597</span></td>
                         <td>[QA] LW Newly created Templates on Alias form not being assinged all NE's, and User/Console commands</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2597" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1423,6 +1628,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2527</span></td>
                         <td>[QA] LW: dno's getting stuck and not completing linc11vm1</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2527" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1430,6 +1636,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2515</span></td>
                         <td>[QA] LW Available BW: Existing Service shown on OMS Usage Matrix - Spectrum/Not shown on WUM</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2515" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1437,6 +1644,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2494</span></td>
                         <td>[QA] LW: /NeMgmt/v2/DeleteNe/{TID} Delete an NE from netFLEX failing with 504 Gateway Timeout</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2494" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1444,6 +1652,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2489</span></td>
                         <td>[QA] LW: 53.1.24 API /Inventory/v2/EquipmentHolder/{TID}/{EH} Get one Equipment Holder (EH) inventory Internal Server Error<</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2489" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1451,6 +1660,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2474</span></td>
                         <td>[QA] LW: 53.1.24 API /Inventory/v2/ManagedElement/{TID} Get one Managed Element (ME) inventory Internal Server Error</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2474" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1458,6 +1668,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2426</span></td>
                         <td>[QA] LW: 53.1.23 CAT PM Missing for NE Type CISCO ROUTER - ciscoNCS57C3MODSSYS</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2426" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1465,6 +1676,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2425</span></td>
                         <td>[QA] LW BEP switching not occurring when down NE count exceeds system define</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2425" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1472,6 +1684,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2412</span></td>
                         <td>[QA] LW snmpne tool not setting enabled bit correctly</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-04</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2412" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1479,6 +1692,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2302</span></td>
                         <td>[QA] LW EM CLI Cut thru Message not providing positive response for command completion</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-03-02</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2302" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1486,6 +1700,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2268</span></td>
                         <td>[QA] LW Fail to Boot after Build Install</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-27</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2268" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1493,6 +1708,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2265</span></td>
                         <td>[QA] LW: 53.1 linc11vm1 dno problem for NE Type CISCO NCS2000 - DWDM PUNIT cards/shelves are not being discovered</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-27</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2265" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1500,6 +1716,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2262</span></td>
                         <td>[QA] LW Unify Login Form Submission Buttons</td>
+                        <td>5.3.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-27</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2262" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1507,6 +1724,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2243</span></td>
                         <td>[QA] LW: 53.0.29 CAT for INFINERA GROOVE G30 failing/FAILED TO GET TRUNK_OTU PM FOR PMAID</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-26</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2243" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1514,6 +1732,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2185</span></td>
                         <td>[DEV][QA][LW Trace showing oductp facilities in trace graphic when the "Show OTN AIDs" is No]Fix circuit trace so trace graphic matches show OTN AIDs setting on left form [#2000]</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-25</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2185" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1521,6 +1740,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2178</span></td>
                         <td>[QA] LW GR replication not occurring per schedule due to GR Xfer Button bug</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-24</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2178" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1528,6 +1748,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2158</span></td>
                         <td>[QA] LW Trace 100G WS5 through mated WS5 config dropping to incorrect far end port</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2158" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1535,6 +1756,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2143</span></td>
                         <td>[QA] LW: 53.0.29 dno fix related to Git issue 2079 has affected dno line data for ADVA FSP 3000R7</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2143" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1542,6 +1764,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2100</span></td>
                         <td>[QA] LW breakup command is core dumping</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-20</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2100" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1549,6 +1772,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2079</span></td>
                         <td>[QA] LW dno failing for PSI-L NE Types</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2079" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1556,6 +1780,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2078</span></td>
                         <td>[QA] LW: 53.0.29 linc10vm15 TRACE not complete for NOKIA 1830 PSI-L</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-19</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2078" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1563,6 +1788,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2030</span></td>
                         <td>[QA] LW Neighbor API not completing for RLS > WS5 Neighbor</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-18</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2030" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1570,6 +1796,7 @@
                     <tr>
                         <td><span class="badge badge-closed">2000</span></td>
                         <td>[QA] LW Trace showing oductp facilities in trace graphic when the "Show OTN AIDs" is No</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-17</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/2000" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1577,6 +1804,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1981</span></td>
                         <td>[QA] LW error message incorrect when logging into standby GR server with an alias</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1981" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1584,6 +1812,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1979</span></td>
                         <td>[QA] LW: Swagger API "/WavelengthServices/v2/wvls/docChan Retrieve the DOC channel report" has no data in the response body</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1979" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1591,6 +1820,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1949</span></td>
                         <td>[QA] LW GR status report not reflecting the correct backup times for rdb group</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1949" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1598,6 +1828,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1948</span></td>
                         <td>[DEV] [QA] [Test separate RDB server with multibox and GR]LW GR not switching correctly when rdb server connection fails [#1685]</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1948" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1605,6 +1836,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1947</span></td>
                         <td>[QA] LW: 53.0.28 Pages will not load if using NE List Type as Pulldown under Misc Tab of View Preferences</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1947" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1612,6 +1844,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1946</span></td>
                         <td>[QA] LW: 53.0.28 Trace Level set to 3 under View Preferences Miscellaneous and cannot be changed</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1946" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1619,6 +1852,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1942</span></td>
                         <td>[QA] LW Match_wvl from the GUI for Infinera GX31 is not supported</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1942" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1626,6 +1860,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1935</span></td>
                         <td>[QA] LW RLS Loopback failing due to command sequence being sent needs updating</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1935" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1633,6 +1868,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1921</span></td>
                         <td>[QA] LW: 52.1.39 Swagger API /NeMgmt/v2/Schedule/LinkStatus/Reset Reset the link has 500 Internal Server Error</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1921" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1640,6 +1876,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1917</span></td>
                         <td>[DEV] [QA] [Test separate RDB server with multibox and GR] LW OTN Facility and Facility Hierarchy menu items missing from menu tree [#1685]</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1917" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1647,6 +1884,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1916</span></td>
                         <td>[DEV] [QA] [Test separate RDB server with multibox and GR]LW CAT not showing PM says not supported [#1685]</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1916" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1654,6 +1892,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1908</span></td>
                         <td>[QA] LW Seperate RDB Server environment not showing NE's up using nestat -B [#1685]</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1908" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1661,6 +1900,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1899</span></td>
                         <td>[DEV][[QA] LW: 53.0 FUJITSU 1FINITY T600 ODUC2 Line Port TRACE Back TRACES to the 100GE Client Port]Perform carrier trace if starting on an INFINERA T600 network port on PIT6-P6A1 [#1852]</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-11</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1899" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1668,6 +1908,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1858</span></td>
                         <td>[QA] LW: 53.0.28 CIENA WAVESERVER Line port TRACES but does not match in a Wavelength Service</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1858" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1675,6 +1916,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1854</span></td>
                         <td>[QA] LW GR not logging user out of GUI after GR switch</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1854" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1682,6 +1924,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1852</span></td>
                         <td>[QA] LW: 53.0 FUJITSU 1FINITY T600 ODUC2 Line Port TRACE Back TRACES to the 100GE Client Port</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1852" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1689,6 +1932,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1834</span></td>
                         <td>[QA] LW: 53.0.28 R8 64-bit match_wvl for CISCO NSC2000 causing segmentation fault</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1834" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1696,6 +1940,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1822</span></td>
                         <td>[QA] LW Having intermittent issues with trace form redrawing after loops being placed</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1822" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1703,6 +1948,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1817</span></td>
                         <td>[QA] LW match_wvl matching in an incorrect ckt related to circuit stitching</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1817" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1710,6 +1956,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1808</span></td>
                         <td>[QA] LW NeMgmt Schedule API's need description updates for 52.1</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1808" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1717,6 +1964,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1798</span></td>
                         <td>[QA] LW Add Link Down Message for REST NE types when attmepting EM functions</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1798" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1724,6 +1972,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1793</span></td>
                         <td>[QA] LW Equipment Management not populating data From native form or Logical View For Waveserver</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1793" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1731,6 +1980,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1784</span></td>
                         <td>[QA] LW NE Summary Disable Link for CLI not working</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1784" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1738,6 +1988,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1723</span></td>
                         <td>[QA] LW 53.0.27 linc11vm1 Swagger API /Performance/v2/SpanAnalysisData Get OTS Span Analysis data not showing Span loss or light levels</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1723" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1745,6 +1996,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1722</span></td>
                         <td>[QA] LW API Endpoint LinkStatus/Reset changes to usage</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1722" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1752,6 +2004,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1720</span></td>
                         <td>[QA] LW 53.0.27 linc11vm1 OTS Span Analysis not showing levels for CISCO NCS2k</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1720" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1759,6 +2012,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1706</span></td>
                         <td>[QA] LW RDB FEP Only MB test</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-03</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1706" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1766,6 +2020,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1700</span></td>
                         <td>[QA] LW Circuit Stitching 6500 to 1830</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-02</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1700" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1773,6 +2028,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1699</span></td>
                         <td>[QA] LW 53.0.27 linc11vm1 Alias Management form displays a please wait box affecting add user</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-02-02</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1699" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1780,6 +2036,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1624</span></td>
                         <td>[QA] LW 53.0.27 linc11vm1 has a file missing. /usr/cnc/mbin/rmvOldFiles is not getting built/installed</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-30</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1624" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1787,6 +2044,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1610</span></td>
                         <td>[QA] LW 53.0.27 Some PM Report windows not loading on demo server netflex1 logged in as console</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-29</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1610" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1794,6 +2052,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1550</span></td>
                         <td>[QA] ***TEST ISSUE NO NEED TO ASSIGN***LW snmp link not down</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-28</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1550" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1801,6 +2060,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1549</span></td>
                         <td>[QA] LW API Reset Link not reseting snmp links</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-28</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1549" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1808,6 +2068,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1500</span></td>
                         <td>[QA] LW End Point LinkStatus is missing parameters</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1500" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1815,6 +2076,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1472</span></td>
                         <td>[QA] LW /NeMgmt/v2/Schedule/WvlsMatch Endpoint needs to send OMS/OTS match flag as well</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-22</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1472" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1822,6 +2084,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1471</span></td>
                         <td>[QA] LW Schedule WvlsMatch End Point needs updated description</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-22</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1471" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1829,6 +2092,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1446</span></td>
                         <td>[QA] LW - auto run match_wvl on card if line port neighbor changes to update wave and client services</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-22</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1446" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1836,6 +2100,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1431</span></td>
                         <td>[QA] LW Trace picking up incorrect Nodes in circuit trace</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-21</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1431" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1843,6 +2108,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1422</span></td>
                         <td>[QA] LW 53.0.27 64-bit linc11vm1. XCON Match from NE Summary failing for 1 NE NOKIA-DMX-2/5</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-21</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1422" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1850,6 +2116,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1391</span></td>
                         <td>[QA] LW NE Mgmt Use Global NE User Login field not disabling password field</td>
+                        <td>Unknown</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-20</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1391" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1857,6 +2124,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1363</span></td>
                         <td>[QA] LW Link Status for NE Type CIENA 5100/5200 is not correct on NE Management Page</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-16</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1363" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1864,6 +2132,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1333</span></td>
                         <td>[QA] LW GR Manual switch from command line takes long time for confirmation</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-16</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1333" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1871,6 +2140,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1332</span></td>
                         <td>[QA] LW GRD not launcing bep_rdb_switch.sh</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-16</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1332" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1878,6 +2148,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1314</span></td>
                         <td>[QA] LW 53.0.26 Historical PM results shows NA for the most recent day</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-15</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1314" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1885,6 +2156,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1311</span></td>
                         <td>[QA] LW Add Tool tip to logical view for WS5 4x100 "Parent" port</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-15</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1311" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1892,6 +2164,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1238</span></td>
                         <td>[QA] LW Deleting 1830 carrier service using GUI is not deleting the xcons for entire path</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-13</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1238" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1899,6 +2172,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1222</span></td>
                         <td>[QA] LW Inventory Get One PTP Response message confusing when no PTP exists</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1222" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1906,6 +2180,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1200</span></td>
                         <td>[QA] LW Loopback removal confirmation message from Trace Form should be consistent across NE Types</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1200" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1913,6 +2188,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1199</span></td>
                         <td>[QA] LW 53.0.26 64-bit Unable to Trace thru PASSIVE MUX/DEMUX on the correct LINE Port</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-12</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1199" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1920,6 +2196,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1178</span></td>
                         <td>[QA] LW 53.0.26 NE Summary page on the demo server has Gateway Timeout/Crashes the GUI</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1178" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1927,6 +2204,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1170</span></td>
                         <td>[QA] LW 52.1.38 API Swagger /Inventory/v2/PhysicalTerminationPoint/{TID}/{PTP} Get one Physical Termination Point (PTP) inventory does not show RATE in the response</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1170" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1934,6 +2212,7 @@
                     <tr>
                         <td><span class="badge badge-open">1168</span></td>
                         <td>[QA] LW: Multi NE AZ Con Provisioning Issue</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1168" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1941,6 +2220,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1167</span></td>
                         <td>[QA] LW: TRACE on carrier service the Loop option for a carrier port is missing</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1167" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1948,6 +2228,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1166</span></td>
                         <td>[QA] LW Add known host error message to trace D0</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1166" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1955,6 +2236,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1165</span></td>
                         <td>[QA] LW Equipment Management Need commands output into trace file for trace level 0</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1165" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1962,6 +2244,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1164</span></td>
                         <td>[QA] LW Power Level report taking too long for SmartOptic NE Type to populate report</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1164" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1969,6 +2252,7 @@
                     <tr>
                         <td><span class="badge badge-open">1163</span></td>
                         <td>[QA] LW EM form sending TL1 command to retrieve Line port for S6AD600 Card - port back to 5.3.1</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-open">OPEN</span></td>
                         <td>2026-01-09</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1163" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1976,6 +2260,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1124</span></td>
                         <td>[QA] LW 53.0.26 64 bit. An existing OMS service does not TRACE</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-07</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1124" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1983,6 +2268,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1083</span></td>
                         <td>[QA] LW Remove Delete Menu option for WS5 Carriers</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1083" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1990,6 +2276,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1068</span></td>
                         <td>[QA] LW FEP BEP communicatons down</td>
+                        <td>5.3.0</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-06</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1068" target="_blank" class="issue-link">View Issue →</a></td>
@@ -1997,6 +2284,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1025</span></td>
                         <td>[SUPPORT] [QA] [LW 52.1.37 missing assigns/facility records in the dno data for holmvm16]Stitching code needs to set DNOmode local to stitching code, remove from add_linedata, for NCS2000 [#1007]</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2026-01-05</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1025" target="_blank" class="issue-link">View Issue →</a></td>
@@ -2004,6 +2292,7 @@
                     <tr>
                         <td><span class="badge badge-closed">1007</span></td>
                         <td>[QA] LW 52.1.37 missing assigns/facility records in the dno data for holmvm16</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2025-12-31</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/1007" target="_blank" class="issue-link">View Issue →</a></td>
@@ -2011,6 +2300,7 @@
                     <tr>
                         <td><span class="badge badge-closed">947</span></td>
                         <td>[QA] LW RLS/WS5 TRACE Client port fails to trace when carrier Line 1 goes to Line 2 of WS5</td>
+                        <td>5.2.1</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2025-12-23</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/947" target="_blank" class="issue-link">View Issue →</a></td>
@@ -2018,6 +2308,7 @@
                     <tr>
                         <td><span class="badge badge-closed">929</span></td>
                         <td>[QA] LW API Endpoints needed to be added to 52.1 release notes</td>
+                        <td>Not specified</td>
                         <td><span class="badge badge-closed">CLOSED</span></td>
                         <td>2025-12-22</td>
                         <td><a href="https://github.com/lightriversoftware/netflex/issues/929" target="_blank" class="issue-link">View Issue →</a></td>
@@ -2033,6 +2324,38 @@
     </button>
 
     <script>
+        // All issues data
+        const allIssues = [{"number": 3410, "title": "[QA] LW PM Not supported on NTK537BA sub ports", "release": "5.3.1", "state": "open", "created": "2026-04-13", "url": "https://github.com/lightriversoftware/netflex/issues/3410", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 3406, "title": "[QA] LW Card Inventory Form missing columns in customize Report Settings", "release": "5.3.1", "state": "open", "created": "2026-04-13", "url": "https://github.com/lightriversoftware/netflex/issues/3406", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 3377, "title": "[QA] LW: 53.1.29 linc11vm1 dno Segmentation fault core dumped on NE INFINERA-GROOVE-2/2001", "release": "5.3.1", "state": "open", "created": "2026-04-10", "url": "https://github.com/lightriversoftware/netflex/issues/3377", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 3364, "title": "[QA] LW: netFlex GUI Historical PM missing for CISCO ROUTER - cisco8201", "release": "5.3.1", "state": "closed", "created": "2026-04-09", "url": "https://github.com/lightriversoftware/netflex/issues/3364", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3360, "title": "[QA] LW: 53.1.29 API /Performance/v2/AllCurrentPmData Get current performance data for a port fails intermittently", "release": "5.3.1", "state": "closed", "created": "2026-04-09", "url": "https://github.com/lightriversoftware/netflex/issues/3360", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3356, "title": "[QA] LW WUM report failing with JSON does not parse error", "release": "5.3.1", "state": "closed", "created": "2026-04-09", "url": "https://github.com/lightriversoftware/netflex/issues/3356", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3352, "title": "[QA] LW Carrier Routing failing route_oms not connecting to remote rdb", "release": "5.3.1", "state": "closed", "created": "2026-04-09", "url": "https://github.com/lightriversoftware/netflex/issues/3352", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3340, "title": "[QA] LW Trace not relfecting ZA trace in GUI", "release": "5.3.1", "state": "closed", "created": "2026-04-09", "url": "https://github.com/lightriversoftware/netflex/issues/3340", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3331, "title": "[QA] LW: 53.1.29 API /NeMgmt/v2/Neighbors/Update Update a Neighbor is not updating the lineid", "release": "5.3.1", "state": "closed", "created": "2026-04-09", "url": "https://github.com/lightriversoftware/netflex/issues/3331", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3257, "title": "[QA] LW Whosfile not working for RH9 biniaries", "release": "5.3.1", "state": "closed", "created": "2026-04-07", "url": "https://github.com/lightriversoftware/netflex/issues/3257", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3222, "title": "[QA] LW Network Layout Enhancement for highlighting a service across network", "release": "5.3.1", "state": "open", "created": "2026-04-07", "url": "https://github.com/lightriversoftware/netflex/issues/3222", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 3194, "title": "[QA] LW Populate 53.031 patch core dumping", "release": "5.3.0", "state": "closed", "created": "2026-04-06", "url": "https://github.com/lightriversoftware/netflex/issues/3194", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3193, "title": "[DEV] [QA] [LW OPS protected Trace not showing protect branch Correctly]Fix circuit trace on non-detail to show protect OPS branch AID [#3181]", "release": "Not specified", "state": "closed", "created": "2026-04-06", "url": "https://github.com/lightriversoftware/netflex/issues/3193", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3183, "title": "[QA] LW Update Neighbor API not updating LineID field", "release": "5.3.0", "state": "open", "created": "2026-04-06", "url": "https://github.com/lightriversoftware/netflex/issues/3183", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 3181, "title": "[QA] LW OPS protected Trace not showing protect branch Correctly", "release": "5.3.0", "state": "closed", "created": "2026-04-03", "url": "https://github.com/lightriversoftware/netflex/issues/3181", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3163, "title": "[QA] LW: 53.1 and 52.1 Service View Wizard is blank for NE TYPE CISCO ROUTER - cisco8201", "release": "5.3.1", "state": "closed", "created": "2026-04-03", "url": "https://github.com/lightriversoftware/netflex/issues/3163", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3125, "title": "[QA] LW NE Cut Thru Available NE's list missing after commands sent to initial set of NE's", "release": "5.3.1", "state": "open", "created": "2026-04-02", "url": "https://github.com/lightriversoftware/netflex/issues/3125", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 3080, "title": "[QA] LW BEP needs to wait for rdb connection before app boots", "release": "5.3.1", "state": "closed", "created": "2026-04-01", "url": "https://github.com/lightriversoftware/netflex/issues/3080", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3050, "title": "[QA] LW: 52.1.41 holmvm16 dno failing for PSI-L NE Types", "release": "5.2.1", "state": "closed", "created": "2026-03-31", "url": "https://github.com/lightriversoftware/netflex/issues/3050", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 3027, "title": "[QA] LW: 52.1.41 TIES missing on Ciena 6500S.", "release": "5.2.1", "state": "closed", "created": "2026-03-31", "url": "https://github.com/lightriversoftware/netflex/issues/3027", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2959, "title": "[QA] LW: 53.1 Linc11vm1 Swagger: Alias for API User Access Control List not working as expected", "release": "5.3.1", "state": "closed", "created": "2026-03-26", "url": "https://github.com/lightriversoftware/netflex/issues/2959", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2958, "title": "[QA] LW Circuit trace after xcon lookup needs to set min num sts to the TO side sts of the xcon", "release": "Not specified", "state": "closed", "created": "2026-03-26", "url": "https://github.com/lightriversoftware/netflex/issues/2958", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2953, "title": "[QA] LW Provisioning RLS wavelength service form filter port is not allowed when a neighbor exists prior to service being provisioned", "release": "5.3.0", "state": "closed", "created": "2026-03-26", "url": "https://github.com/lightriversoftware/netflex/issues/2953", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2949, "title": "[QA] LW Trace From wvls report against client port is tracing carrier service", "release": "5.3.0", "state": "closed", "created": "2026-03-26", "url": "https://github.com/lightriversoftware/netflex/issues/2949", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2946, "title": "[QA] LW Tracing OPS protected servcie from the wvls report, ZA direction isnt working", "release": "5.3.0", "state": "closed", "created": "2026-03-26", "url": "https://github.com/lightriversoftware/netflex/issues/2946", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2943, "title": "[QA] LW Trace When tracing OPS protected service from client OPS port trace fails", "release": "5.3.0", "state": "closed", "created": "2026-03-26", "url": "https://github.com/lightriversoftware/netflex/issues/2943", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2926, "title": "[QA] LW Complete API action is core dumping", "release": "5.3.0", "state": "closed", "created": "2026-03-25", "url": "https://github.com/lightriversoftware/netflex/issues/2926", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2925, "title": "[QA] LW Multi Box Commands timing out, alrmhndlr q filling up", "release": "5.3.0", "state": "closed", "created": "2026-03-25", "url": "https://github.com/lightriversoftware/netflex/issues/2925", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2923, "title": "[QA] LW: 53.1.28 TRACE/ Ports missing from circuit TRACE for NE Type OPENROADM RT", "release": "5.3.1", "state": "open", "created": "2026-03-25", "url": "https://github.com/lightriversoftware/netflex/issues/2923", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 2891, "title": "[QA] LW: In netFlex seeing zero counts in Historical PM results when filtering for non-zero", "release": "5.3.1", "state": "open", "created": "2026-03-24", "url": "https://github.com/lightriversoftware/netflex/issues/2891", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 2884, "title": "[QA] LW NE Cut Thru TL1 Send Multi not passing responses to commands", "release": "5.3.1", "state": "closed", "created": "2026-03-24", "url": "https://github.com/lightriversoftware/netflex/issues/2884", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2879, "title": "[QA] LW: 53.1 Circuit Trace Pencil and service view wizard icon in the wrong location on left hand pane", "release": "5.3.1", "state": "open", "created": "2026-03-24", "url": "https://github.com/lightriversoftware/netflex/issues/2879", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 2876, "title": "[QA] LW Swagger.json link on the swagger form not accessing file....opens blank page", "release": "5.3.0", "state": "closed", "created": "2026-03-23", "url": "https://github.com/lightriversoftware/netflex/issues/2876", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2864, "title": "[QA] LW: /Inventory/v2/ManagedElement/{TID} Get one Managed Element (ME) inventory Chrome Browser freezing", "release": "5.3.1", "state": "closed", "created": "2026-03-23", "url": "https://github.com/lightriversoftware/netflex/issues/2864", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2848, "title": "[QA] LW Equipment Management form not refrehsing when loop is dropped", "release": "5.3.0", "state": "closed", "created": "2026-03-23", "url": "https://github.com/lightriversoftware/netflex/issues/2848", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2819, "title": "[QA] LW Wvls Partially Protected Servcie USER proc core dumps", "release": "5.3.0", "state": "closed", "created": "2026-03-20", "url": "https://github.com/lightriversoftware/netflex/issues/2819", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2814, "title": "[QA] LW API CLI Cut Thru not passing success  message upon command completion", "release": "5.3.0", "state": "closed", "created": "2026-03-19", "url": "https://github.com/lightriversoftware/netflex/issues/2814", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2813, "title": "[QA] LW matching in fully protect service using the protect port doesnt bring in the service", "release": "5.3.0", "state": "closed", "created": "2026-03-19", "url": "https://github.com/lightriversoftware/netflex/issues/2813", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2798, "title": "[QA] LW wvl_svc_sync_dno is core dumping every few seconds", "release": "5.3.0", "state": "closed", "created": "2026-03-19", "url": "https://github.com/lightriversoftware/netflex/issues/2798", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2778, "title": "[QA] LW WVLS Complete API failing into partial state", "release": "5.3.0", "state": "closed", "created": "2026-03-19", "url": "https://github.com/lightriversoftware/netflex/issues/2778", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2771, "title": "[QA] LW RDB upgrade failing for Remote server deployment", "release": "5.3.0", "state": "closed", "created": "2026-03-18", "url": "https://github.com/lightriversoftware/netflex/issues/2771", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2756, "title": "[QA] LW: API for /Inventory/v2/ManagedElement/{TID} Get one Managed Element (ME) inventory incorrect/inconsistent output", "release": "5.3.0", "state": "open", "created": "2026-03-18", "url": "https://github.com/lightriversoftware/netflex/issues/2756", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 2734, "title": "[QA] LW: 53.1 netFlex Historical PM showing NO DATA YET, linc11vm1 and linc10vm15 for certain NE Types", "release": "5.3.1", "state": "closed", "created": "2026-03-18", "url": "https://github.com/lightriversoftware/netflex/issues/2734", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2692, "title": "[QA] LW CEC Trace not following xcon OTU4", "release": "5.2.1 53.0", "state": "closed", "created": "2026-03-17", "url": "https://github.com/lightriversoftware/netflex/issues/2692", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2690, "title": "[QA] LW new feature for Interface management enhanced for NETCONF, RESTCONF, and CLI are not in def.system_defines", "release": "5.3.1", "state": "closed", "created": "2026-03-16", "url": "https://github.com/lightriversoftware/netflex/issues/2690", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2631, "title": "[QA] LW Deleting NE's using RMT script failing b'c NE up when alrady in disable state", "release": "5.3.0", "state": "closed", "created": "2026-03-13", "url": "https://github.com/lightriversoftware/netflex/issues/2631", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2625, "title": "[QA] LW Multibox Is Adding NE's to all MUX's instead of just the one as selected on NE Mgmt", "release": "5.3.0", "state": "closed", "created": "2026-03-13", "url": "https://github.com/lightriversoftware/netflex/issues/2625", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2597, "title": "[QA] LW Newly created Templates on Alias form not being assinged all NE's, and User/Console commands", "release": "5.2.1", "state": "closed", "created": "2026-03-12", "url": "https://github.com/lightriversoftware/netflex/issues/2597", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2527, "title": "[QA] LW: dno's getting stuck and not completing linc11vm1", "release": "5.3.1", "state": "closed", "created": "2026-03-09", "url": "https://github.com/lightriversoftware/netflex/issues/2527", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2515, "title": "[QA] LW Available BW: Existing Service shown on OMS Usage Matrix - Spectrum/Not shown on WUM", "release": "5.3.1", "state": "closed", "created": "2026-03-09", "url": "https://github.com/lightriversoftware/netflex/issues/2515", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2494, "title": "[QA] LW: /NeMgmt/v2/DeleteNe/{TID} Delete an NE from netFLEX failing with 504 Gateway Timeout", "release": "5.3.1", "state": "closed", "created": "2026-03-09", "url": "https://github.com/lightriversoftware/netflex/issues/2494", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2489, "title": "[QA] LW: 53.1.24 API /Inventory/v2/EquipmentHolder/{TID}/{EH} Get one Equipment Holder (EH) inventory Internal Server Error<", "release": "5.3.1", "state": "closed", "created": "2026-03-06", "url": "https://github.com/lightriversoftware/netflex/issues/2489", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2474, "title": "[QA] LW: 53.1.24 API /Inventory/v2/ManagedElement/{TID} Get one Managed Element (ME) inventory Internal Server Error", "release": "5.3.1", "state": "closed", "created": "2026-03-06", "url": "https://github.com/lightriversoftware/netflex/issues/2474", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2426, "title": "[QA] LW: 53.1.23 CAT PM Missing for NE Type CISCO ROUTER - ciscoNCS57C3MODSSYS", "release": "5.3.1", "state": "closed", "created": "2026-03-05", "url": "https://github.com/lightriversoftware/netflex/issues/2426", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2425, "title": "[QA] LW BEP switching not occurring when down NE count exceeds system define", "release": "5.3.0", "state": "closed", "created": "2026-03-05", "url": "https://github.com/lightriversoftware/netflex/issues/2425", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2412, "title": "[QA] LW snmpne tool not setting enabled bit correctly", "release": "5.3.0", "state": "closed", "created": "2026-03-04", "url": "https://github.com/lightriversoftware/netflex/issues/2412", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2302, "title": "[QA] LW EM CLI Cut thru Message not providing positive response for command completion", "release": "5.3.1", "state": "closed", "created": "2026-03-02", "url": "https://github.com/lightriversoftware/netflex/issues/2302", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2268, "title": "[QA] LW Fail to Boot after Build Install", "release": "5.3.1", "state": "closed", "created": "2026-02-27", "url": "https://github.com/lightriversoftware/netflex/issues/2268", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2265, "title": "[QA] LW: 53.1 linc11vm1 dno problem for NE Type CISCO NCS2000 - DWDM PUNIT cards/shelves are not being discovered", "release": "5.3.1", "state": "closed", "created": "2026-02-27", "url": "https://github.com/lightriversoftware/netflex/issues/2265", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2262, "title": "[QA] LW Unify Login Form Submission Buttons", "release": "5.3.1", "state": "closed", "created": "2026-02-27", "url": "https://github.com/lightriversoftware/netflex/issues/2262", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2243, "title": "[QA] LW: 53.0.29 CAT for INFINERA GROOVE G30 failing/FAILED TO GET TRUNK_OTU PM FOR PMAID", "release": "5.3.0", "state": "closed", "created": "2026-02-26", "url": "https://github.com/lightriversoftware/netflex/issues/2243", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2185, "title": "[DEV][QA][LW Trace showing oductp facilities in trace graphic when the \"Show OTN AIDs\" is No]Fix circuit trace so trace graphic matches show OTN AIDs setting on left form [#2000]", "release": "Not specified", "state": "closed", "created": "2026-02-25", "url": "https://github.com/lightriversoftware/netflex/issues/2185", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2178, "title": "[QA] LW GR replication not occurring per schedule due to GR Xfer Button bug", "release": "5.3.0", "state": "closed", "created": "2026-02-24", "url": "https://github.com/lightriversoftware/netflex/issues/2178", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2158, "title": "[QA] LW Trace 100G WS5 through mated WS5 config dropping to incorrect far end port", "release": "5.3.0", "state": "closed", "created": "2026-02-23", "url": "https://github.com/lightriversoftware/netflex/issues/2158", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2143, "title": "[QA] LW: 53.0.29 dno fix related to Git issue 2079 has affected dno line data for ADVA FSP 3000R7", "release": "5.3.0", "state": "closed", "created": "2026-02-23", "url": "https://github.com/lightriversoftware/netflex/issues/2143", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2100, "title": "[QA] LW breakup command is core dumping", "release": "5.3.0", "state": "closed", "created": "2026-02-20", "url": "https://github.com/lightriversoftware/netflex/issues/2100", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2079, "title": "[QA] LW dno failing for PSI-L NE Types", "release": "5.3.0", "state": "closed", "created": "2026-02-19", "url": "https://github.com/lightriversoftware/netflex/issues/2079", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2078, "title": "[QA] LW: 53.0.29 linc10vm15 TRACE not complete for NOKIA 1830 PSI-L", "release": "5.3.0", "state": "closed", "created": "2026-02-19", "url": "https://github.com/lightriversoftware/netflex/issues/2078", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2030, "title": "[QA] LW Neighbor API not completing for RLS > WS5 Neighbor", "release": "5.3.0", "state": "closed", "created": "2026-02-18", "url": "https://github.com/lightriversoftware/netflex/issues/2030", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 2000, "title": "[QA] LW Trace showing oductp facilities in trace graphic when the \"Show OTN AIDs\" is No", "release": "5.3.0", "state": "closed", "created": "2026-02-17", "url": "https://github.com/lightriversoftware/netflex/issues/2000", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1981, "title": "[QA] LW error message incorrect when logging into standby GR server with an alias", "release": "5.3.0", "state": "closed", "created": "2026-02-13", "url": "https://github.com/lightriversoftware/netflex/issues/1981", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1979, "title": "[QA] LW: Swagger API \"/WavelengthServices/v2/wvls/docChan Retrieve the DOC channel report\" has no data in the response body", "release": "5.3.0", "state": "closed", "created": "2026-02-13", "url": "https://github.com/lightriversoftware/netflex/issues/1979", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1949, "title": "[QA] LW GR status report not reflecting the correct backup times for rdb group", "release": "5.3.0", "state": "closed", "created": "2026-02-12", "url": "https://github.com/lightriversoftware/netflex/issues/1949", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1948, "title": "[DEV] [QA] [Test separate RDB server with multibox and GR]LW GR not switching correctly when rdb server connection fails [#1685]", "release": "Not specified", "state": "closed", "created": "2026-02-12", "url": "https://github.com/lightriversoftware/netflex/issues/1948", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1947, "title": "[QA] LW: 53.0.28 Pages will not load if using NE List Type as Pulldown under Misc Tab of View Preferences", "release": "5.3.0", "state": "closed", "created": "2026-02-12", "url": "https://github.com/lightriversoftware/netflex/issues/1947", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1946, "title": "[QA] LW: 53.0.28 Trace Level set to 3 under View Preferences Miscellaneous and cannot be changed", "release": "5.3.0", "state": "closed", "created": "2026-02-12", "url": "https://github.com/lightriversoftware/netflex/issues/1946", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1942, "title": "[QA] LW Match_wvl from the GUI for Infinera GX31 is not supported", "release": "5.3.0", "state": "closed", "created": "2026-02-12", "url": "https://github.com/lightriversoftware/netflex/issues/1942", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1935, "title": "[QA] LW RLS Loopback failing due to command sequence being sent needs updating", "release": "5.2.1", "state": "closed", "created": "2026-02-11", "url": "https://github.com/lightriversoftware/netflex/issues/1935", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1921, "title": "[QA] LW: 52.1.39 Swagger API /NeMgmt/v2/Schedule/LinkStatus/Reset Reset the link has 500 Internal Server Error", "release": "5.2.1", "state": "closed", "created": "2026-02-11", "url": "https://github.com/lightriversoftware/netflex/issues/1921", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1917, "title": "[DEV] [QA] [Test separate RDB server with multibox and GR] LW OTN Facility and Facility Hierarchy menu items missing from menu tree [#1685]", "release": "Not specified", "state": "closed", "created": "2026-02-11", "url": "https://github.com/lightriversoftware/netflex/issues/1917", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1916, "title": "[DEV] [QA] [Test separate RDB server with multibox and GR]LW CAT not showing PM says not supported [#1685]", "release": "Not specified", "state": "closed", "created": "2026-02-11", "url": "https://github.com/lightriversoftware/netflex/issues/1916", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1908, "title": "[QA] LW Seperate RDB Server environment not showing NE's up using nestat -B [#1685]", "release": "5.3.0", "state": "closed", "created": "2026-02-11", "url": "https://github.com/lightriversoftware/netflex/issues/1908", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1899, "title": "[DEV][[QA] LW: 53.0 FUJITSU 1FINITY T600 ODUC2 Line Port TRACE Back TRACES to the 100GE Client Port]Perform carrier trace if starting on an INFINERA T600 network port on PIT6-P6A1 [#1852]", "release": "Not specified", "state": "closed", "created": "2026-02-11", "url": "https://github.com/lightriversoftware/netflex/issues/1899", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1858, "title": "[QA] LW: 53.0.28 CIENA WAVESERVER Line port TRACES but does not match in a Wavelength Service", "release": "5.3.0", "state": "closed", "created": "2026-02-09", "url": "https://github.com/lightriversoftware/netflex/issues/1858", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1854, "title": "[QA] LW GR not logging user out of GUI after GR switch", "release": "5.3.0", "state": "closed", "created": "2026-02-09", "url": "https://github.com/lightriversoftware/netflex/issues/1854", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1852, "title": "[QA] LW: 53.0 FUJITSU 1FINITY T600 ODUC2 Line Port TRACE Back TRACES to the 100GE Client Port", "release": "5.3.0", "state": "closed", "created": "2026-02-09", "url": "https://github.com/lightriversoftware/netflex/issues/1852", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1834, "title": "[QA] LW: 53.0.28 R8 64-bit match_wvl for CISCO NSC2000 causing segmentation fault", "release": "5.3.0", "state": "closed", "created": "2026-02-06", "url": "https://github.com/lightriversoftware/netflex/issues/1834", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1822, "title": "[QA] LW Having intermittent issues with trace form redrawing after loops being placed", "release": "5.2.1", "state": "closed", "created": "2026-02-05", "url": "https://github.com/lightriversoftware/netflex/issues/1822", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1817, "title": "[QA] LW match_wvl matching in an incorrect ckt related to circuit stitching", "release": "5.3.0", "state": "closed", "created": "2026-02-05", "url": "https://github.com/lightriversoftware/netflex/issues/1817", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1808, "title": "[QA] LW NeMgmt Schedule API's need description updates for 52.1", "release": "5.2.1", "state": "closed", "created": "2026-02-05", "url": "https://github.com/lightriversoftware/netflex/issues/1808", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1798, "title": "[QA] LW Add Link Down Message for REST NE types when attmepting EM functions", "release": "5.2.1", "state": "closed", "created": "2026-02-05", "url": "https://github.com/lightriversoftware/netflex/issues/1798", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1793, "title": "[QA] LW Equipment Management not populating data From native form or Logical View For Waveserver", "release": "5.2.1", "state": "closed", "created": "2026-02-05", "url": "https://github.com/lightriversoftware/netflex/issues/1793", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1784, "title": "[QA] LW NE Summary Disable Link for CLI not working", "release": "5.2.1", "state": "closed", "created": "2026-02-05", "url": "https://github.com/lightriversoftware/netflex/issues/1784", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1723, "title": "[QA] LW 53.0.27 linc11vm1 Swagger API /Performance/v2/SpanAnalysisData Get OTS Span Analysis data not showing Span loss or light levels", "release": "5.3.0", "state": "closed", "created": "2026-02-03", "url": "https://github.com/lightriversoftware/netflex/issues/1723", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1722, "title": "[QA] LW API Endpoint LinkStatus/Reset changes to usage", "release": "5.3.0", "state": "closed", "created": "2026-02-03", "url": "https://github.com/lightriversoftware/netflex/issues/1722", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1720, "title": "[QA] LW 53.0.27 linc11vm1 OTS Span Analysis not showing levels for CISCO NCS2k", "release": "5.3.0", "state": "closed", "created": "2026-02-03", "url": "https://github.com/lightriversoftware/netflex/issues/1720", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1706, "title": "[QA] LW RDB FEP Only MB test", "release": "5.3.0", "state": "closed", "created": "2026-02-03", "url": "https://github.com/lightriversoftware/netflex/issues/1706", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1700, "title": "[QA] LW Circuit Stitching 6500 to 1830", "release": "5.3.0", "state": "closed", "created": "2026-02-02", "url": "https://github.com/lightriversoftware/netflex/issues/1700", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1699, "title": "[QA] LW 53.0.27 linc11vm1 Alias Management form displays a please wait box affecting add user", "release": "5.3.0", "state": "closed", "created": "2026-02-02", "url": "https://github.com/lightriversoftware/netflex/issues/1699", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1624, "title": "[QA] LW 53.0.27 linc11vm1 has a file missing. /usr/cnc/mbin/rmvOldFiles is not getting built/installed", "release": "5.3.0", "state": "closed", "created": "2026-01-30", "url": "https://github.com/lightriversoftware/netflex/issues/1624", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1610, "title": "[QA] LW 53.0.27 Some PM Report windows not loading on demo server netflex1 logged in as console", "release": "5.3.0", "state": "closed", "created": "2026-01-29", "url": "https://github.com/lightriversoftware/netflex/issues/1610", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1550, "title": "[QA] ***TEST ISSUE NO NEED TO ASSIGN***LW snmp link not down", "release": "5.3.0", "state": "closed", "created": "2026-01-28", "url": "https://github.com/lightriversoftware/netflex/issues/1550", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1549, "title": "[QA] LW API Reset Link not reseting snmp links", "release": "5.3.0", "state": "closed", "created": "2026-01-28", "url": "https://github.com/lightriversoftware/netflex/issues/1549", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1500, "title": "[QA] LW End Point LinkStatus is missing parameters", "release": "5.3.0", "state": "closed", "created": "2026-01-23", "url": "https://github.com/lightriversoftware/netflex/issues/1500", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1472, "title": "[QA] LW /NeMgmt/v2/Schedule/WvlsMatch Endpoint needs to send OMS/OTS match flag as well", "release": "5.3.0", "state": "closed", "created": "2026-01-22", "url": "https://github.com/lightriversoftware/netflex/issues/1472", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1471, "title": "[QA] LW Schedule WvlsMatch End Point needs updated description", "release": "5.3.0", "state": "closed", "created": "2026-01-22", "url": "https://github.com/lightriversoftware/netflex/issues/1471", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1446, "title": "[QA] LW - auto run match_wvl on card if line port neighbor changes to update wave and client services", "release": "5.3.0", "state": "closed", "created": "2026-01-22", "url": "https://github.com/lightriversoftware/netflex/issues/1446", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1431, "title": "[QA] LW Trace picking up incorrect Nodes in circuit trace", "release": "5.3.0", "state": "closed", "created": "2026-01-21", "url": "https://github.com/lightriversoftware/netflex/issues/1431", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1422, "title": "[QA] LW 53.0.27 64-bit linc11vm1. XCON Match from NE Summary failing for 1 NE NOKIA-DMX-2/5", "release": "5.3.0", "state": "closed", "created": "2026-01-21", "url": "https://github.com/lightriversoftware/netflex/issues/1422", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1391, "title": "[QA] LW NE Mgmt Use Global NE User Login field not disabling password field", "release": "Unknown", "state": "closed", "created": "2026-01-20", "url": "https://github.com/lightriversoftware/netflex/issues/1391", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1363, "title": "[QA] LW Link Status for NE Type CIENA 5100/5200 is not correct on NE Management Page", "release": "5.3.0", "state": "closed", "created": "2026-01-16", "url": "https://github.com/lightriversoftware/netflex/issues/1363", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1333, "title": "[QA] LW GR Manual switch from command line takes long time for confirmation", "release": "5.3.0", "state": "closed", "created": "2026-01-16", "url": "https://github.com/lightriversoftware/netflex/issues/1333", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1332, "title": "[QA] LW GRD not launcing bep_rdb_switch.sh", "release": "5.3.0", "state": "closed", "created": "2026-01-16", "url": "https://github.com/lightriversoftware/netflex/issues/1332", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1314, "title": "[QA] LW 53.0.26 Historical PM results shows NA for the most recent day", "release": "5.3.0", "state": "closed", "created": "2026-01-15", "url": "https://github.com/lightriversoftware/netflex/issues/1314", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1311, "title": "[QA] LW Add Tool tip to logical view for WS5 4x100 \"Parent\" port", "release": "5.2.1", "state": "closed", "created": "2026-01-15", "url": "https://github.com/lightriversoftware/netflex/issues/1311", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1238, "title": "[QA] LW Deleting 1830 carrier service using GUI is not deleting the xcons for entire path", "release": "5.2.1", "state": "closed", "created": "2026-01-13", "url": "https://github.com/lightriversoftware/netflex/issues/1238", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1222, "title": "[QA] LW Inventory Get One PTP Response message confusing when no PTP exists", "release": "5.2.1", "state": "closed", "created": "2026-01-12", "url": "https://github.com/lightriversoftware/netflex/issues/1222", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1200, "title": "[QA] LW Loopback removal confirmation message from Trace Form should be consistent across NE Types", "release": "5.2.1", "state": "closed", "created": "2026-01-12", "url": "https://github.com/lightriversoftware/netflex/issues/1200", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1199, "title": "[QA] LW 53.0.26 64-bit Unable to Trace thru PASSIVE MUX/DEMUX on the correct LINE Port", "release": "5.3.0", "state": "closed", "created": "2026-01-12", "url": "https://github.com/lightriversoftware/netflex/issues/1199", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1178, "title": "[QA] LW 53.0.26 NE Summary page on the demo server has Gateway Timeout/Crashes the GUI", "release": "5.3.0", "state": "closed", "created": "2026-01-09", "url": "https://github.com/lightriversoftware/netflex/issues/1178", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1170, "title": "[QA] LW 52.1.38 API Swagger /Inventory/v2/PhysicalTerminationPoint/{TID}/{PTP} Get one Physical Termination Point (PTP) inventory does not show RATE in the response", "release": "5.2.1", "state": "closed", "created": "2026-01-09", "url": "https://github.com/lightriversoftware/netflex/issues/1170", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1168, "title": "[QA] LW: Multi NE AZ Con Provisioning Issue", "release": "Not specified", "state": "open", "created": "2026-01-09", "url": "https://github.com/lightriversoftware/netflex/issues/1168", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 1167, "title": "[QA] LW: TRACE on carrier service the Loop option for a carrier port is missing", "release": "Not specified", "state": "closed", "created": "2026-01-09", "url": "https://github.com/lightriversoftware/netflex/issues/1167", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1166, "title": "[QA] LW Add known host error message to trace D0", "release": "Not specified", "state": "closed", "created": "2026-01-09", "url": "https://github.com/lightriversoftware/netflex/issues/1166", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1165, "title": "[QA] LW Equipment Management Need commands output into trace file for trace level 0", "release": "Not specified", "state": "closed", "created": "2026-01-09", "url": "https://github.com/lightriversoftware/netflex/issues/1165", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1164, "title": "[QA] LW Power Level report taking too long for SmartOptic NE Type to populate report", "release": "Not specified", "state": "closed", "created": "2026-01-09", "url": "https://github.com/lightriversoftware/netflex/issues/1164", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1163, "title": "[QA] LW EM form sending TL1 command to retrieve Line port for S6AD600 Card - port back to 5.3.1", "release": "Not specified", "state": "open", "created": "2026-01-09", "url": "https://github.com/lightriversoftware/netflex/issues/1163", "status_badge": "badge-open", "status_text": "OPEN"}, {"number": 1124, "title": "[QA] LW 53.0.26 64 bit. An existing OMS service does not TRACE", "release": "Not specified", "state": "closed", "created": "2026-01-07", "url": "https://github.com/lightriversoftware/netflex/issues/1124", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1083, "title": "[QA] LW Remove Delete Menu option for WS5 Carriers", "release": "Not specified", "state": "closed", "created": "2026-01-06", "url": "https://github.com/lightriversoftware/netflex/issues/1083", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1068, "title": "[QA] LW FEP BEP communicatons down", "release": "5.3.0", "state": "closed", "created": "2026-01-06", "url": "https://github.com/lightriversoftware/netflex/issues/1068", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1025, "title": "[SUPPORT] [QA] [LW 52.1.37 missing assigns/facility records in the dno data for holmvm16]Stitching code needs to set DNOmode local to stitching code, remove from add_linedata, for NCS2000 [#1007]", "release": "Not specified", "state": "closed", "created": "2026-01-05", "url": "https://github.com/lightriversoftware/netflex/issues/1025", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 1007, "title": "[QA] LW 52.1.37 missing assigns/facility records in the dno data for holmvm16", "release": "5.2.1", "state": "closed", "created": "2025-12-31", "url": "https://github.com/lightriversoftware/netflex/issues/1007", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 947, "title": "[QA] LW RLS/WS5 TRACE Client port fails to trace when carrier Line 1 goes to Line 2 of WS5", "release": "5.2.1", "state": "closed", "created": "2025-12-23", "url": "https://github.com/lightriversoftware/netflex/issues/947", "status_badge": "badge-closed", "status_text": "CLOSED"}, {"number": 929, "title": "[QA] LW API Endpoints needed to be added to 52.1 release notes", "release": "Not specified", "state": "closed", "created": "2025-12-22", "url": "https://github.com/lightriversoftware/netflex/issues/929", "status_badge": "badge-closed", "status_text": "CLOSED"}];
+
+        // Function to show issues for a specific release
+        function showReleaseIssues(release) {
+            const filteredIssues = allIssues.filter(issue => issue.release === release);
+            const tbody = document.getElementById('release-issues-tbody');
+            const title = document.getElementById('release-section-title');
+            const navButton = document.getElementById('release-nav-button');
+
+            title.textContent = `Issues for Release: ${release} (${filteredIssues.length} issues)`;
+
+            tbody.innerHTML = '';
+            filteredIssues.sort((a, b) => b.number - a.number).forEach(issue => {
+                const row = `
+                    <tr>
+                        <td><span class="badge ${issue.status_badge}">${issue.number}</span></td>
+                        <td>${issue.title}</td>
+                        <td><span class="badge ${issue.status_badge}">${issue.status_text}</span></td>
+                        <td>${issue.created}</td>
+                        <td><a href="${issue.url}" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+
+            // Show the release section and update navigation
+            navButton.style.display = 'inline-block';
+            navButton.textContent = `${release} (${filteredIssues.length})`;
+            showSection('release');
+        }
+
         // Chart 1: Issues by Status (Pie Chart)
         const statusCtx = document.getElementById('statusChart').getContext('2d');
         new Chart(statusCtx, {
@@ -2168,6 +2491,13 @@
                             size: 16
                         }
                     }
+                },
+                onClick: (event, activeElements) => {
+                    if (activeElements.length > 0) {
+                        const index = activeElements[0].index;
+                        const release = ["5.3.0", "5.3.1", "5.2.1", "Not specified", "5.2.1 53.0", "Unknown"][index];
+                        showReleaseIssues(release);
+                    }
                 }
             }
         });
@@ -2189,6 +2519,9 @@
             } else if (section === 'all') {
                 document.getElementById('all-section').classList.add('active');
                 document.querySelectorAll('.nav-button')[3].classList.add('active');
+            } else if (section === 'release') {
+                document.getElementById('release-section').classList.add('active');
+                document.getElementById('release-nav-button').classList.add('active');
             }
         }
 

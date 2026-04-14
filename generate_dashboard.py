@@ -299,6 +299,7 @@ def generate_html(issues):
             <button class="nav-button" onclick="showSection('open')">Open Issues</button>
             <button class="nav-button" onclick="showSection('closed')">Closed Issues</button>
             <button class="nav-button" onclick="showSection('all')">All Issues</button>
+            <button class="nav-button" id="release-nav-button" onclick="showSection('release')" style="display:none;">Release Issues</button>
         </div>
 
         <!-- Charts Section -->
@@ -315,8 +316,27 @@ def generate_html(issues):
             </div>
             <div class="chart-box-full">
                 <h2>Issues by Software Release</h2>
+                <p style="text-align: center; color: #666; font-size: 14px; margin-top: 10px;">Click on any bar to view issues for that release</p>
                 <canvas id="releaseChart"></canvas>
             </div>
+        </div>
+
+        <!-- Release Filtered Issues Section -->
+        <div id="release-section" class="section">
+            <h2 id="release-section-title">Issues for Release</h2>
+            <table class="issues-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody id="release-issues-tbody">
+                </tbody>
+            </table>
         </div>
 
         <!-- Open Issues Section -->
@@ -327,6 +347,7 @@ def generate_html(issues):
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Release</th>
                         <th>Created</th>
                         <th>Link</th>
                     </tr>
@@ -337,10 +358,12 @@ def generate_html(issues):
     # Add open issues
     for issue in sorted(open_issues, key=lambda x: x['number'], reverse=True):
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
+        release = extract_software_release(issue.get('body', ''))
 
         html += f"""                    <tr>
                         <td><span class="badge badge-open">{issue['number']}</span></td>
                         <td>{issue['title']}</td>
+                        <td>{release}</td>
                         <td>{created}</td>
                         <td><a href="{issue['url']}" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -358,6 +381,7 @@ def generate_html(issues):
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Release</th>
                         <th>Created</th>
                         <th>Link</th>
                     </tr>
@@ -368,10 +392,12 @@ def generate_html(issues):
     # Add closed issues
     for issue in sorted(closed_issues, key=lambda x: x['number'], reverse=True):
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
+        release = extract_software_release(issue.get('body', ''))
 
         html += f"""                    <tr>
                         <td><span class="badge badge-closed">{issue['number']}</span></td>
                         <td>{issue['title']}</td>
+                        <td>{release}</td>
                         <td>{created}</td>
                         <td><a href="{issue['url']}" target="_blank" class="issue-link">View Issue →</a></td>
                     </tr>
@@ -389,6 +415,7 @@ def generate_html(issues):
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Release</th>
                         <th>Status</th>
                         <th>Created</th>
                         <th>Link</th>
@@ -402,10 +429,12 @@ def generate_html(issues):
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
         status_badge = 'badge-open' if issue['state'] == 'open' else 'badge-closed'
         status_text = issue['state'].upper()
+        release = extract_software_release(issue.get('body', ''))
 
         html += f"""                    <tr>
                         <td><span class="badge {status_badge}">{issue['number']}</span></td>
                         <td>{issue['title']}</td>
+                        <td>{release}</td>
                         <td><span class="badge {status_badge}">{status_text}</span></td>
                         <td>{created}</td>
                         <td><a href="{issue['url']}" target="_blank" class="issue-link">View Issue →</a></td>
@@ -415,6 +444,24 @@ def generate_html(issues):
     # Generate chart data
     month_labels = [m[0] for m in sorted_months]
     month_counts = [m[1] for m in sorted_months]
+
+    # Prepare issues data for JavaScript
+    issues_data = []
+    for issue in issues:
+        created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
+        status_badge = 'badge-open' if issue['state'] == 'open' else 'badge-closed'
+        status_text = issue['state'].upper()
+        release = extract_software_release(issue.get('body', ''))
+        issues_data.append({
+            'number': issue['number'],
+            'title': issue['title'],
+            'release': release,
+            'state': issue['state'],
+            'created': created,
+            'url': issue['url'],
+            'status_badge': status_badge,
+            'status_text': status_text
+        })
 
     html += f"""                </tbody>
             </table>
@@ -427,6 +474,38 @@ def generate_html(issues):
     </button>
 
     <script>
+        // All issues data
+        const allIssues = {json.dumps(issues_data)};
+
+        // Function to show issues for a specific release
+        function showReleaseIssues(release) {{
+            const filteredIssues = allIssues.filter(issue => issue.release === release);
+            const tbody = document.getElementById('release-issues-tbody');
+            const title = document.getElementById('release-section-title');
+            const navButton = document.getElementById('release-nav-button');
+
+            title.textContent = `Issues for Release: ${{release}} (${{filteredIssues.length}} issues)`;
+
+            tbody.innerHTML = '';
+            filteredIssues.sort((a, b) => b.number - a.number).forEach(issue => {{
+                const row = `
+                    <tr>
+                        <td><span class="badge ${{issue.status_badge}}">${{issue.number}}</span></td>
+                        <td>${{issue.title}}</td>
+                        <td><span class="badge ${{issue.status_badge}}">${{issue.status_text}}</span></td>
+                        <td>${{issue.created}}</td>
+                        <td><a href="${{issue.url}}" target="_blank" class="issue-link">View Issue →</a></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            }});
+
+            // Show the release section and update navigation
+            navButton.style.display = 'inline-block';
+            navButton.textContent = `${{release}} (${{filteredIssues.length}})`;
+            showSection('release');
+        }}
+
         // Chart 1: Issues by Status (Pie Chart)
         const statusCtx = document.getElementById('statusChart').getContext('2d');
         new Chart(statusCtx, {{
@@ -562,6 +641,13 @@ def generate_html(issues):
                             size: 16
                         }}
                     }}
+                }},
+                onClick: (event, activeElements) => {{
+                    if (activeElements.length > 0) {{
+                        const index = activeElements[0].index;
+                        const release = {json.dumps(release_labels)}[index];
+                        showReleaseIssues(release);
+                    }}
                 }}
             }}
         }});
@@ -583,6 +669,9 @@ def generate_html(issues):
             }} else if (section === 'all') {{
                 document.getElementById('all-section').classList.add('active');
                 document.querySelectorAll('.nav-button')[3].classList.add('active');
+            }} else if (section === 'release') {{
+                document.getElementById('release-section').classList.add('active');
+                document.getElementById('release-nav-button').classList.add('active');
             }}
         }}
 
