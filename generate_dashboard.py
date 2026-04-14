@@ -179,6 +179,25 @@ def generate_html(issues):
             padding: 12px;
             text-align: left;
             font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }}
+        .issues-table th:hover {{
+            background: linear-gradient(135deg, #7889f5 0%, #8757b3 100%);
+        }}
+        .issues-table th::after {{
+            content: ' ↕';
+            opacity: 0.3;
+            font-size: 12px;
+        }}
+        .issues-table th.sort-asc::after {{
+            content: ' ↑';
+            opacity: 1;
+        }}
+        .issues-table th.sort-desc::after {{
+            content: ' ↓';
+            opacity: 1;
         }}
         .issues-table td {{
             padding: 12px;
@@ -324,13 +343,13 @@ def generate_html(issues):
         <!-- Release Filtered Issues Section -->
         <div id="release-section" class="section">
             <h2 id="release-section-title">Issues for Release</h2>
-            <table class="issues-table">
+            <table class="issues-table" id="release-table">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Status</th>
-                        <th>Created</th>
+                        <th data-sort="number" onclick="sortTable('release-table', 'number')">#</th>
+                        <th data-sort="title" onclick="sortTable('release-table', 'title')">Title</th>
+                        <th data-sort="status" onclick="sortTable('release-table', 'status')">Status</th>
+                        <th data-sort="created" onclick="sortTable('release-table', 'created')">Created</th>
                         <th>Link</th>
                     </tr>
                 </thead>
@@ -342,13 +361,13 @@ def generate_html(issues):
         <!-- Open Issues Section -->
         <div id="open-section" class="section">
             <h2>Open Issues ({len(open_issues)})</h2>
-            <table class="issues-table">
+            <table class="issues-table" id="open-table">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Release</th>
-                        <th>Created</th>
+                        <th data-sort="number" onclick="sortTable('open-table', 'number')">#</th>
+                        <th data-sort="title" onclick="sortTable('open-table', 'title')">Title</th>
+                        <th data-sort="release" onclick="sortTable('open-table', 'release')">Release</th>
+                        <th data-sort="created" onclick="sortTable('open-table', 'created')">Created</th>
                         <th>Link</th>
                     </tr>
                 </thead>
@@ -376,13 +395,13 @@ def generate_html(issues):
         <!-- Closed Issues Section -->
         <div id="closed-section" class="section">
             <h2>Closed Issues (""" + str(len(closed_issues)) + """)</h2>
-            <table class="issues-table">
+            <table class="issues-table" id="closed-table">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Release</th>
-                        <th>Created</th>
+                        <th data-sort="number" onclick="sortTable('closed-table', 'number')">#</th>
+                        <th data-sort="title" onclick="sortTable('closed-table', 'title')">Title</th>
+                        <th data-sort="release" onclick="sortTable('closed-table', 'release')">Release</th>
+                        <th data-sort="created" onclick="sortTable('closed-table', 'created')">Created</th>
                         <th>Link</th>
                     </tr>
                 </thead>
@@ -410,14 +429,14 @@ def generate_html(issues):
         <!-- All Issues Section -->
         <div id="all-section" class="section">
             <h2>All Issues (""" + str(len(issues)) + """)</h2>
-            <table class="issues-table">
+            <table class="issues-table" id="all-table">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Release</th>
-                        <th>Status</th>
-                        <th>Created</th>
+                        <th data-sort="number" onclick="sortTable('all-table', 'number')">#</th>
+                        <th data-sort="title" onclick="sortTable('all-table', 'title')">Title</th>
+                        <th data-sort="release" onclick="sortTable('all-table', 'release')">Release</th>
+                        <th data-sort="status" onclick="sortTable('all-table', 'status')">Status</th>
+                        <th data-sort="created" onclick="sortTable('all-table', 'created')">Created</th>
                         <th>Link</th>
                     </tr>
                 </thead>
@@ -690,6 +709,75 @@ def generate_html(issues):
                 top: 0,
                 behavior: 'smooth'
             }});
+        }}
+
+        // Table sorting functionality
+        let sortStates = {{}};  // Track sort state for each table
+
+        function sortTable(tableId, column) {{
+            const table = document.getElementById(tableId);
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const th = table.querySelector(`th[data-sort="${{column}}"]`);
+
+            // Initialize sort state for this table/column if not exists
+            const key = `${{tableId}}-${{column}}`;
+            if (!sortStates[key]) {{
+                sortStates[key] = 'none';
+            }}
+
+            // Determine next sort direction
+            let direction;
+            if (sortStates[key] === 'none' || sortStates[key] === 'desc') {{
+                direction = 'asc';
+            }} else {{
+                direction = 'desc';
+            }}
+            sortStates[key] = direction;
+
+            // Clear all sort indicators in this table
+            table.querySelectorAll('th').forEach(header => {{
+                header.classList.remove('sort-asc', 'sort-desc');
+            }});
+
+            // Add sort indicator to clicked header
+            th.classList.add(`sort-${{direction}}`);
+
+            // Sort rows
+            rows.sort((a, b) => {{
+                let aVal, bVal;
+
+                if (column === 'number') {{
+                    // Extract number from badge
+                    aVal = parseInt(a.cells[0].textContent.trim());
+                    bVal = parseInt(b.cells[0].textContent.trim());
+                }} else if (column === 'title') {{
+                    // Get column index based on table structure
+                    const colIndex = Array.from(th.parentElement.children).indexOf(th);
+                    aVal = a.cells[colIndex].textContent.toLowerCase();
+                    bVal = b.cells[colIndex].textContent.toLowerCase();
+                }} else if (column === 'release') {{
+                    const colIndex = Array.from(th.parentElement.children).indexOf(th);
+                    aVal = a.cells[colIndex].textContent.toLowerCase();
+                    bVal = b.cells[colIndex].textContent.toLowerCase();
+                }} else if (column === 'status') {{
+                    const colIndex = Array.from(th.parentElement.children).indexOf(th);
+                    aVal = a.cells[colIndex].textContent.toLowerCase();
+                    bVal = b.cells[colIndex].textContent.toLowerCase();
+                }} else if (column === 'created') {{
+                    const colIndex = Array.from(th.parentElement.children).indexOf(th);
+                    aVal = a.cells[colIndex].textContent;
+                    bVal = b.cells[colIndex].textContent;
+                }}
+
+                // Compare values
+                if (aVal < bVal) return direction === 'asc' ? -1 : 1;
+                if (aVal > bVal) return direction === 'asc' ? 1 : -1;
+                return 0;
+            }});
+
+            // Re-append sorted rows
+            rows.forEach(row => tbody.appendChild(row));
         }}
     </script>
 </body>
