@@ -38,20 +38,16 @@ def extract_software_release(body):
 def fetch_issues():
     """Fetch all issues matching your search criteria"""
     print("Fetching issues from GitHub...")
-    # Customize this search query for your needs:
-    # - Change "org:YOUR_ORG" to your organization name
-    # - Add filters like "label:bug", "is:open", etc.
-    cmd = 'gh search issues "repo:lightriversoftware/netflex" --limit 1000 --json number,title,state,createdAt,updatedAt,labels,url,body'
+    cmd = 'gh issue list --repo lightriversoftware/netflex --state all --search "[QA] LW" --limit 2000 --json number,title,state,createdAt,updatedAt,labels,url,body'
     output = run_gh_command(cmd)
 
     if not output:
         return []
 
-    all_issues = json.loads(output)
+    issues = json.loads(output)
 
-    # Filter issues by title pattern (e.g., issues starting with [TAG])
-    # Customize or remove this filter based on your needs
-    filtered_issues = [issue for issue in all_issues if 'LW' in issue['title'] and 'QA' in issue['title']]
+    # Safety filter — ensure title actually contains both QA and LW
+    filtered_issues = [issue for issue in issues if 'LW' in issue['title'] and 'QA' in issue['title']]
 
     print(f"Found {len(filtered_issues)} issues")
     return filtered_issues
@@ -60,8 +56,8 @@ def generate_html(issues):
     """Generate the HTML dashboard"""
 
     # Calculate statistics
-    open_issues = [i for i in issues if i['state'] == 'open']
-    closed_issues = [i for i in issues if i['state'] == 'closed']
+    open_issues = [i for i in issues if i['state'].lower() == 'open']
+    closed_issues = [i for i in issues if i['state'].lower() == 'closed']
 
     # Issues over time
     issues_by_month = defaultdict(int)
@@ -446,7 +442,7 @@ def generate_html(issues):
     # Add all issues
     for issue in sorted(issues, key=lambda x: x['number'], reverse=True):
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
-        status_badge = 'badge-open' if issue['state'] == 'open' else 'badge-closed'
+        status_badge = 'badge-open' if issue['state'].lower() == 'open' else 'badge-closed'
         status_text = issue['state'].upper()
         release = extract_software_release(issue.get('body', ''))
 
@@ -468,7 +464,7 @@ def generate_html(issues):
     issues_data = []
     for issue in issues:
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
-        status_badge = 'badge-open' if issue['state'] == 'open' else 'badge-closed'
+        status_badge = 'badge-open' if issue['state'].lower() == 'open' else 'badge-closed'
         status_text = issue['state'].upper()
         release = extract_software_release(issue.get('body', ''))
         issues_data.append({
@@ -808,8 +804,8 @@ def main():
 
     print("✅ Dashboard generated successfully: index.html")
     print(f"   Total issues: {len(issues)}")
-    print(f"   Open: {len([i for i in issues if i['state'] == 'open'])}")
-    print(f"   Closed: {len([i for i in issues if i['state'] == 'closed'])}")
+    print(f"   Open: {len([i for i in issues if i['state'].lower() == 'open'])}")
+    print(f"   Closed: {len([i for i in issues if i['state'].lower() == 'closed'])}")
 
 if __name__ == '__main__':
     main()
