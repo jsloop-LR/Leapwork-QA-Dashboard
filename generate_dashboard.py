@@ -14,8 +14,21 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from collections import Counter, defaultdict
 
-# Path to the historical CSV export from Monday.com
+# Path to the historical CSV export from Monday.com (local only)
 HISTORICAL_CSV_PATH = '/mnt/c/Users/JimmySloop/Downloads/Regression_Test_Result_Failures.csv'
+
+# Pre-processed historical data embedded for CI/CD (generated 2026-06-04 from 1,601 records)
+HISTORICAL_EMBEDDED = {
+    "total": 1601, "total_lw": 702, "total_manual": 844, "total_pre": 340, "total_post": 1252,
+    "releases": ["4.1.2","4.2.0","4.2.1","4.3.0","4.3.1","4.4.0","4.4.1","4.5.0","4.5.1",
+                 "4.6.0","4.6.1","4.7.0","4.7.1","4.8.0","4.8.1","4.9.0","4.9.1","5.0.0",
+                 "50.1","51","51.1","52","52.1","53","53.1","54"],
+    "by_release": [2,6,36,47,22,7,88,48,49,73,111,69,72,57,111,65,72,66,85,98,114,98,79,91,32,3],
+    "pre_ga":     [0,2,0,1,6,0,16,0,11,16,44,13,12,6,41,17,15,11,20,8,30,20,16,25,7,3],
+    "post_ga":    [2,4,36,46,16,7,72,48,38,57,67,56,60,51,70,48,57,55,65,90,84,75,57,66,25,0],
+    "leapwork":   [2,3,17,22,9,3,43,24,26,27,49,34,27,29,51,31,37,38,33,45,50,37,24,27,14,0],
+    "manual":     [0,2,19,25,13,4,42,24,21,44,62,35,45,28,60,34,35,28,51,52,63,56,48,42,10,1],
+}
 
 def run_gh_command(cmd):
     """Run a gh CLI command and return the output"""
@@ -61,8 +74,8 @@ def sort_release_key(rel):
 def load_historical_csv():
     """Load and parse historical issue data from Monday.com CSV export"""
     if not os.path.exists(HISTORICAL_CSV_PATH):
-        print(f"Warning: Historical CSV not found at {HISTORICAL_CSV_PATH}")
-        return []
+        print(f"CSV not found — using embedded historical data ({HISTORICAL_EMBEDDED['total']} records)")
+        return HISTORICAL_EMBEDDED
 
     print(f"Loading historical data from CSV...")
     records = []
@@ -157,47 +170,53 @@ def generate_html(issues, historical=[]):
     release_counts_list = [r[1] for r in sorted_releases]
 
     # ── Historical data processing ──
-    hist_by_release   = defaultdict(int)
-    hist_pre_ga       = defaultdict(int)
-    hist_post_ga      = defaultdict(int)
-    hist_leapwork     = defaultdict(int)
-    hist_manual       = defaultdict(int)
-    hist_total_lw     = 0
-    hist_total_manual = 0
-    hist_total_pre    = 0
-    hist_total_post   = 0
-
-    for rec in historical:
-        rel = rec['release']
-        hist_by_release[rel] += 1
-        if rec['timing'] == 'Pre GA':
-            hist_pre_ga[rel] += 1
-            hist_total_pre += 1
-        elif rec['timing'] == 'Post GA':
-            hist_post_ga[rel] += 1
-            hist_total_post += 1
-        if rec['found_by'] == 'Leapwork':
-            hist_leapwork[rel] += 1
-            hist_total_lw += 1
-        elif rec['found_by'] == 'Manual':
-            hist_manual[rel] += 1
-            hist_total_manual += 1
+    if isinstance(historical, dict):
+        h                     = historical
+        hist_total            = h['total']
+        hist_total_lw         = h['total_lw']
+        hist_total_manual     = h['total_manual']
+        hist_total_pre        = h['total_pre']
+        hist_total_post       = h['total_post']
+        hist_releases_sorted  = h['releases']
+        hist_by_release_map   = dict(zip(h['releases'], h['by_release']))
+        pre_ga_counts         = h['pre_ga']
+        post_ga_counts        = h['post_ga']
+        lw_counts             = h['leapwork']
+        manual_counts         = h['manual']
+    else:
+        hist_by_release   = defaultdict(int)
+        hist_pre_ga       = defaultdict(int)
+        hist_post_ga      = defaultdict(int)
+        hist_leapwork     = defaultdict(int)
+        hist_manual       = defaultdict(int)
+        hist_total_lw     = 0
+        hist_total_manual = 0
+        hist_total_pre    = 0
+        hist_total_post   = 0
+        for rec in historical:
+            rel = rec['release']
+            hist_by_release[rel] += 1
+            if rec['timing'] == 'Pre GA':
+                hist_pre_ga[rel] += 1; hist_total_pre += 1
+            elif rec['timing'] == 'Post GA':
+                hist_post_ga[rel] += 1; hist_total_post += 1
+            if rec['found_by'] == 'Leapwork':
+                hist_leapwork[rel] += 1; hist_total_lw += 1
+            elif rec['found_by'] == 'Manual':
+                hist_manual[rel] += 1; hist_total_manual += 1
+        hist_total            = len(historical)
+        hist_releases_sorted  = sorted(hist_by_release.keys(), key=sort_release_key)
+        hist_by_release_map   = dict(hist_by_release)
+        pre_ga_counts         = [hist_pre_ga.get(r, 0)  for r in hist_releases_sorted]
+        post_ga_counts        = [hist_post_ga.get(r, 0) for r in hist_releases_sorted]
+        lw_counts             = [hist_leapwork.get(r, 0) for r in hist_releases_sorted]
+        manual_counts         = [hist_manual.get(r, 0)   for r in hist_releases_sorted]
 
     # Combined defects per release (CSV history + GitHub live)
-    combined_releases = set(hist_by_release.keys())
-    for r in release_labels:
-        combined_releases.add(r)
-    sorted_combined = sorted(combined_releases, key=sort_release_key)
-
-    combined_hist_counts  = [hist_by_release.get(r, 0) for r in sorted_combined]
-    combined_github_counts = [release_counts.get(r, 0) for r in sorted_combined]
-
-    # Pre/Post GA per release (sorted chronologically)
-    hist_releases_sorted = sorted(hist_by_release.keys(), key=sort_release_key)
-    pre_ga_counts  = [hist_pre_ga.get(r, 0)  for r in hist_releases_sorted]
-    post_ga_counts = [hist_post_ga.get(r, 0) for r in hist_releases_sorted]
-    lw_counts      = [hist_leapwork.get(r, 0) for r in hist_releases_sorted]
-    manual_counts  = [hist_manual.get(r, 0)   for r in hist_releases_sorted]
+    combined_releases      = set(hist_by_release_map.keys()) | set(release_labels)
+    sorted_combined        = sorted(combined_releases, key=sort_release_key)
+    combined_hist_counts   = [hist_by_release_map.get(r, 0) for r in sorted_combined]
+    combined_github_counts = [release_counts.get(r, 0)       for r in sorted_combined]
 
     # Generate HTML
     html = f"""<!DOCTYPE html>
@@ -415,16 +434,19 @@ def generate_html(issues, historical=[]):
 
         <div class="stats">
             <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showSection('all')">
-                <div class="stat-number">{len(issues)}</div>
-                <div class="stat-label">Total Issues</div>
+                <div class="stat-number">{len(issues) + hist_total:,}</div>
+                <div class="stat-label">Total Issues Found</div>
+                <div style="font-size:12px;margin-top:6px;opacity:0.85;">{hist_total:,} historical + {len(issues)} GitHub</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showSection('open')">
                 <div class="stat-number">{len(open_issues)}</div>
                 <div class="stat-label">Open Issues</div>
+                <div style="font-size:12px;margin-top:6px;opacity:0.85;">GitHub live</div>
             </div>
             <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showSection('closed')">
-                <div class="stat-number">{len(closed_issues)}</div>
-                <div class="stat-label">Closed Issues</div>
+                <div class="stat-number">{len(closed_issues) + hist_total:,}</div>
+                <div class="stat-label">Resolved Issues</div>
+                <div style="font-size:12px;margin-top:6px;opacity:0.85;">{hist_total:,} historical + {len(closed_issues)} GitHub</div>
             </div>
         </div>
 
@@ -459,7 +481,7 @@ def generate_html(issues, historical=[]):
         <!-- Historical Trends Section -->
         <div id="historical-section" class="section">
             <p style="text-align:center;color:#666;font-size:14px;margin-bottom:10px;">
-                Historical data from {len(historical):,} issues spanning v4.2.0 → 54.0 (pre-GitHub era + GitHub era combined)
+                Historical data from {hist_total:,} issues spanning v4.2.0 → 54.0 (pre-GitHub era + GitHub era combined)
             </p>
             <div class="chart-container">
                 <div class="chart-box">
@@ -824,7 +846,7 @@ def generate_html(issues, historical=[]):
             type: 'pie',
             data: {{
                 labels: ['Leapwork', 'Manual', 'Not Specified'],
-                datasets: [{{ data: [{hist_total_lw}, {hist_total_manual}, {len(historical) - hist_total_lw - hist_total_manual}],
+                datasets: [{{ data: [{hist_total_lw}, {hist_total_manual}, {hist_total - hist_total_lw - hist_total_manual}],
                     backgroundColor: ['rgba(54,162,235,0.8)','rgba(255,159,64,0.8)','rgba(200,200,200,0.8)'],
                     borderWidth: 2 }}]
             }},
@@ -837,7 +859,7 @@ def generate_html(issues, historical=[]):
             type: 'pie',
             data: {{
                 labels: ['Pre GA', 'Post GA', 'Not Specified'],
-                datasets: [{{ data: [{hist_total_pre}, {hist_total_post}, {len(historical) - hist_total_pre - hist_total_post}],
+                datasets: [{{ data: [{hist_total_pre}, {hist_total_post}, {hist_total - hist_total_pre - hist_total_post}],
                     backgroundColor: ['rgba(75,192,192,0.8)','rgba(255,99,132,0.8)','rgba(200,200,200,0.8)'],
                     borderWidth: 2 }}]
             }},
