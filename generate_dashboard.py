@@ -75,10 +75,17 @@ def normalize_release(rel):
     return rel
 
 def sort_release_key(rel):
-    """Sort releases chronologically by parsing version numbers"""
+    """Sort releases chronologically by parsing version numbers.
+    Normalizes old-style numbering (50→5.0, 51→5.1, 53→5.3, 54→5.4, etc.)
+    so they sort correctly alongside new-style (5.3.0, 5.4.0)."""
     try:
-        parts = rel.replace('-', '.').split('.')
-        return tuple(int(p) for p in parts[:3] + [0]*(3-len(parts[:3])))
+        parts = [int(p) for p in rel.replace('-', '.').split('.')[:3]]
+        # Old numbering: 50.x = 5.0.x, 51.x = 5.1.x, 53.x = 5.3.x, 54.x = 5.4.x
+        if 50 <= parts[0] <= 59:
+            minor = parts[0] - 50
+            rest  = parts[1:] if len(parts) > 1 else [0]
+            parts = [5, minor] + rest
+        return tuple(parts + [0] * (3 - len(parts)))
     except:
         return (999, 0, 0)
 
