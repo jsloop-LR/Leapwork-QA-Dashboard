@@ -39,20 +39,31 @@ def run_gh_command(cmd):
         return None
     return result.stdout
 
-def extract_software_release(body):
-    """Extract Software Release Detected from issue body"""
+def extract_software_releases(body):
+    """Extract Software Release Detected from issue body.
+    Returns a list — handles combined values like '5.2.1 53.0' as two releases."""
     if not body:
-        return 'Not specified'
+        return ['Not specified']
 
-    # Look for "Software Release Detected" field
     match = re.search(r'Software Release Detected[:\s]*([^\n]+)', body, re.IGNORECASE)
-    if match:
-        release = match.group(1).strip()
-        # Clean up common variations
-        if release.lower() in ['none', 'n/a', '']:
-            return 'Not specified'
-        return release
-    return 'Not specified'
+    if not match:
+        return ['Not specified']
+
+    raw = match.group(1).strip()
+    if raw.lower() in ['none', 'n/a', '']:
+        return ['Not specified']
+
+    # Split on spaces or commas to catch combined entries like "5.2.1 53.0"
+    parts = re.split(r'[\s,/]+', raw)
+    # Keep only parts that look like version numbers
+    version_re = re.compile(r'^\d+(\.\d+)*$')
+    releases = [p.strip() for p in parts if version_re.match(p.strip())]
+    return releases if releases else [raw]
+
+def extract_software_release(body):
+    """Single-release wrapper for backward compatibility."""
+    releases = extract_software_releases(body)
+    return releases[0] if releases else 'Not specified'
 
 def normalize_release(rel):
     """Normalize release strings to a sortable format"""
@@ -157,13 +168,14 @@ def generate_html(issues, historical=[]):
 
     sorted_months = sorted(issues_by_month.items())[-12:]  # Last 12 months
 
-    # Extract software releases and count
-    releases = []
+    # Extract software releases and count — one issue may span multiple releases
+    release_counts = Counter()
+    issue_releases = {}  # map issue number → list of releases (for click-through)
     for issue in issues:
-        release = extract_software_release(issue.get('body', ''))
-        releases.append(release)
-
-    release_counts = Counter(releases)
+        rels = extract_software_releases(issue.get('body', ''))
+        issue_releases[issue['number']] = rels
+        for r in rels:
+            release_counts[r] += 1
 
     # ── Historical data processing ──
     if isinstance(historical, dict):
@@ -556,7 +568,7 @@ def generate_html(issues, historical=[]):
     # Add open issues
     for issue in sorted(open_issues, key=lambda x: x['number'], reverse=True):
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
-        release = extract_software_release(issue.get('body', ''))
+        release = ', '.join(extract_software_releases(issue.get('body', '')))
 
         html += f"""                    <tr>
                         <td><span class="badge badge-open">{issue['number']}</span></td>
@@ -590,7 +602,7 @@ def generate_html(issues, historical=[]):
     # Add closed issues
     for issue in sorted(closed_issues, key=lambda x: x['number'], reverse=True):
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
-        release = extract_software_release(issue.get('body', ''))
+        release = ', '.join(extract_software_releases(issue.get('body', '')))
 
         html += f"""                    <tr>
                         <td><span class="badge badge-closed">{issue['number']}</span></td>
@@ -627,7 +639,7 @@ def generate_html(issues, historical=[]):
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
         status_badge = 'badge-open' if issue['state'].lower() == 'open' else 'badge-closed'
         status_text = issue['state'].upper()
-        release = extract_software_release(issue.get('body', ''))
+        release = ', '.join(extract_software_releases(issue.get('body', '')))
 
         html += f"""                    <tr>
                         <td><span class="badge {status_badge}">{issue['number']}</span></td>
@@ -649,7 +661,7 @@ def generate_html(issues, historical=[]):
         created = datetime.fromisoformat(issue['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d')
         status_badge = 'badge-open' if issue['state'].lower() == 'open' else 'badge-closed'
         status_text = issue['state'].upper()
-        release = extract_software_release(issue.get('body', ''))
+        release = ', '.join(extract_software_releases(issue.get('body', '')))
         issues_data.append({
             'number': issue['number'],
             'title': issue['title'],
