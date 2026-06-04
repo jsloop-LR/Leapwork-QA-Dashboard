@@ -2,14 +2,20 @@
 """
 Issues Dashboard Generator
 Fetches issues from GitHub and generates an interactive HTML dashboard
+Includes historical data from pre-GitHub Monday.com export CSV
 """
 
 import json
 import subprocess
 import re
+import csv
+import os
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from collections import Counter, defaultdict
+
+# Path to the historical CSV export from Monday.com
+HISTORICAL_CSV_PATH = '/mnt/c/Users/JimmySloop/Downloads/Regression_Test_Result_Failures.csv'
 
 def run_gh_command(cmd):
     """Run a gh CLI command and return the output"""
@@ -35,6 +41,76 @@ def extract_software_release(body):
         return release
     return 'Not specified'
 
+def normalize_release(rel):
+    """Normalize release strings to a sortable format"""
+    rel = rel.strip().strip('"').strip()
+    if not rel or rel in ('Release', 'Post/Pre GA', 'Not specified'):
+        return None
+    # Map old-style (4.x.x) and new-style (50, 51.1, etc.)
+    rel = rel.replace('v', '').replace('V', '')
+    return rel
+
+def sort_release_key(rel):
+    """Sort releases chronologically by parsing version numbers"""
+    try:
+        parts = rel.replace('-', '.').split('.')
+        return tuple(int(p) for p in parts[:3] + [0]*(3-len(parts[:3])))
+    except:
+        return (999, 0, 0)
+
+def load_historical_csv():
+    """Load and parse historical issue data from Monday.com CSV export"""
+    if not os.path.exists(HISTORICAL_CSV_PATH):
+        print(f"Warning: Historical CSV not found at {HISTORICAL_CSV_PATH}")
+        return []
+
+    print(f"Loading historical data from CSV...")
+    records = []
+    skip_patterns = ['Regression Test Result Failures', 'Name,MR,Release',
+                     'Problem Identified MR Entered', 'This spreadsheet']
+
+    with open(HISTORICAL_CSV_PATH, encoding='utf-8', errors='replace') as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            # Skip header/section rows
+            if any(p in line for p in skip_patterns):
+                continue
+
+            parts = line.split(',')
+            if len(parts) < 5:
+                continue
+
+            name     = parts[0].strip().strip('"')
+            mr       = parts[1].strip().strip('"')
+            release  = parts[2].strip().strip('"')
+            timing   = parts[3].strip().strip('"')   # Pre GA / Post GA
+            status   = parts[4].strip().strip('"')
+            found_by = parts[5].strip().strip('"') if len(parts) > 5 else ''
+
+            # Skip rows that are clearly headers or section labels
+            if name in ('Name', '') or release in ('Release', ''):
+                continue
+            if status not in ('MR Resolved', 'Working on it'):
+                continue
+
+            rel_norm = normalize_release(release)
+            if not rel_norm:
+                continue
+
+            records.append({
+                'name':     name,
+                'mr':       mr,
+                'release':  rel_norm,
+                'timing':   timing,   # 'Pre GA' or 'Post GA'
+                'status':   status,
+                'found_by': found_by  # 'Leapwork' or 'Manual'
+            })
+
+    print(f"Loaded {len(records)} historical records")
+    return records
+
 def fetch_issues():
     """Fetch all issues matching your search criteria"""
     print("Fetching issues from GitHub...")
@@ -52,7 +128,7 @@ def fetch_issues():
     print(f"Found {len(filtered_issues)} issues")
     return filtered_issues
 
-def generate_html(issues):
+def generate_html(issues, historical=[]):
     """Generate the HTML dashboard"""
 
     # Calculate statistics
@@ -79,6 +155,49 @@ def generate_html(issues):
     sorted_releases = sorted(release_counts.items(), key=lambda x: (-x[1], x[0]))
     release_labels = [r[0] for r in sorted_releases]
     release_counts_list = [r[1] for r in sorted_releases]
+
+    # ── Historical data processing ──
+    hist_by_release   = defaultdict(int)
+    hist_pre_ga       = defaultdict(int)
+    hist_post_ga      = defaultdict(int)
+    hist_leapwork     = defaultdict(int)
+    hist_manual       = defaultdict(int)
+    hist_total_lw     = 0
+    hist_total_manual = 0
+    hist_total_pre    = 0
+    hist_total_post   = 0
+
+    for rec in historical:
+        rel = rec['release']
+        hist_by_release[rel] += 1
+        if rec['timing'] == 'Pre GA':
+            hist_pre_ga[rel] += 1
+            hist_total_pre += 1
+        elif rec['timing'] == 'Post GA':
+            hist_post_ga[rel] += 1
+            hist_total_post += 1
+        if rec['found_by'] == 'Leapwork':
+            hist_leapwork[rel] += 1
+            hist_total_lw += 1
+        elif rec['found_by'] == 'Manual':
+            hist_manual[rel] += 1
+            hist_total_manual += 1
+
+    # Combined defects per release (CSV history + GitHub live)
+    combined_releases = set(hist_by_release.keys())
+    for r in release_labels:
+        combined_releases.add(r)
+    sorted_combined = sorted(combined_releases, key=sort_release_key)
+
+    combined_hist_counts  = [hist_by_release.get(r, 0) for r in sorted_combined]
+    combined_github_counts = [release_counts.get(r, 0) for r in sorted_combined]
+
+    # Pre/Post GA per release (sorted chronologically)
+    hist_releases_sorted = sorted(hist_by_release.keys(), key=sort_release_key)
+    pre_ga_counts  = [hist_pre_ga.get(r, 0)  for r in hist_releases_sorted]
+    post_ga_counts = [hist_post_ga.get(r, 0) for r in hist_releases_sorted]
+    lw_counts      = [hist_leapwork.get(r, 0) for r in hist_releases_sorted]
+    manual_counts  = [hist_manual.get(r, 0)   for r in hist_releases_sorted]
 
     # Generate HTML
     html = f"""<!DOCTYPE html>
@@ -311,6 +430,7 @@ def generate_html(issues):
 
         <div class="nav-buttons">
             <button class="nav-button active" onclick="showSection('charts')">Charts</button>
+            <button class="nav-button" onclick="showSection('historical')">Historical Trends</button>
             <button class="nav-button" onclick="showSection('open')">Open Issues</button>
             <button class="nav-button" onclick="showSection('closed')">Closed Issues</button>
             <button class="nav-button" onclick="showSection('all')">All Issues</button>
@@ -333,6 +453,36 @@ def generate_html(issues):
                 <h2>Issues by Software Release</h2>
                 <p style="text-align: center; color: #666; font-size: 14px; margin-top: 10px;">Click on any bar to view issues for that release</p>
                 <canvas id="releaseChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Historical Trends Section -->
+        <div id="historical-section" class="section">
+            <p style="text-align:center;color:#666;font-size:14px;margin-bottom:10px;">
+                Historical data from {len(historical):,} issues spanning v4.2.0 → 54.0 (pre-GitHub era + GitHub era combined)
+            </p>
+            <div class="chart-container">
+                <div class="chart-box">
+                    <h2>Detection Method — Overall</h2>
+                    <canvas id="detectionPieChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h2>Pre GA vs Post GA — Overall</h2>
+                    <canvas id="timingPieChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-box-full">
+                <h2>Defects per Release — All Time (Historical + Live GitHub)</h2>
+                <p style="text-align:center;color:#666;font-size:13px;">Blue = pre-GitHub CSV history &nbsp;|&nbsp; Orange = live GitHub issues</p>
+                <canvas id="combinedReleaseChart"></canvas>
+            </div>
+            <div class="chart-box-full">
+                <h2>Pre GA vs Post GA by Release</h2>
+                <canvas id="prePostChart"></canvas>
+            </div>
+            <div class="chart-box-full">
+                <h2>Leapwork vs Manual Detection by Release</h2>
+                <canvas id="detectionChart"></canvas>
             </div>
         </div>
 
@@ -667,6 +817,88 @@ def generate_html(issues):
             }}
         }});
 
+        // ── Historical Charts ──
+
+        // Detection Method Pie
+        new Chart(document.getElementById('detectionPieChart').getContext('2d'), {{
+            type: 'pie',
+            data: {{
+                labels: ['Leapwork', 'Manual', 'Not Specified'],
+                datasets: [{{ data: [{hist_total_lw}, {hist_total_manual}, {len(historical) - hist_total_lw - hist_total_manual}],
+                    backgroundColor: ['rgba(54,162,235,0.8)','rgba(255,159,64,0.8)','rgba(200,200,200,0.8)'],
+                    borderWidth: 2 }}]
+            }},
+            options: {{ responsive: true, plugins: {{ legend: {{ position: 'bottom' }},
+                title: {{ display: true, text: 'How Issues Were Found', font: {{ size: 15 }} }} }} }}
+        }});
+
+        // Pre/Post GA Pie
+        new Chart(document.getElementById('timingPieChart').getContext('2d'), {{
+            type: 'pie',
+            data: {{
+                labels: ['Pre GA', 'Post GA', 'Not Specified'],
+                datasets: [{{ data: [{hist_total_pre}, {hist_total_post}, {len(historical) - hist_total_pre - hist_total_post}],
+                    backgroundColor: ['rgba(75,192,192,0.8)','rgba(255,99,132,0.8)','rgba(200,200,200,0.8)'],
+                    borderWidth: 2 }}]
+            }},
+            options: {{ responsive: true, plugins: {{ legend: {{ position: 'bottom' }},
+                title: {{ display: true, text: 'When Issues Were Found', font: {{ size: 15 }} }} }} }}
+        }});
+
+        // Combined Defects per Release (stacked: CSV + GitHub)
+        new Chart(document.getElementById('combinedReleaseChart').getContext('2d'), {{
+            type: 'bar',
+            data: {{
+                labels: {json.dumps(sorted_combined)},
+                datasets: [
+                    {{ label: 'Historical (CSV)', data: {json.dumps(combined_hist_counts)},
+                       backgroundColor: 'rgba(54,162,235,0.75)', borderColor: 'rgba(54,162,235,1)', borderWidth: 1 }},
+                    {{ label: 'GitHub Live', data: {json.dumps(combined_github_counts)},
+                       backgroundColor: 'rgba(255,159,64,0.75)', borderColor: 'rgba(255,159,64,1)', borderWidth: 1 }}
+                ]
+            }},
+            options: {{ responsive: true, scales: {{
+                x: {{ stacked: true, title: {{ display: true, text: 'Release' }} }},
+                y: {{ stacked: true, beginAtZero: true, title: {{ display: true, text: 'Number of Issues' }} }}
+            }}, plugins: {{ legend: {{ position: 'top' }} }} }}
+        }});
+
+        // Pre GA vs Post GA per Release
+        new Chart(document.getElementById('prePostChart').getContext('2d'), {{
+            type: 'bar',
+            data: {{
+                labels: {json.dumps(hist_releases_sorted)},
+                datasets: [
+                    {{ label: 'Pre GA',  data: {json.dumps(pre_ga_counts)},
+                       backgroundColor: 'rgba(75,192,192,0.75)', borderColor: 'rgba(75,192,192,1)', borderWidth: 1 }},
+                    {{ label: 'Post GA', data: {json.dumps(post_ga_counts)},
+                       backgroundColor: 'rgba(255,99,132,0.75)', borderColor: 'rgba(255,99,132,1)', borderWidth: 1 }}
+                ]
+            }},
+            options: {{ responsive: true, scales: {{
+                x: {{ stacked: true, title: {{ display: true, text: 'Release' }} }},
+                y: {{ stacked: true, beginAtZero: true, title: {{ display: true, text: 'Number of Issues' }} }}
+            }}, plugins: {{ legend: {{ position: 'top' }} }} }}
+        }});
+
+        // Leapwork vs Manual per Release
+        new Chart(document.getElementById('detectionChart').getContext('2d'), {{
+            type: 'bar',
+            data: {{
+                labels: {json.dumps(hist_releases_sorted)},
+                datasets: [
+                    {{ label: 'Leapwork', data: {json.dumps(lw_counts)},
+                       backgroundColor: 'rgba(54,162,235,0.75)', borderColor: 'rgba(54,162,235,1)', borderWidth: 1 }},
+                    {{ label: 'Manual',   data: {json.dumps(manual_counts)},
+                       backgroundColor: 'rgba(255,159,64,0.75)', borderColor: 'rgba(255,159,64,1)', borderWidth: 1 }}
+                ]
+            }},
+            options: {{ responsive: true, scales: {{
+                x: {{ stacked: true, title: {{ display: true, text: 'Release' }} }},
+                y: {{ stacked: true, beginAtZero: true, title: {{ display: true, text: 'Number of Issues' }} }}
+            }}, plugins: {{ legend: {{ position: 'top' }} }} }}
+        }});
+
         // Section switching functionality
         function showSection(section) {{
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -675,15 +907,18 @@ def generate_html(issues):
             if (section === 'charts') {{
                 document.getElementById('charts-section').classList.add('active');
                 document.querySelectorAll('.nav-button')[0].classList.add('active');
+            }} else if (section === 'historical') {{
+                document.getElementById('historical-section').classList.add('active');
+                document.querySelectorAll('.nav-button')[1].classList.add('active');
             }} else if (section === 'open') {{
                 document.getElementById('open-section').classList.add('active');
-                document.querySelectorAll('.nav-button')[1].classList.add('active');
+                document.querySelectorAll('.nav-button')[2].classList.add('active');
             }} else if (section === 'closed') {{
                 document.getElementById('closed-section').classList.add('active');
-                document.querySelectorAll('.nav-button')[2].classList.add('active');
+                document.querySelectorAll('.nav-button')[3].classList.add('active');
             }} else if (section === 'all') {{
                 document.getElementById('all-section').classList.add('active');
-                document.querySelectorAll('.nav-button')[3].classList.add('active');
+                document.querySelectorAll('.nav-button')[4].classList.add('active');
             }} else if (section === 'release') {{
                 document.getElementById('release-section').classList.add('active');
                 document.getElementById('release-nav-button').classList.add('active');
@@ -787,7 +1022,10 @@ def main():
     print("Issues Dashboard Generator")
     print("=" * 50)
 
-    # Fetch issues
+    # Load historical CSV data
+    historical = load_historical_csv()
+
+    # Fetch live GitHub issues
     issues = fetch_issues()
 
     if not issues:
@@ -796,7 +1034,7 @@ def main():
 
     # Generate HTML
     print("Generating HTML dashboard...")
-    html = generate_html(issues)
+    html = generate_html(issues, historical)
 
     # Write to file
     with open('index.html', 'w', encoding='utf-8') as f:
