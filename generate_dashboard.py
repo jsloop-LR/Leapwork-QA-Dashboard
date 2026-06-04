@@ -164,10 +164,6 @@ def generate_html(issues, historical=[]):
         releases.append(release)
 
     release_counts = Counter(releases)
-    # Sort by count (descending) and then by release name
-    sorted_releases = sorted(release_counts.items(), key=lambda x: (-x[1], x[0]))
-    release_labels = [r[0] for r in sorted_releases]
-    release_counts_list = [r[1] for r in sorted_releases]
 
     # ── Historical data processing ──
     if isinstance(historical, dict):
@@ -212,11 +208,25 @@ def generate_html(issues, historical=[]):
         lw_counts             = [hist_leapwork.get(r, 0) for r in hist_releases_sorted]
         manual_counts         = [hist_manual.get(r, 0)   for r in hist_releases_sorted]
 
-    # Combined defects per release (CSV history + GitHub live)
-    combined_releases      = set(hist_by_release_map.keys()) | set(release_labels)
+    # Combined defects per release (CSV history + GitHub live) — sorted chronologically
+    combined_releases      = set(hist_by_release_map.keys()) | set(release_counts.keys())
     sorted_combined        = sorted(combined_releases, key=sort_release_key)
     combined_hist_counts   = [hist_by_release_map.get(r, 0) for r in sorted_combined]
     combined_github_counts = [release_counts.get(r, 0)       for r in sorted_combined]
+
+    # Main release chart: all releases chronologically (GitHub only, sorted by version)
+    github_release_labels = sorted(
+        [r for r in release_counts if r != 'Not specified'],
+        key=sort_release_key
+    )
+    # Add 'Not specified' at end if present
+    if 'Not specified' in release_counts:
+        github_release_labels.append('Not specified')
+    github_release_counts_list = [release_counts[r] for r in github_release_labels]
+
+    # Keep these for backward-compat (click-through still works)
+    release_labels = github_release_labels
+    release_counts_list = github_release_counts_list
 
     # Generate HTML
     html = f"""<!DOCTYPE html>
@@ -451,6 +461,7 @@ def generate_html(issues, historical=[]):
         </div>
 
         <div class="nav-buttons">
+            <button class="nav-button" onclick="goHome()" title="Back to top / main dashboard" style="background: linear-gradient(135deg, #444 0%, #222 100%);">Home</button>
             <button class="nav-button active" onclick="showSection('charts')">Charts</button>
             <button class="nav-button" onclick="showSection('historical')">Historical Trends</button>
             <button class="nav-button" onclick="showSection('open')">Open Issues</button>
@@ -472,7 +483,7 @@ def generate_html(issues, historical=[]):
                 </div>
             </div>
             <div class="chart-box-full">
-                <h2>Issues by Software Release</h2>
+                <h2>Issues by Software Release (GitHub — Chronological)</h2>
                 <p style="text-align: center; color: #666; font-size: 14px; margin-top: 10px;">Click on any bar to view issues for that release</p>
                 <canvas id="releaseChart"></canvas>
             </div>
@@ -962,6 +973,11 @@ def generate_html(issues, historical=[]):
                 top: 0,
                 behavior: 'smooth'
             }});
+        }}
+
+        function goHome() {{
+            showSection('charts');
+            window.scrollTo({{ top: 0, behavior: 'smooth' }});
         }}
 
         // Table sorting functionality
