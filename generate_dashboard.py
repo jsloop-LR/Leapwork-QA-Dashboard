@@ -55,9 +55,15 @@ def extract_software_releases(body):
 
     # Split on spaces or commas to catch combined entries like "5.2.1 53.0"
     parts = re.split(r'[\s,/]+', raw)
-    # Keep only parts that look like version numbers
+    # Keep only parts that look like version numbers, then normalize old→new style
     version_re = re.compile(r'^\d+(\.\d+)*$')
-    releases = [p.strip() for p in parts if version_re.match(p.strip())]
+    releases = []
+    for p in parts:
+        p = p.strip()
+        if version_re.match(p):
+            norm = normalize_release(p)
+            if norm and norm not in releases:
+                releases.append(norm)
     return releases if releases else [raw]
 
 def extract_software_release(body):
@@ -66,12 +72,21 @@ def extract_software_release(body):
     return releases[0] if releases else 'Not specified'
 
 def normalize_release(rel):
-    """Normalize release strings to a sortable format"""
+    """Normalize release strings — converts old-style (50→5.0, 53→5.3, 54→5.4)
+    to new-style so equivalent releases merge into one label."""
     rel = rel.strip().strip('"').strip()
     if not rel or rel in ('Release', 'Post/Pre GA', 'Not specified'):
         return None
-    # Map old-style (4.x.x) and new-style (50, 51.1, etc.)
     rel = rel.replace('v', '').replace('V', '')
+    try:
+        parts = [int(p) for p in rel.split('.')[:3]]
+        if 50 <= parts[0] <= 59:
+            minor = parts[0] - 50
+            rest  = parts[1:] if len(parts) > 1 else [0]
+            parts = [5, minor] + rest
+            rel   = '.'.join(str(p) for p in parts)
+    except:
+        pass
     return rel
 
 def sort_release_key(rel):
@@ -186,18 +201,29 @@ def generate_html(issues, historical=[]):
 
     # ── Historical data processing ──
     if isinstance(historical, dict):
-        h                     = historical
-        hist_total            = h['total']
-        hist_total_lw         = h['total_lw']
-        hist_total_manual     = h['total_manual']
-        hist_total_pre        = h['total_pre']
-        hist_total_post       = h['total_post']
-        hist_releases_sorted  = h['releases']
-        hist_by_release_map   = dict(zip(h['releases'], h['by_release']))
-        pre_ga_counts         = h['pre_ga']
-        post_ga_counts        = h['post_ga']
-        lw_counts             = h['leapwork']
-        manual_counts         = h['manual']
+        h             = historical
+        hist_total    = h['total']
+        hist_total_lw = h['total_lw']
+        hist_total_manual = h['total_manual']
+        hist_total_pre    = h['total_pre']
+        hist_total_post   = h['total_post']
+        # Normalize old-style release labels and merge duplicates
+        raw_map = defaultdict(lambda: {'by':0,'pre':0,'post':0,'lw':0,'man':0})
+        for rel, by, pre, post, lw, man in zip(
+                h['releases'], h['by_release'], h['pre_ga'],
+                h['post_ga'], h['leapwork'], h['manual']):
+            norm = normalize_release(rel) or rel
+            raw_map[norm]['by']   += by
+            raw_map[norm]['pre']  += pre
+            raw_map[norm]['post'] += post
+            raw_map[norm]['lw']   += lw
+            raw_map[norm]['man']  += man
+        hist_releases_sorted = sorted(raw_map.keys(), key=sort_release_key)
+        hist_by_release_map  = {r: raw_map[r]['by']   for r in hist_releases_sorted}
+        pre_ga_counts        = [raw_map[r]['pre']  for r in hist_releases_sorted]
+        post_ga_counts       = [raw_map[r]['post'] for r in hist_releases_sorted]
+        lw_counts            = [raw_map[r]['lw']   for r in hist_releases_sorted]
+        manual_counts        = [raw_map[r]['man']  for r in hist_releases_sorted]
     else:
         hist_by_release   = defaultdict(int)
         hist_pre_ga       = defaultdict(int)
